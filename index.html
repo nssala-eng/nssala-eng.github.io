@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NSSALA – Nigerian Secondary School AI Learning Assistant</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    header {
+      text-align: center;
+      padding: 25px;
+      background: #0a3cff;
+      color: white;
+    }
+
+    .logo {
+      width: 150px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      background: #ffffff;
+      padding: 12px;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      padding: 10px 16px;
+      border: none;
+      background: #0a3cff;
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    nav button:hover {
+      background: #062bb5;
+    }
+
+    section {
+      display: none;
+      padding: 25px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    h2 {
+      color: #0a3cff;
+    }
+
+    input {
+      padding: 10px;
+      width: 220px;
+      font-size: 15px;
+      margin-top: 10px;
+    }
+
+    .solve-btn {
+      padding: 10px 15px;
+      margin-left: 5px;
+      background: #0a3cff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .output {
+      margin-top: 20px;
+      padding: 15px;
+      background: #ffffff;
+      border-radius: 6px;
+      line-height: 1.6;
+    }
+
+    ul {
+      line-height: 1.8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 13px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <!-- If logo doesn't show, remove the img line -->
+    <img src="icon.png" alt="NSSALA Logo" class="logo">
+    <h1>NSSALA</h1>
+    <p>Nigerian Secondary School AI Learning Assistant</p>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <button onclick="showSection('home')">Home</button>
+    <button onclick="showSection('maths')">Mathematics</button>
+    <button onclick="showSection('ai')">AI Studies</button>
+    <button onclick="showSection('about')">About</button>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home" class="active">
+    <h2>Welcome 👋</h2>
+    <p>
+      NSSALA is a prototype AI-powered learning assistant designed to support
+      Nigerian secondary school students facing limited access to teachers,
+      technology, and learning resources.
+    </p>
+
+    <p><strong>Target Users:</strong> SS1 – SS3 Students</p>
+    <p><strong>Core Idea:</strong> Simple, accessible, and future-focused learning</p>
+  </section>
+
+  <!-- MATHEMATICS -->
+  <section id="maths">
+    <h2>Mathematics Assistant</h2>
+    <p>Enter a simple maths question:</p>
+
+    <input type="text" id="mathInput" placeholder="e.g. 7+5">
+    <button class="solve-btn" onclick="solveMath()">Solve</button>
+
+    <div id="mathAnswer" class="output"></div>
+  </section>
+
+  <!-- AI STUDIES -->
+  <section id="ai">
+    <h2>AI Studies (Intro)</h2>
+
+    <p><strong>What is Artificial Intelligence?</strong></p>
+    <p>
+      Artificial Intelligence (AI) is the ability of computers to perform tasks
+      that normally require human intelligence, such as learning, reasoning,
+      and problem-solving.
+    </p>
+
+    <p><strong>Why learn AI early?</strong></p>
+    <ul>
+      <li>AI is shaping the future of jobs</li>
+      <li>Early exposure builds problem-solving skills</li>
+      <li>Students can become creators, not just users</li>
+    </ul>
+
+    <p>
+      NSSALA introduces AI concepts in a simple and student-friendly way.
+    </p>
+    <hr>
+
+<h3>AI Assistant (Prototype)</h3>
+<p>Ask the AI a simple question:</p>
+
+<input type="text" id="aiInput" placeholder="Type your question">
+<button class="solve-btn" onclick="askAI()">Ask</button>
+
+<div id="aiAnswer" class="output"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About NSSALA</h2>
+
+    <p>
+      Many Nigerian secondary schools struggle with overcrowded classrooms,
+      limited teachers, and restricted access to digital tools.
+    </p>
+
+    <p>
+      NSSALA is a prototype that demonstrates how AI-based learning assistants
+      can support students even in low-resource environments.
+    </p>
+
+    <p><strong>Project Status:</strong> Prototype</p>
+
+    <p><strong>Future Expansion:</strong></p>
+    <ul>
+      <li>More subjects (Physics, Chemistry, Biology)</li>
+      <li>Offline AI models</li>
+      <li>Church & community learning editions</li>
+    </ul>
+  </section>
+
+  <footer>
+    NSSALA Prototype • Built for Educational Innovation
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    function showSection(id) {
+      document.querySelectorAll("section").forEach(sec => {
+        sec.classList.remove("active");
+      });
+      document.getElementById(id).classList.add("active");
+    }
+
+    function solveMath() {
+      const q = document.getElementById("mathInput").value.trim();
+      let explanation = "";
+      let answer = "";
+
+      if (q.includes("+")) {
+        const [a, b] = q.split("+").map(Number);
+        explanation =
+          "Step 1: Identify the numbers → " + a + " and " + b + "<br>" +
+          "Step 2: Add them together → " + a + " + " + b;
+        answer = a + b;
+
+      } else if (q.includes("-")) {
+        const [a, b] = q.split("-").map(Number);
+        explanation =
+          "Step 1: Identify the numbers → " + a + " and " + b + "<br>" +
+          "Step 2: Subtract the second from the first → " + a + " - " + b;
+        answer = a - b;
+
+      } else if (q.includes("*")) {
+        const [a, b] = q.split("*").map(Number);
+        explanation =
+          "Step 1: Identify the numbers → " + a + " and " + b + "<br>" +
+          "Step 2: Multiply them → " + a + " × " + b;
+        answer = a * b;
+
+      } else if (q.includes("/")) {
+        const [a, b] = q.split("/").map(Number);
+        explanation =
+          "Step 1: Identify the numbers → " + a + " and " + b + "<br>" +
+          "Step 2: Divide the first by the second → " + a + " ÷ " + b;
+        answer = a / b;
+
+      } else {
+        document.getElementById("mathAnswer").innerHTML =
+          "This prototype can only solve basic operations for now.";
+        return;
+      }
+
+      document.getElementById("mathAnswer").innerHTML =
+        explanation + "<br><br><strong>Answer: " + answer + "</strong>";
+    }
+    function askAI() {
+  const question = document.getElementById("aiInput").value.toLowerCase();
+  let response = "Good day 😊. I'm still learning and may not know that yet.";
+
+  if (question.includes("what is ai")) {
+    response = "Good day 😊. Artificial Intelligence is when computers are designed to think, learn, and solve problems like humans.";
+
+  } else if (question.includes("who are you")) {
+    response = "Good day 😊. I am NSSALA, a prototype AI learning assistant for Nigerian secondary school students.";
+
+  } else if (question.includes("what can you do")) {
+    response = "Good day 😊. I can help with basic mathematics, introduce AI concepts, and support learning in a simple way.";
+
+  } else if (question.includes("why is ai important")) {
+    response = "Good day 😊. AI is important because it helps solve problems faster, improves productivity, and shapes future careers.";
+  }
+
+  document.getElementById("aiAnswer").innerHTML = response;
+}
+  </script>
+
+</body>
+</html>
