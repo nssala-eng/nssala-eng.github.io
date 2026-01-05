@@ -3,55 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <title>NSSALA – Nigerian Secondary School AI Learning Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      background: #f4f6f8;
-      color: #222;
+      background: #0b0f1a;
+      color: #ffffff;
     }
 
     header {
+      background: linear-gradient(135deg, #0a3cff, #00d4ff);
+      padding: 30px 20px;
       text-align: center;
-      padding: 25px;
-      background: #0a3cff;
-      color: white;
     }
 
-    .logo {
-      width: 150px;
-      height: auto;
-      margin-bottom: 10px;
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    header p {
+      margin-top: 8px;
+      opacity: 0.9;
     }
 
     nav {
       display: flex;
       justify-content: center;
-      gap: 10px;
-      background: #ffffff;
+      gap: 15px;
+      background: #11162a;
       padding: 12px;
       flex-wrap: wrap;
     }
 
     nav button {
-      padding: 10px 16px;
+      background: #1a2040;
       border: none;
-      background: #0a3cff;
       color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
       cursor: pointer;
-      border-radius: 6px;
-      font-size: 14px;
+      font-size: 0.9rem;
     }
 
     nav button:hover {
-      background: #062bb5;
+      background: #2a33ff;
     }
 
     section {
       display: none;
-      padding: 25px;
-      max-width: 800px;
+      padding: 20px;
+      max-width: 900px;
       margin: auto;
     }
 
@@ -59,221 +67,190 @@
       display: block;
     }
 
-    h2 {
-      color: #0a3cff;
+    .card {
+      background: #151b34;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
     }
 
-    input {
-      padding: 10px;
-      width: 220px;
-      font-size: 15px;
+    .card h2 {
+      margin-top: 0;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+
+    input, textarea {
+      background: #0f1430;
+      color: white;
+    }
+
+    .send-btn {
+      background: #2a33ff;
+      color: white;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    .send-btn:hover {
+      background: #00c6ff;
+    }
+
+    .chat-box {
+      background: #0f1430;
+      border-radius: 10px;
+      padding: 15px;
+      height: 250px;
+      overflow-y: auto;
       margin-top: 10px;
     }
 
-    .solve-btn {
-      padding: 10px 15px;
-      margin-left: 5px;
-      background: #0a3cff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+    .ai {
+      color: #00d4ff;
+      margin-bottom: 8px;
     }
 
-    .output {
-      margin-top: 20px;
-      padding: 15px;
-      background: #ffffff;
-      border-radius: 6px;
-      line-height: 1.6;
-    }
-
-    ul {
-      line-height: 1.8;
+    .user {
+      color: #ffffff;
+      margin-bottom: 8px;
+      text-align: right;
     }
 
     footer {
       text-align: center;
-      padding: 15px;
-      font-size: 13px;
-      color: #666;
+      padding: 20px;
+      opacity: 0.6;
+      font-size: 0.85rem;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <!-- If logo doesn't show, remove the img line -->
-    <img src="icon.png" alt="NSSALA Logo" class="logo">
-    <h1>NSSALA</h1>
-    <p>Nigerian Secondary School AI Learning Assistant</p>
-  </header>
+<header>
+  <h1>NSSALA</h1>
+  <p>Nigerian Secondary School AI Learning Assistant</p>
+</header>
 
-  <!-- NAVIGATION -->
-  <nav>
-    <button onclick="showSection('home')">Home</button>
-    <button onclick="showSection('maths')">Mathematics</button>
-    <button onclick="showSection('ai')">AI Studies</button>
-    <button onclick="showSection('about')">About</button>
-  </nav>
+<nav>
+  <button onclick="showSection('home')">Home</button>
+  <button onclick="showSection('maths')">Mathematics</button>
+  <button onclick="showSection('ai')">AI Tutor</button>
+  <button onclick="showSection('about')">About</button>
+</nav>
 
-  <!-- HOME -->
-  <section id="home" class="active">
+<section id="home" class="active">
+  <div class="card">
     <h2>Welcome 👋</h2>
     <p>
-      NSSALA is a prototype AI-powered learning assistant designed to support
-      Nigerian secondary school students facing limited access to teachers,
-      technology, and learning resources.
+      NSSALA is an AI-powered learning assistant built for Nigerian secondary school students.
+      It works without teachers, focuses on clarity, and supports future-ready skills.
     </p>
+    <p>
+      📘 Subjects<br>
+      🤖 AI Studies<br>
+      ⚡ Fast learning<br>
+      🇳🇬 Built for Nigeria
+    </p>
+  </div>
+</section>
 
-    <p><strong>Target Users:</strong> SS1 – SS3 Students</p>
-    <p><strong>Core Idea:</strong> Simple, accessible, and future-focused learning</p>
-  </section>
-
-  <!-- MATHEMATICS -->
-  <section id="maths">
+<section id="maths">
+  <div class="card">
     <h2>Mathematics Assistant</h2>
-    <p>Enter a simple maths question:</p>
+    <p>Ask a maths question (prototype logic).</p>
 
-    <input type="text" id="mathInput" placeholder="e.g. 7+5">
-    <button class="solve-btn" onclick="solveMath()">Solve</button>
+    <input id="mathInput" placeholder="e.g. What is 7 + 5 ?" />
+    <button class="send-btn" onclick="solveMath()">Solve</button>
 
-    <div id="mathAnswer" class="output"></div>
-  </section>
+    <p id="mathAnswer" style="margin-top:15px;"></p>
+  </div>
+</section>
 
-  <!-- AI STUDIES -->
-  <section id="ai">
-    <h2>AI Studies (Intro)</h2>
+<section id="ai">
+  <div class="card">
+    <h2>AI Learning Assistant</h2>
+    <p>This is a prototype AI interaction.</p>
 
-    <p><strong>What is Artificial Intelligence?</strong></p>
-    <p>
-      Artificial Intelligence (AI) is the ability of computers to perform tasks
-      that normally require human intelligence, such as learning, reasoning,
-      and problem-solving.
-    </p>
+    <div class="chat-box" id="chatBox">
+      <div class="ai">AI: Good day 👋 I am NSSALA. How can I help you learn today?</div>
+    </div>
 
-    <p><strong>Why learn AI early?</strong></p>
-    <ul>
-      <li>AI is shaping the future of jobs</li>
-      <li>Early exposure builds problem-solving skills</li>
-      <li>Students can become creators, not just users</li>
-    </ul>
+    <input id="userMessage" placeholder="Type your message..." />
+    <button class="send-btn" onclick="sendMessage()">Send</button>
+  </div>
+</section>
 
-    <p>
-      NSSALA introduces AI concepts in a simple and student-friendly way.
-    </p>
-    <hr>
-
-<h3>AI Assistant (Prototype)</h3>
-<p>Ask the AI a simple question:</p>
-
-<input type="text" id="aiInput" placeholder="Type your question">
-<button class="solve-btn" onclick="askAI()">Ask</button>
-
-<div id="aiAnswer" class="output"></div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
+<section id="about">
+  <div class="card">
     <h2>About NSSALA</h2>
-
     <p>
-      Many Nigerian secondary schools struggle with overcrowded classrooms,
-      limited teachers, and restricted access to digital tools.
+      NSSALA was designed to solve key problems in Nigerian schools:
     </p>
-
-    <p>
-      NSSALA is a prototype that demonstrates how AI-based learning assistants
-      can support students even in low-resource environments.
-    </p>
-
-    <p><strong>Project Status:</strong> Prototype</p>
-
-    <p><strong>Future Expansion:</strong></p>
     <ul>
-      <li>More subjects (Physics, Chemistry, Biology)</li>
-      <li>Offline AI models</li>
-      <li>Church & community learning editions</li>
+      <li>Lack of teachers</li>
+      <li>Slow learning pace</li>
+      <li>No access to AI tools</li>
+      <li>Limited tech infrastructure</li>
     </ul>
-  </section>
+    <p>
+      This is a <strong>prototype</strong> built for innovation competitions.
+    </p>
+  </div>
+</section>
 
-  <footer>
-    NSSALA Prototype • Built for Educational Innovation
-  </footer>
+<footer>
+  © 2026 NSSALA Prototype • Built by Daniel
+</footer>
 
-  <!-- JAVASCRIPT -->
-  <script>
-    function showSection(id) {
-      document.querySelectorAll("section").forEach(sec => {
-        sec.classList.remove("active");
-      });
-      document.getElementById(id).classList.add("active");
-    }
-
-    function solveMath() {
-      const q = document.getElementById("mathInput").value.trim();
-      let explanation = "";
-      let answer = "";
-
-      if (q.includes("+")) {
-        const [a, b] = q.split("+").map(Number);
-        explanation =
-          "Step 1: Identify the numbers → " + a + " and " + b + "<br>" +
-          "Step 2: Add them together → " + a + " + " + b;
-        answer = a + b;
-
-      } else if (q.includes("-")) {
-        const [a, b] = q.split("-").map(Number);
-        explanation =
-          "Step 1: Identify the numbers → " + a + " and " + b + "<br>" +
-          "Step 2: Subtract the second from the first → " + a + " - " + b;
-        answer = a - b;
-
-      } else if (q.includes("*")) {
-        const [a, b] = q.split("*").map(Number);
-        explanation =
-          "Step 1: Identify the numbers → " + a + " and " + b + "<br>" +
-          "Step 2: Multiply them → " + a + " × " + b;
-        answer = a * b;
-
-      } else if (q.includes("/")) {
-        const [a, b] = q.split("/").map(Number);
-        explanation =
-          "Step 1: Identify the numbers → " + a + " and " + b + "<br>" +
-          "Step 2: Divide the first by the second → " + a + " ÷ " + b;
-        answer = a / b;
-
-      } else {
-        document.getElementById("mathAnswer").innerHTML =
-          "This prototype can only solve basic operations for now.";
-        return;
-      }
-
-      document.getElementById("mathAnswer").innerHTML =
-        explanation + "<br><br><strong>Answer: " + answer + "</strong>";
-    }
-    function askAI() {
-  const question = document.getElementById("aiInput").value.toLowerCase();
-  let response = "Good day 😊. I'm still learning and may not know that yet.";
-
-  if (question.includes("what is ai")) {
-    response = "Good day 😊. Artificial Intelligence is when computers are designed to think, learn, and solve problems like humans.";
-
-  } else if (question.includes("who are you")) {
-    response = "Good day 😊. I am NSSALA, a prototype AI learning assistant for Nigerian secondary school students.";
-
-  } else if (question.includes("what can you do")) {
-    response = "Good day 😊. I can help with basic mathematics, introduce AI concepts, and support learning in a simple way.";
-
-  } else if (question.includes("why is ai important")) {
-    response = "Good day 😊. AI is important because it helps solve problems faster, improves productivity, and shapes future careers.";
+<script>
+  function showSection(id) {
+    document.querySelectorAll("section").forEach(sec => {
+      sec.classList.remove("active");
+    });
+    document.getElementById(id).classList.add("active");
   }
 
-  document.getElementById("aiAnswer").innerHTML = response;
-}
-  </script>
+  function solveMath() {
+    const q = document.getElementById("mathInput").value.toLowerCase();
+    let ans = "Sorry, I don't know the answer yet.";
+
+    if (q.includes("7 + 5")) ans = "7 + 5 = 12";
+    else if (q.includes("2 + 2")) ans = "2 + 2 = 4";
+    else if (q.includes("10 - 3")) ans = "10 - 3 = 7";
+
+    document.getElementById("mathAnswer").innerText = ans;
+  }
+
+  function sendMessage() {
+    const input = document.getElementById("userMessage");
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    const chatBox = document.getElementById("chatBox");
+
+    const userDiv = document.createElement("div");
+    userDiv.className = "user";
+    userDiv.innerText = "You: " + msg;
+
+    const aiDiv = document.createElement("div");
+    aiDiv.className = "ai";
+    aiDiv.innerText = "AI: I understand. This is a prototype response. Full AI coming soon.";
+
+    chatBox.appendChild(userDiv);
+    chatBox.appendChild(aiDiv);
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+    input.value = "";
+  }
+</script>
 
 </body>
 </html>
