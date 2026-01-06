@@ -6,141 +6,60 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{
-  box-sizing:border-box;
-  font-family: "Segoe UI", system-ui, sans-serif;
-}
-
-body{
-  margin:0;
-  background:#070b17;
-  color:#e8ecff;
-}
+*{box-sizing:border-box;font-family:"Segoe UI",system-ui,sans-serif;}
+body{margin:0;background:#070b17;color:#e8ecff;}
 
 header{
   padding:40px 20px;
   text-align:center;
-  background:radial-gradient(circle at top, #1b3cff, #070b17);
+  background:radial-gradient(circle at top,#1b3cff,#070b17);
 }
-
-header h1{
-  margin:0;
-  font-size:2.4rem;
-  letter-spacing:1px;
-}
-
-header p{
-  opacity:0.85;
-  margin-top:10px;
-  max-width:700px;
-  margin-inline:auto;
-}
+header h1{margin:0;font-size:2.4rem;letter-spacing:1px;}
+header p{opacity:.85;margin-top:10px;max-width:750px;margin-inline:auto;}
 
 nav{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
-  padding:12px;
-  background:#0c1024;
-  border-bottom:1px solid #1c2250;
+  display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
+  padding:12px;background:#0c1024;border-bottom:1px solid #1c2250;
 }
-
 nav button{
-  background:#131a3a;
-  color:#e8ecff;
-  border:1px solid #2a35ff;
-  padding:10px 16px;
-  border-radius:10px;
-  cursor:pointer;
-  font-size:0.9rem;
+  background:#131a3a;color:#e8ecff;border:1px solid #2a35ff;
+  padding:10px 16px;border-radius:10px;cursor:pointer;font-size:.9rem;
 }
+nav button:hover{background:#2a35ff;}
 
-nav button:hover{
-  background:#2a35ff;
-}
-
-section{
-  display:none;
-  padding:30px 20px;
-  max-width:1000px;
-  margin:auto;
-}
-
-section.active{
-  display:block;
-}
+section{display:none;padding:30px 20px;max-width:1000px;margin:auto;}
+section.active{display:block;}
 
 .card{
   background:linear-gradient(180deg,#0f1535,#0b1028);
-  border:1px solid #1c245c;
-  border-radius:16px;
-  padding:25px;
-  margin-bottom:25px;
-  box-shadow:0 0 25px rgba(42,53,255,0.15);
+  border:1px solid #1c245c;border-radius:16px;
+  padding:25px;margin-bottom:25px;
+  box-shadow:0 0 25px rgba(42,53,255,.15);
 }
+.card h2{margin-top:0;color:#7aa2ff;}
+.card p,li{line-height:1.6;}
 
-.card h2{
-  margin-top:0;
-  color:#7aa2ff;
+input,button{
+  width:100%;padding:12px;border-radius:10px;
+  border:none;font-size:1rem;
 }
-
-.card p, li{
-  line-height:1.6;
-}
-
-input, textarea, button{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:none;
-  font-size:1rem;
-}
-
 input{
-  background:#0b1230;
-  color:#e8ecff;
-  border:1px solid #1f2a66;
+  background:#0b1230;color:#e8ecff;border:1px solid #1f2a66;
 }
-
 .send-btn{
-  margin-top:12px;
-  background:#2a35ff;
-  color:white;
-  cursor:pointer;
+  margin-top:12px;background:#2a35ff;color:white;cursor:pointer;
 }
-
-.send-btn:hover{
-  background:#00d4ff;
-  color:#000;
-}
+.send-btn:hover{background:#00d4ff;color:#000;}
 
 .chat-box{
-  background:#060a1d;
-  border:1px solid #1f2a66;
-  border-radius:12px;
-  padding:15px;
-  height:280px;
-  overflow-y:auto;
-  margin-top:12px;
+  background:#060a1d;border:1px solid #1f2a66;
+  border-radius:12px;padding:15px;height:300px;
+  overflow-y:auto;margin-top:12px;
 }
+.ai{color:#7ef9ff;margin-bottom:10px;}
+.user{text-align:right;margin-bottom:10px;}
 
-.ai{
-  color:#7ef9ff;
-  margin-bottom:10px;
-}
-
-.user{
-  text-align:right;
-  margin-bottom:10px;
-}
-
-footer{
-  text-align:center;
-  padding:25px;
-  opacity:0.6;
-  font-size:0.85rem;
-}
+footer{text-align:center;padding:25px;opacity:.6;font-size:.85rem;}
 </style>
 </head>
 
@@ -149,8 +68,7 @@ footer{
 <header>
 <h1>NSSALA</h1>
 <p>
-Nigerian Secondary School AI Learning Assistant —  
-a student-built AI platform designed to solve learning challenges in Nigerian schools using accessible technology.
+Nigerian Secondary School AI Learning Assistant — empowering students through accessible AI-driven learning.
 </p>
 </header>
 
@@ -165,38 +83,24 @@ a student-built AI platform designed to solve learning challenges in Nigerian sc
 <div class="card">
 <h2>🚀 Vision</h2>
 <p>
-NSSALA aims to become a digital learning companion for Nigerian secondary school students, especially in environments where teachers, resources, and technology are limited.
+NSSALA aims to bridge educational gaps in Nigerian secondary schools by providing students with an intelligent AI assistant they can rely on outside the classroom.
 </p>
 </div>
 
 <div class="card">
-<h2>⚠️ Problem</h2>
+<h2>⚠️ Challenges</h2>
 <ul>
-<li>Overcrowded classrooms</li>
-<li>Limited access to teachers</li>
-<li>No AI tools in schools</li>
-<li>Slow learning pace</li>
-<li>Phones restricted during school hours</li>
+<li>Insufficient teachers</li>
+<li>Limited access to technology</li>
+<li>Slow understanding of science subjects</li>
+<li>No exposure to AI education</li>
 </ul>
 </div>
 
 <div class="card">
-<h2>💡 Solution</h2>
+<h2>💡 NSSALA Solution</h2>
 <p>
-NSSALA provides an AI-powered, self-guided learning system that helps students:
-</p>
-<ul>
-<li>Understand subjects independently</li>
-<li>Practice maths interactively</li>
-<li>Learn future-ready AI concepts</li>
-<li>Study outside school hours via web access</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>🧠 Built by a Student</h2>
-<p>
-This prototype was built by a Nigerian secondary school student as an innovation concept for national and international competitions.
+A web-based AI learning platform that helps students understand subjects, revise concepts, and build future-ready skills independently.
 </p>
 </div>
 </section>
@@ -204,47 +108,35 @@ This prototype was built by a Nigerian secondary school student as an innovation
 <section id="maths">
 <div class="card">
 <h2>➗ Mathematics Assistant</h2>
-<p>
-Ask a basic maths question using normal language.
-</p>
+<p>Ask basic calculations.</p>
 
-<input id="mathInput" placeholder="e.g. 12 + 8, 20 / 4, 7 * 6" />
+<input id="mathInput" placeholder="e.g. 15 + 5, 9 * 6, (20 - 4) / 2" />
 <button class="send-btn" onclick="solveMath()">Solve</button>
-
 <p id="mathAnswer" style="margin-top:15px;"></p>
 </div>
 </section>
 
 <section id="ai">
 <div class="card">
-<h2>🤖 AI Learning Assistant</h2>
+<h2>🤖 NSA — NSSALA Smart Assistant</h2>
 <p>
-Prototype AI trained to guide students academically.
+NSA is trained to assist with secondary school subjects like Biology, Physics, Chemistry, Maths, and AI basics.
 </p>
 
 <div class="chat-box" id="chat">
-<div class="ai">AI: Good day 👋 I am NSSALA. What would you like to learn today?</div>
+<div class="ai">NSA: Good day 👋 I am NSA, your smart learning assistant. What would you like to learn today?</div>
 </div>
 
-<input id="msg" placeholder="Ask about maths, science, AI, studying..." />
+<input id="msg" placeholder="Ask about biology, physics, chemistry, AI, studying..." />
 <button class="send-btn" onclick="chat()">Send</button>
 </div>
 </section>
 
 <section id="about">
 <div class="card">
-<h2>🏆 Innovation & Impact</h2>
+<h2>🏆 Innovation Impact</h2>
 <p>
-NSSALA is designed with scalability in mind:
-</p>
-<ul>
-<li>Web-based (no expensive hardware)</li>
-<li>Offline-ready future version</li>
-<li>Expandable to all subjects</li>
-<li>AI literacy for African students</li>
-</ul>
-<p>
-This prototype demonstrates how student-led innovation can improve education using AI.
+NSSALA introduces AI literacy early, helping students adapt to the future of education and technology.
 </p>
 </div>
 </section>
@@ -260,50 +152,50 @@ function show(id){
 }
 
 function solveMath(){
-  const q = document.getElementById("mathInput").value;
-  let ans = "I couldn't understand that. Try a simple expression.";
-
+  const q=document.getElementById("mathInput").value;
+  let ans="I couldn't understand that expression.";
   try{
-    if(q.match(/[0-9+\-*/(). ]+/)){
-      ans = "Answer: " + eval(q);
-    }
-  }catch{
-    ans = "Invalid maths expression.";
-  }
-
-  document.getElementById("mathAnswer").innerText = ans;
+    if(q.match(/[0-9+\-*/(). ]+/)) ans="Answer: "+eval(q);
+  }catch{}
+  document.getElementById("mathAnswer").innerText=ans;
 }
 
 function chat(){
-  const input = document.getElementById("msg");
-  const text = input.value.toLowerCase().trim();
+  const input=document.getElementById("msg");
+  const text=input.value.toLowerCase().trim();
   if(!text) return;
 
-  const box = document.getElementById("chat");
+  const box=document.getElementById("chat");
 
-  const u = document.createElement("div");
+  const u=document.createElement("div");
   u.className="user";
   u.innerText="You: "+input.value;
 
-  const a = document.createElement("div");
+  const a=document.createElement("div");
   a.className="ai";
 
-  let reply = "That is interesting. Can you tell me more?";
+  let reply="That is a good question. Let's break it down together.";
 
   if(text.includes("hello")||text.includes("hi"))
     reply="Hello 👋 How can I assist your learning today?";
-  else if(text.includes("math"))
-    reply="Mathematics improves logical thinking. Try asking a calculation in the maths section.";
+  else if(text.includes("biology"))
+    reply="Biology is the study of living organisms, including plants, animals, and humans.";
+  else if(text.includes("photosynthesis"))
+    reply="Photosynthesis is the process by which green plants make food using sunlight, carbon dioxide, and water.";
+  else if(text.includes("physics"))
+    reply="Physics studies matter, energy, motion, and forces.";
+  else if(text.includes("chemistry"))
+    reply="Chemistry deals with substances, their properties, and chemical reactions.";
+  else if(text.includes("atom"))
+    reply="An atom is the smallest unit of an element that retains its chemical properties.";
   else if(text.includes("ai"))
-    reply="AI stands for Artificial Intelligence. It allows machines to learn and make decisions like humans.";
+    reply="Artificial Intelligence enables machines to learn, reason, and solve problems.";
   else if(text.includes("study"))
-    reply="Studying consistently and practicing questions daily improves understanding.";
-  else if(text.includes("science"))
-    reply="Science explains how the world works through observation and experiments.";
+    reply="Consistent revision and practice are key to academic success.";
   else if(text.includes("who are you"))
-    reply="I am NSSALA, a student-built AI learning assistant.";
+    reply="I am NSA — the NSSALA Smart Assistant.";
 
-  a.innerText="AI: "+reply;
+  a.innerText="NSA: "+reply;
 
   box.appendChild(u);
   box.appendChild(a);
