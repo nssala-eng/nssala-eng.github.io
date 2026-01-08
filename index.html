@@ -2,320 +2,259 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>NSSALA – AI Learning Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSSALA — Smart School System</title>
 
 <style>
-:root{
-  --bg:#050817;
-  --card:#0b1030;
-  --glow:#00e5ff;
-  --accent:#5865ff;
-  --text:#eaf0ff;
-}
+    body {
+        font-family: Arial, sans-serif;
+        background: #0c1226;
+        color: white;
+        margin: 0;
+        padding: 0;
+    }
 
-*{box-sizing:border-box;font-family:"Segoe UI",system-ui,sans-serif;}
+    header {
+        text-align: center;
+        padding: 35px 10px;
+        background: #121a35;
+        border-bottom: 2px solid #1d2a5c;
+    }
 
-body{
-  margin:0;
-  background:radial-gradient(circle at top, #0d1450, var(--bg));
-  color:var(--text);
-  overflow-x:hidden;
-}
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        background: #0f162f;
+        padding: 10px;
+        flex-wrap: wrap;
+    }
 
-/* animated background glow */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:linear-gradient(120deg, transparent, rgba(0,229,255,.08), transparent);
-  animation:move 8s linear infinite;
-  pointer-events:none;
-}
-@keyframes move{
-  from{transform:translateX(-100%);}
-  to{transform:translateX(100%);}
-}
+    nav button {
+        background: #1a4d9c;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+    }
 
-header{
-  padding:60px 20px;
-  text-align:center;
-}
+    nav button:hover {
+        background: #2262c2;
+    }
 
-header h1{
-  font-size:2.8rem;
-  margin:0;
-  letter-spacing:2px;
-  text-shadow:0 0 20px var(--glow);
-}
+    .section {
+        margin: 18px;
+        padding: 20px;
+        background: #121a35;
+        border-radius: 8px;
+    }
 
-header p{
-  max-width:800px;
-  margin:15px auto 0;
-  opacity:.9;
-}
+    input, textarea, select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        border-radius: 6px;
+        border: none;
+        outline: none;
+        background: #0f1a36;
+        color: white;
+    }
 
-nav{
-  display:flex;
-  justify-content:center;
-  gap:14px;
-  flex-wrap:wrap;
-  padding:14px;
-  background:rgba(5,8,23,.8);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid #1c245c;
-  position:sticky;
-  top:0;
-  z-index:10;
-}
+    button {
+        padding: 10px 18px;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        background: #1a4d9c;
+        margin-top: 8px;
+        cursor: pointer;
+    }
 
-nav button{
-  background:transparent;
-  color:var(--text);
-  border:1px solid var(--accent);
-  padding:10px 18px;
-  border-radius:12px;
-  cursor:pointer;
-}
+    button:hover {
+        background: #2262c2;
+    }
 
-nav button:hover{
-  background:var(--accent);
-  box-shadow:0 0 15px var(--accent);
-}
+    .hidden {
+        display: none;
+    }
 
-section{
-  display:none;
-  padding:40px 20px;
-  max-width:1100px;
-  margin:auto;
-}
-
-section.active{display:block;}
-
-.card{
-  background:linear-gradient(180deg, var(--card), #060a22);
-  border:1px solid #1f2a66;
-  border-radius:18px;
-  padding:28px;
-  margin-bottom:28px;
-  box-shadow:0 0 30px rgba(88,101,255,.2);
-}
-
-.card h2{
-  margin-top:0;
-  color:var(--glow);
-}
-
-.card p,li{
-  line-height:1.7;
-  opacity:.95;
-}
-
-input,button{
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:none;
-  font-size:1rem;
-}
-
-input{
-  background:#050a26;
-  color:var(--text);
-  border:1px solid #27338a;
-}
-
-.send-btn{
-  margin-top:12px;
-  background:var(--accent);
-  color:white;
-  cursor:pointer;
-}
-.send-btn:hover{
-  background:var(--glow);
-  color:#000;
-}
-
-.chat-box{
-  background:#03071b;
-  border:1px solid #27338a;
-  border-radius:14px;
-  padding:16px;
-  height:300px;
-  overflow-y:auto;
-  margin-top:14px;
-}
-
-.ai{color:var(--glow);margin-bottom:10px;}
-.user{text-align:right;margin-bottom:10px;}
-
-.badge{
-  display:inline-block;
-  padding:6px 12px;
-  border-radius:999px;
-  border:1px solid var(--glow);
-  color:var(--glow);
-  font-size:.8rem;
-  margin-bottom:10px;
-}
-
-footer{
-  text-align:center;
-  padding:30px;
-  opacity:.6;
-  font-size:.85rem;
-}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>NSSALA</h1>
-<p>
-An AI-powered learning platform built to transform secondary school education in Nigeria —  
-designed, prototyped, and engineered by a student.
-</p>
+    <h1>NSSALA</h1>
+    <p>Smart Learning • Smart Attendance • Smart Security</p>
 </header>
 
 <nav>
-<button onclick="show('home')">Home</button>
-<button onclick="show('ai')">NSA AI</button>
-<button onclick="show('maths')">Maths</button>
-<button onclick="show('coming')">Coming Soon</button>
-<button onclick="show('about')">About Us</button>
+    <button onclick="showSection('studentDash')">Student Dashboard</button>
+    <button onclick="showSection('teacherDash')">Teacher Dashboard</button>
+    <button onclick="showSection('parentDash')">Parent Dashboard</button>
+    <button onclick="showSection('about')">About</button>
+    <button onclick="showSection('coming')">Coming Soon</button>
 </nav>
 
-<section id="home" class="active">
-<div class="card">
-<span class="badge">MISSION</span>
-<h2>Reimagining Learning with AI</h2>
-<p>
-NSSALA (Nigerian Secondary School AI Learning Assistant) is a next-generation educational concept that empowers students to learn independently using artificial intelligence.
-</p>
-</div>
 
-<div class="card">
-<span class="badge">PROBLEM</span>
-<h2>Challenges in Nigerian Schools</h2>
-<ul>
-<li>Teacher shortages</li>
-<li>Limited access to modern technology</li>
-<li>No exposure to AI tools</li>
-<li>Slow learning pace in science subjects</li>
-</ul>
-</div>
+<!-- STUDENT DASHBOARD -->
+<section class="section" id="studentDash">
+    <h2>Student Dashboard</h2>
+    <p>Access AI, Math tools and study support.</p>
 
-<div class="card">
-<span class="badge">SOLUTION</span>
-<h2>AI-Driven Self Learning</h2>
-<p>
-NSSALA provides a smart AI assistant, interactive subject support, and future-ready AI education — accessible through a simple web platform.
-</p>
-</div>
+    <h3>NSA AI Assistant</h3>
+    <textarea id="aiInput" placeholder="Ask NSA anything…"></textarea>
+    <button onclick="nsalaAI()">Ask NSA</button>
+    <div id="aiOutput"></div>
+
+    <h3>Math Solver</h3>
+    <input id="mathInput" type="text" placeholder="e.g 12*3 + 4/2">
+    <button onclick="solveMath()">Solve</button>
+    <div id="mathOutput"></div>
 </section>
 
-<section id="ai">
-<div class="card">
-<h2>🤖 NSA — NSSALA Smart Assistant</h2>
-<p>
-NSA assists students with Biology, Physics, Chemistry, Mathematics, AI basics, and effective study methods.
-</p>
 
-<div class="chat-box" id="chat">
-<div class="ai">NSA: Good day 👋 I am NSA. How can I support your learning today?</div>
-</div>
+<!-- TEACHER DASHBOARD -->
+<section class="section hidden" id="teacherDash">
+    <h2>Teacher Dashboard</h2>
+    <p>Mark attendance and confirm student positions.</p>
 
-<input id="msg" placeholder="Ask about biology, chemistry, physics, AI..." />
-<button class="send-btn" onclick="chat()">Send</button>
-</div>
+    <h3>Mark Attendance</h3>
+    <input id="studentName" type="text" placeholder="Student Name">
+    <select id="status">
+        <option>Present</option>
+        <option>Absent</option>
+    </select>
+    <button onclick="recordAttendance()">Record</button>
+
+    <h3>Attendance List</h3>
+    <div id="attendanceList"></div>
+
+    <h3>GPS Verification</h3>
+    <button onclick="getGPS()">Verify Student Location</button>
+    <div id="gpsOutput"></div>
 </section>
 
-<section id="maths">
-<div class="card">
-<h2>➗ Smart Maths Engine</h2>
-<p>Enter a maths expression.</p>
-<input id="mathInput" placeholder="e.g. (12 + 8) / 4" />
-<button class="send-btn" onclick="solveMath()">Solve</button>
-<p id="mathAnswer" style="margin-top:14px;"></p>
-</div>
+
+<!-- PARENT DASHBOARD -->
+<section class="section hidden" id="parentDash">
+    <h2>Parent Dashboard</h2>
+    <p>View your child's attendance and last known location.</p>
+
+    <h3>Recent Attendance</h3>
+    <div id="parentAttendanceView">No data yet…</div>
+
+    <h3>Location Updates</h3>
+    <div id="parentLocation">Location not verified…</div>
 </section>
 
-<section id="coming">
-<div class="card">
-<h2>🚧 Coming Soon</h2>
-<ul>
-<li>Advanced conversational AI assistant</li>
-<li>Full Science Hub (Biology, Chemistry, Physics)</li>
-<li>User-friendly student dashboard</li>
-<li>Offline & low-data learning mode</li>
-<li>AI studies curriculum for secondary schools</li>
-</ul>
-<p>
-These features are part of the future roadmap for NSSALA.
-</p>
-</div>
+
+<!-- About -->
+<section class="section hidden" id="about">
+    <h2>About NSSALA</h2>
+    <p>
+       NSSALA is a Nigerian-built educational and security platform made to improve 
+       learning, attendance, safety, and communication between schools, teachers, and parents.
+    </p>
 </section>
 
-<section id="about">
-<div class="card">
-<h2>👨‍💻 About Us</h2>
-<p>
-NSSALA was conceptualized and built by a Nigerian secondary school student passionate about technology, education, and artificial intelligence.
-</p>
-<p>
-The project demonstrates how young innovators can leverage AI concepts to solve real-world educational challenges.
-</p>
-</div>
+<!-- Coming Soon -->
+<section class="section hidden" id="coming">
+    <h2>Coming Soon</h2>
+    <ul>
+        <li>Real-time GPS live tracking</li>
+        <li>Parent instant alerts</li>
+        <li>Student academic progress analytics</li>
+        <li>AI voice assistant</li>
+        <li>School admin dashboard</li>
+    </ul>
 </section>
-
-<footer>
-© 2026 NSSALA • Prototype Version • Built in Nigeria 🇳🇬
-</footer>
 
 <script>
-function show(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+
+// SECTION SWITCHING
+function showSection(id) {
+    const sections = document.querySelectorAll(".section");
+    sections.forEach(sec => sec.classList.add("hidden"));
+    document.getElementById(id).classList.remove("hidden");
 }
 
-function solveMath(){
-  const q=document.getElementById("mathInput").value;
-  let ans="Unable to process expression.";
-  try{
-    if(q.match(/[0-9+\-*/(). ]+/)) ans="Answer: "+eval(q);
-  }catch{}
-  document.getElementById("mathAnswer").innerText=ans;
+
+// NSA AI ENGINE
+function nsalaAI() {
+    let input = document.getElementById("aiInput").value.toLowerCase();
+    let output = "";
+
+    if (input.includes("cell")) {
+        output = "A cell is the basic unit of life.";
+    } else if (input.includes("photosynthesis")) {
+        output = "Photosynthesis is the process plants use to convert sunlight into energy.";
+    } else if (input.includes("digest")) {
+        output = "Digestion is the breakdown of food into absorbable form.";
+    } else if (input.includes("acid")) {
+        output = "Acids have a pH below 7 and turn blue litmus red.";
+    } else {
+        output = "NSA: I understand your question. A more advanced AI version is coming soon…";
+    }
+
+    document.getElementById("aiOutput").innerHTML = output;
 }
 
-function chat(){
-  const input=document.getElementById("msg");
-  const text=input.value.toLowerCase().trim();
-  if(!text) return;
 
-  const box=document.getElementById("chat");
-
-  box.innerHTML += `<div class="user">You: ${input.value}</div>`;
-
-  let reply="That is a thoughtful question. Let us explore it together.";
-
-  if(text.includes("biology"))
-    reply="Biology studies living organisms, including plants, animals, and humans.";
-  else if(text.includes("photosynthesis"))
-    reply="Photosynthesis is how green plants make food using sunlight.";
-  else if(text.includes("chemistry"))
-    reply="Chemistry focuses on substances, reactions, and their properties.";
-  else if(text.includes("physics"))
-    reply="Physics explains motion, energy, forces, and matter.";
-  else if(text.includes("ai"))
-    reply="Artificial Intelligence allows machines to learn and make decisions.";
-  else if(text.includes("study"))
-    reply="Consistent revision and practice improve understanding.";
-
-  box.innerHTML += `<div class="ai">NSA: ${reply}</div>`;
-  box.scrollTop=box.scrollHeight;
-  input.value="";
+// MATH SOLVER
+function solveMath() {
+    try {
+        let expr = document.getElementById("mathInput").value;
+        let ans = eval(expr);
+        document.getElementById("mathOutput").innerHTML = "Answer: " + ans;
+    } catch {
+        document.getElementById("mathOutput").innerHTML = "Invalid math expression.";
+    }
 }
+
+
+// ATTENDANCE SYSTEM
+function recordAttendance() {
+    let name = document.getElementById("studentName").value;
+    let status = document.getElementById("status").value;
+    let time = new Date().toLocaleTimeString();
+
+    if (!name.trim()) {
+        alert("Enter student name!");
+        return;
+    }
+
+    let log = `${name} — ${status} at ${time}`;
+    let entry = document.createElement("p");
+    entry.textContent = log;
+    document.getElementById("attendanceList").appendChild(entry);
+
+    // Update parent side too
+    document.getElementById("parentAttendanceView").innerHTML = log;
+}
+
+
+// GPS SYSTEM DEMO
+function getGPS() {
+    if (!navigator.geolocation) {
+        document.getElementById("gpsOutput").innerHTML = "Device does not support GPS.";
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(pos => {
+        let data = `
+            Latitude: ${pos.coords.latitude}<br>
+            Longitude: ${pos.coords.longitude}<br>
+        `;
+
+        document.getElementById("gpsOutput").innerHTML = data;
+
+        document.getElementById("parentLocation").innerHTML = "Student last location:<br>" + data;
+    });
+}
+
 </script>
 
 </body>
