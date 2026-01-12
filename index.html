@@ -1,342 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NSSALA — Smart Student System</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap" rel="stylesheet">
-
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
-
+<title>NSSALA – AI Learning Hub</title>
 <style>
-    :root {
-        --bg:#0D1117;
-        --panel:#161B22;
-        --accent:#3A63F3;
-        --glass:rgba(255,255,255,0.04);
-    }
-
-    * {
-        scroll-behavior: smooth;
-    }
-
-    body {
+    body{
         margin:0;
-        background:var(--bg);
-        font-family:"Poppins",sans-serif;
+        font-family:Arial, sans-serif;
+        background:#0b0f19;
         color:white;
     }
-
-    header {
-        padding:20px;
+    .center{
         text-align:center;
-        background:#13161F;
-        font-size:26px;
-        font-weight:600;
-        border-bottom:1px solid rgba(255,255,255,0.08);
-        animation:slideDown .6s ease;
+        margin-top:60px;
     }
-
-    @keyframes slideDown {
-        from {transform:translateY(-40px);opacity:0;}
-        to {transform:translateY(0);opacity:1;}
-    }
-
-    .page {
-        padding:25px;
-        display:none;
-        animation:fade .5s ease;
-    }
-
-    @keyframes fade {
-        from {opacity:0; transform:translateY(10px);}
-        to {opacity:1; transform:translateY(0);}
-    }
-
-    input {
-        width:95%;
-        padding:13px;
-        border-radius:10px;
-        background:#202632;
-        color:white;
+    .btn{
+        padding:10px 22px;
+        background:#3b82f6;
         border:none;
-        margin-top:10px;
-        font-size:14px;
-    }
-
-    button {
-        padding:13px;
-        width:100%;
-        background:var(--accent);
-        border:none;
+        border-radius:6px;
         color:white;
-        border-radius:10px;
-        margin-top:10px;
-        font-weight:600;
         cursor:pointer;
-        transition:.25s;
+        transition:0.2s;
     }
-
-    button:hover {
-        background:#2D4FCD;
-        transform:translateY(-2px);
+    .btn:hover{
+        background:#2563eb;
     }
-
-    .flex {
-        display:flex;
-        gap:10px;
-        margin-top:15px;
+    #appSection{
+        display:none;
     }
-
-    .card {
-        background:var(--panel);
-        padding:20px;
-        border-radius:15px;
-        margin-bottom:20px;
-        box-shadow:0 0 20px rgba(0,0,0,0.4);
-        border:1px solid rgba(255,255,255,0.03);
+    .sidebar{
+        position:fixed;
+        top:0;
+        left:0;
+        height:100%;
+        width:220px;
+        background:#111827;
+        padding-top:20px;
+        transform:translateX(-230px);
         transition:0.3s;
     }
-
-    .card:hover {
-        transform:scale(1.02);
+    .sidebar.active{
+        transform:translateX(0);
     }
-
-    .nav-btn {
-        flex:1;
-        background:#222736;
-        border-radius:10px;
-        padding:10px;
-        cursor:pointer;
-        text-align:center;
-        transition:.25s;
-    }
-
-    .nav-btn:hover {
-        background:#2a3245;
-    }
-
-    .title {
-        font-size:20px;
-        font-weight:600;
-        margin-bottom:10px;
-    }
-
-    textarea {
-        width:95%;
-        height:80px;
-        border-radius:12px;
-        background:#202632;
+    .sidebar a{
+        display:block;
+        padding:15px;
         color:white;
-        border:none;
-        margin-top:10px;
-        padding:10px;
+        text-decoration:none;
+        font-size:17px;
+        transition:0.2s;
     }
-
-    .log {
-        font-size:13px;
-        margin-top:10px;
-        line-height:1.7;
-        opacity:.8;
+    .sidebar a:hover{
+        background:#1f2937;
     }
-
+    .content{
+        margin-left:20px;
+        padding:20px;
+    }
+    .menuBtn{
+        font-size:25px;
+        cursor:pointer;
+        position:absolute;
+        left:15px;
+        top:15px;
+    }
+    .fadeIn{
+        animation:fade 0.6s ease forwards;
+        opacity:0;
+    }
+    @keyframes fade{
+        from{opacity:0;transform:translateY(10px);}
+        to{opacity:1;transform:translateY(0);}
+    }
 </style>
-</head>
 
+<!-- FIREBASE CDNs -->
+<script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js"></script>
+
+</head>
 <body>
 
-<header>NSSALA — Smart Student Monitoring + NSA AI</header>
-
-<!-- AUTH PAGE -->
-<div id="authPage" class="page" style="display:block;">
-    <h2>Login to Continue</h2>
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
-    <button onclick="login()">Login</button>
-    <button onclick="signup()">Create New Account</button>
+<div id="loginPage" class="center fadeIn">
+    <h1>NSSALA</h1>
+    <p>Welcome to Nigeria’s Smart Student AI Hub</p>
+    <input id="email" placeholder="Email" style="padding:10px;width:70%;border-radius:6px;"><br><br>
+    <input id="password" type="password" placeholder="Password" style="padding:10px;width:70%;border-radius:6px;"><br><br>
+    <button class="btn" onclick="login()">Login</button>
+    <button class="btn" onclick="signup()">Signup</button>
 </div>
 
-<!-- DASHBOARD -->
-<div id="dashboard" class="page">
-    <h2>Hello, <span id="userEmail"></span></h2>
-
-    <div class="flex">
-        <div class="nav-btn" onclick="showSection('aiPanel')">NSA AI</div>
-        <div class="nav-btn" onclick="showSection('attendancePanel')">Attendance</div>
-        <div class="nav-btn" onclick="showSection('locationPanel')">Location</div>
+<!-- MAIN APP DASHBOARD -->
+<div id="appSection">
+    <div class="sidebar" id="sideNav">
+        <a onclick="showPage('dashboard')">🏠 Dashboard</a>
+        <a onclick="showPage('ai')">🤖 NSA AI Assistant</a>
+        <a onclick="showPage('profile')">👤 Profile</a>
+        <a onclick="logout()">🚪 Logout</a>
     </div>
 
-    <div class="flex">
-        <div class="nav-btn" onclick="showSection('timetable')">Timetable</div>
-        <div class="nav-btn" onclick="showSection('reports')">Reports</div>
-        <div class="nav-btn" onclick="logout()">Logout</div>
-    </div>
+    <span class="menuBtn" onclick="toggleMenu()">☰</span>
 
-    <!-- NSA AI -->
-    <div id="aiPanel" class="card">
-        <div class="title">NSA — Smart AI Assistant</div>
-        <input id="aiInput" placeholder="Ask NSA anything...">
-        <button onclick="askNSA()">Ask</button>
-        <p id="aiResponse"></p>
-    </div>
+    <div class="content">
 
-    <!-- Attendance -->
-    <div id="attendancePanel" class="card" style="display:none;">
-        <div class="title">Biometric-Style Attendance</div>
-        <input id="studentName" placeholder="Student Name">
-        <button onclick="markAttendance()">Mark Present</button>
-        <div id="attendanceLog" class="log"></div>
-    </div>
+        <div id="dashboard" class="fadeIn">
+            <h2>Dashboard</h2>
+            <p>Welcome to NSSALA — your AI learning ecosystem.</p>
+        </div>
 
-    <!-- SIMULATED LOCATION -->
-    <div id="locationPanel" class="card" style="display:none;">
-        <div class="title">Student Location (Simulated)</div>
-        <button onclick="simulateLocation()">Update Location</button>
-        <div id="locationLog" class="log"></div>
-    </div>
+        <div id="ai" class="fadeIn" style="display:none;">
+            <h2>NSA – AI Assistant</h2>
+            <input id="aiQuestion" placeholder="Ask NSA anything..." style="padding:10px;width:70%;border-radius:6px;">
+            <button class="btn" onclick="askNSA()">Ask</button>
+            <p id="aiResponse"></p>
+        </div>
 
-    <!-- TIMETABLE -->
-    <div id="timetable" class="card" style="display:none;">
-        <div class="title">Timetable</div>
-        <p class="log">
-            Monday – Maths, English, Chemistry <br>
-            Tuesday – Biology, Physics, Civic <br>
-            Wednesday – Further Maths, ICT <br>
-            Thursday – Lit-in-English, Yoruba/Igbo/Hausa <br>
-            Friday – Revision + Practical
-        </p>
-    </div>
+        <div id="profile" class="fadeIn" style="display:none;">
+            <h2>Your Profile</h2>
+            <p id="profileEmail"></p>
+        </div>
 
-    <!-- REPORTS -->
-    <div id="reports" class="card" style="display:none;">
-        <div class="title">Report Cards</div>
-        <p class="log">
-            Maths – 88%<br>
-            English – 79%<br>
-            Biology – 92%<br>
-            Chemistry – 85%<br>
-            Physics – 91%<br>
-        </p>
     </div>
 </div>
+
 
 <script>
-/* -----------------------------
-   FIREBASE CONFIG
---------------------------------*/
+
+// PASTE YOUR FIREBASE CONFIG BELOW
 const firebaseConfig = {
-    apiKey: "YOUR_KEY",
-    authDomain: "YOUR_DOMAIN",
-    databaseURL: "YOUR_DB",
-    projectId: "YOUR_ID",
-    storageBucket: "YOUR",
-    messagingSenderId: "YOUR",
-    appId: "YOUR",
+  apiKey: "YOUR KEY",
+  authDomain: "YOUR DOMAIN",
+  projectId: "YOUR PROJECT",
+  storageBucket: "YOUR BUCKET",
+  messagingSenderId: "XXXX",
+  appId: "XXXX"
 };
+
 firebase.initializeApp(firebaseConfig);
-
 const auth = firebase.auth();
-const db = firebase.database();
 
-/* -----------------------------
-   LOGIN + SIGNUP
---------------------------------*/
-function login() {
-    let e = email.value, p = password.value;
-    auth.signInWithEmailAndPassword(e,p).then(showDash).catch(err=>alert(err.message));
+function signup(){
+    auth.createUserWithEmailAndPassword(
+        email.value, password.value
+    ).then(()=>{
+        alert("Signup successful!");
+    }).catch(e=>alert(e.message));
 }
 
-function signup() {
-    let e = email.value, p = password.value;
-    auth.createUserWithEmailAndPassword(e,p).then(showDash).catch(err=>alert(err.message));
+function login(){
+    auth.signInWithEmailAndPassword(
+        email.value, password.value
+    ).then(()=>{
+        loginPage.style.display="none";
+        appSection.style.display="block";
+        profileEmail.innerText = email.value;
+    }).catch(e=>alert(e.message));
 }
 
-function logout() {
-    auth.signOut();
-    dashboard.style.display="none";
-    authPage.style.display="block";
-}
-
-auth.onAuthStateChanged(user=>{
-    if(user) showDash();
-});
-
-function showDash(){
-    userEmail.textContent = auth.currentUser.email;
-    authPage.style.display="none";
-    dashboard.style.display="block";
-    showSection("aiPanel");
-}
-
-/* -----------------------------
-   SECTION SWITCHER
---------------------------------*/
-function showSection(id){
-    ["aiPanel","attendancePanel","locationPanel","timetable","reports"]
-    .forEach(sec=>{
-        document.getElementById(sec).style.display="none";
+function logout(){
+    auth.signOut().then(()=>{
+        appSection.style.display="none";
+        loginPage.style.display="block";
     });
-    document.getElementById(id).style.display="block";
 }
 
-/* -----------------------------
-   AI BRAIN (NSA)
---------------------------------*/
+function toggleMenu(){
+    document.getElementById("sideNav").classList.toggle("active");
+}
+
+function showPage(page){
+    dashboard.style.display="none";
+    ai.style.display="none";
+    profile.style.display="none";
+    document.getElementById(page).style.display="block";
+}
+
+// SIMPLE AI BRAIN
 function askNSA(){
-    let q = aiInput.value.toLowerCase();
+    let q = aiQuestion.value.toLowerCase();
     let r = "";
 
-    if(q.includes("cell")||q.includes("organism")){
-        r = "In biology, a cell is the basic structural & functional unit of life.";
-    }
-    else if(q.includes("atom")||q.includes("chemistry")){
-        r = "An atom consists of protons, neutrons and electrons.";
-    }
-    else if(q.includes("solve")){
-        r = "Send the full equation and I’ll solve it.";
-    }
-    else if(q.includes("sun")||q.includes("photosynthesis")){
-        r = "Photosynthesis converts light energy into chemical energy in plants.";
-    }
-    else{
-        r = "NSA: I need a clearer question 👀";
+    if(q.includes("photosynthesis")){
+        r = "Photosynthesis is the process plants use to convert sunlight into energy.";
+    } else if(q.includes("cell") || q.includes("biology")){
+        r = "A cell is the basic unit of life. All living organisms are made of cells.";
+    } else if(q.includes("algebra")){
+        r = "Algebra uses letters like x and y to represent numbers in equations.";
+    } else {
+        r = "NSA: I'm still learning. Try asking a science or maths topic.";
     }
 
-    aiResponse.textContent = r;
-}
-
-/* -----------------------------
-   ATTENDANCE
---------------------------------*/
-function markAttendance(){
-    let name = studentName.value.trim();
-    if(!name) return;
-
-    let time = new Date().toLocaleString();
-
-    db.ref("attendance/"+name).push({
-        time:time,
-        status:"PRESENT"
-    });
-
-    attendanceLog.innerHTML += `<div>${name} — Present @ ${time}</div>`;
-}
-
-/* -----------------------------
-   LOCATION SIMULATION
---------------------------------*/
-function simulateLocation(){
-    const places = ["Home","School","Road","Church","Lesson Centre"];
-    let pick = places[Math.floor(Math.random()*places.length)];
-
-    let t = new Date().toLocaleTimeString();
-
-    locationLog.innerHTML += `<div>Location: <b>${pick}</b> at ${t}</div>`;
+    aiResponse.innerText = r;
 }
 
 </script>
+
 </body>
 </html>
