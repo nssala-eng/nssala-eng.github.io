@@ -3,81 +3,144 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NSSALA — Smart School System</title>
+<title>NSSALA — Smart Student System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
 
 <style>
+    :root {
+        --bg:#0D1117;
+        --panel:#161B22;
+        --accent:#3A63F3;
+        --glass:rgba(255,255,255,0.04);
+    }
+
+    * {
+        scroll-behavior: smooth;
+    }
+
     body {
-        font-family: Arial, sans-serif;
-        background: #0c1226;
-        color: white;
-        margin: 0;
-        padding: 0;
+        margin:0;
+        background:var(--bg);
+        font-family:"Poppins",sans-serif;
+        color:white;
     }
 
     header {
-        text-align: center;
-        padding: 35px 10px;
-        background: #121a35;
-        border-bottom: 2px solid #1d2a5c;
+        padding:20px;
+        text-align:center;
+        background:#13161F;
+        font-size:26px;
+        font-weight:600;
+        border-bottom:1px solid rgba(255,255,255,0.08);
+        animation:slideDown .6s ease;
     }
 
-    nav {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        background: #0f162f;
-        padding: 10px;
-        flex-wrap: wrap;
+    @keyframes slideDown {
+        from {transform:translateY(-40px);opacity:0;}
+        to {transform:translateY(0);opacity:1;}
     }
 
-    nav button {
-        background: #1a4d9c;
-        border: none;
-        padding: 8px 12px;
-        border-radius: 6px;
-        color: white;
-        cursor: pointer;
-        font-weight: bold;
+    .page {
+        padding:25px;
+        display:none;
+        animation:fade .5s ease;
     }
 
-    nav button:hover {
-        background: #2262c2;
+    @keyframes fade {
+        from {opacity:0; transform:translateY(10px);}
+        to {opacity:1; transform:translateY(0);}
     }
 
-    .section {
-        margin: 18px;
-        padding: 20px;
-        background: #121a35;
-        border-radius: 8px;
-    }
-
-    input, textarea, select {
-        width: 100%;
-        padding: 10px;
-        margin-top: 6px;
-        border-radius: 6px;
-        border: none;
-        outline: none;
-        background: #0f1a36;
-        color: white;
+    input {
+        width:95%;
+        padding:13px;
+        border-radius:10px;
+        background:#202632;
+        color:white;
+        border:none;
+        margin-top:10px;
+        font-size:14px;
     }
 
     button {
-        padding: 10px 18px;
-        border: none;
-        border-radius: 6px;
-        color: white;
-        background: #1a4d9c;
-        margin-top: 8px;
-        cursor: pointer;
+        padding:13px;
+        width:100%;
+        background:var(--accent);
+        border:none;
+        color:white;
+        border-radius:10px;
+        margin-top:10px;
+        font-weight:600;
+        cursor:pointer;
+        transition:.25s;
     }
 
     button:hover {
-        background: #2262c2;
+        background:#2D4FCD;
+        transform:translateY(-2px);
     }
 
-    .hidden {
-        display: none;
+    .flex {
+        display:flex;
+        gap:10px;
+        margin-top:15px;
+    }
+
+    .card {
+        background:var(--panel);
+        padding:20px;
+        border-radius:15px;
+        margin-bottom:20px;
+        box-shadow:0 0 20px rgba(0,0,0,0.4);
+        border:1px solid rgba(255,255,255,0.03);
+        transition:0.3s;
+    }
+
+    .card:hover {
+        transform:scale(1.02);
+    }
+
+    .nav-btn {
+        flex:1;
+        background:#222736;
+        border-radius:10px;
+        padding:10px;
+        cursor:pointer;
+        text-align:center;
+        transition:.25s;
+    }
+
+    .nav-btn:hover {
+        background:#2a3245;
+    }
+
+    .title {
+        font-size:20px;
+        font-weight:600;
+        margin-bottom:10px;
+    }
+
+    textarea {
+        width:95%;
+        height:80px;
+        border-radius:12px;
+        background:#202632;
+        color:white;
+        border:none;
+        margin-top:10px;
+        padding:10px;
+    }
+
+    .log {
+        font-size:13px;
+        margin-top:10px;
+        line-height:1.7;
+        opacity:.8;
     }
 
 </style>
@@ -85,177 +148,195 @@
 
 <body>
 
-<header>
-    <h1>NSSALA</h1>
-    <p>Smart Learning • Smart Attendance • Smart Security</p>
-</header>
+<header>NSSALA — Smart Student Monitoring + NSA AI</header>
 
-<nav>
-    <button onclick="showSection('studentDash')">Student Dashboard</button>
-    <button onclick="showSection('teacherDash')">Teacher Dashboard</button>
-    <button onclick="showSection('parentDash')">Parent Dashboard</button>
-    <button onclick="showSection('about')">About</button>
-    <button onclick="showSection('coming')">Coming Soon</button>
-</nav>
+<!-- AUTH PAGE -->
+<div id="authPage" class="page" style="display:block;">
+    <h2>Login to Continue</h2>
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <button onclick="signup()">Create New Account</button>
+</div>
 
+<!-- DASHBOARD -->
+<div id="dashboard" class="page">
+    <h2>Hello, <span id="userEmail"></span></h2>
 
-<!-- STUDENT DASHBOARD -->
-<section class="section" id="studentDash">
-    <h2>Student Dashboard</h2>
-    <p>Access AI, Math tools and study support.</p>
+    <div class="flex">
+        <div class="nav-btn" onclick="showSection('aiPanel')">NSA AI</div>
+        <div class="nav-btn" onclick="showSection('attendancePanel')">Attendance</div>
+        <div class="nav-btn" onclick="showSection('locationPanel')">Location</div>
+    </div>
 
-    <h3>NSA AI Assistant</h3>
-    <textarea id="aiInput" placeholder="Ask NSA anything…"></textarea>
-    <button onclick="nsalaAI()">Ask NSA</button>
-    <div id="aiOutput"></div>
+    <div class="flex">
+        <div class="nav-btn" onclick="showSection('timetable')">Timetable</div>
+        <div class="nav-btn" onclick="showSection('reports')">Reports</div>
+        <div class="nav-btn" onclick="logout()">Logout</div>
+    </div>
 
-    <h3>Math Solver</h3>
-    <input id="mathInput" type="text" placeholder="e.g 12*3 + 4/2">
-    <button onclick="solveMath()">Solve</button>
-    <div id="mathOutput"></div>
-</section>
+    <!-- NSA AI -->
+    <div id="aiPanel" class="card">
+        <div class="title">NSA — Smart AI Assistant</div>
+        <input id="aiInput" placeholder="Ask NSA anything...">
+        <button onclick="askNSA()">Ask</button>
+        <p id="aiResponse"></p>
+    </div>
 
+    <!-- Attendance -->
+    <div id="attendancePanel" class="card" style="display:none;">
+        <div class="title">Biometric-Style Attendance</div>
+        <input id="studentName" placeholder="Student Name">
+        <button onclick="markAttendance()">Mark Present</button>
+        <div id="attendanceLog" class="log"></div>
+    </div>
 
-<!-- TEACHER DASHBOARD -->
-<section class="section hidden" id="teacherDash">
-    <h2>Teacher Dashboard</h2>
-    <p>Mark attendance and confirm student positions.</p>
+    <!-- SIMULATED LOCATION -->
+    <div id="locationPanel" class="card" style="display:none;">
+        <div class="title">Student Location (Simulated)</div>
+        <button onclick="simulateLocation()">Update Location</button>
+        <div id="locationLog" class="log"></div>
+    </div>
 
-    <h3>Mark Attendance</h3>
-    <input id="studentName" type="text" placeholder="Student Name">
-    <select id="status">
-        <option>Present</option>
-        <option>Absent</option>
-    </select>
-    <button onclick="recordAttendance()">Record</button>
+    <!-- TIMETABLE -->
+    <div id="timetable" class="card" style="display:none;">
+        <div class="title">Timetable</div>
+        <p class="log">
+            Monday – Maths, English, Chemistry <br>
+            Tuesday – Biology, Physics, Civic <br>
+            Wednesday – Further Maths, ICT <br>
+            Thursday – Lit-in-English, Yoruba/Igbo/Hausa <br>
+            Friday – Revision + Practical
+        </p>
+    </div>
 
-    <h3>Attendance List</h3>
-    <div id="attendanceList"></div>
-
-    <h3>GPS Verification</h3>
-    <button onclick="getGPS()">Verify Student Location</button>
-    <div id="gpsOutput"></div>
-</section>
-
-
-<!-- PARENT DASHBOARD -->
-<section class="section hidden" id="parentDash">
-    <h2>Parent Dashboard</h2>
-    <p>View your child's attendance and last known location.</p>
-
-    <h3>Recent Attendance</h3>
-    <div id="parentAttendanceView">No data yet…</div>
-
-    <h3>Location Updates</h3>
-    <div id="parentLocation">Location not verified…</div>
-</section>
-
-
-<!-- About -->
-<section class="section hidden" id="about">
-    <h2>About NSSALA</h2>
-    <p>
-       NSSALA is a Nigerian-built educational and security platform made to improve 
-       learning, attendance, safety, and communication between schools, teachers, and parents.
-    </p>
-</section>
-
-<!-- Coming Soon -->
-<section class="section hidden" id="coming">
-    <h2>Coming Soon</h2>
-    <ul>
-        <li>Real-time GPS live tracking</li>
-        <li>Parent instant alerts</li>
-        <li>Student academic progress analytics</li>
-        <li>AI voice assistant</li>
-        <li>School admin dashboard</li>
-    </ul>
-</section>
+    <!-- REPORTS -->
+    <div id="reports" class="card" style="display:none;">
+        <div class="title">Report Cards</div>
+        <p class="log">
+            Maths – 88%<br>
+            English – 79%<br>
+            Biology – 92%<br>
+            Chemistry – 85%<br>
+            Physics – 91%<br>
+        </p>
+    </div>
+</div>
 
 <script>
+/* -----------------------------
+   FIREBASE CONFIG
+--------------------------------*/
+const firebaseConfig = {
+    apiKey: "YOUR_KEY",
+    authDomain: "YOUR_DOMAIN",
+    databaseURL: "YOUR_DB",
+    projectId: "YOUR_ID",
+    storageBucket: "YOUR",
+    messagingSenderId: "YOUR",
+    appId: "YOUR",
+};
+firebase.initializeApp(firebaseConfig);
 
-// SECTION SWITCHING
-function showSection(id) {
-    const sections = document.querySelectorAll(".section");
-    sections.forEach(sec => sec.classList.add("hidden"));
-    document.getElementById(id).classList.remove("hidden");
+const auth = firebase.auth();
+const db = firebase.database();
+
+/* -----------------------------
+   LOGIN + SIGNUP
+--------------------------------*/
+function login() {
+    let e = email.value, p = password.value;
+    auth.signInWithEmailAndPassword(e,p).then(showDash).catch(err=>alert(err.message));
 }
 
-
-// NSA AI ENGINE
-function nsalaAI() {
-    let input = document.getElementById("aiInput").value.toLowerCase();
-    let output = "";
-
-    if (input.includes("cell")) {
-        output = "A cell is the basic unit of life.";
-    } else if (input.includes("photosynthesis")) {
-        output = "Photosynthesis is the process plants use to convert sunlight into energy.";
-    } else if (input.includes("digest")) {
-        output = "Digestion is the breakdown of food into absorbable form.";
-    } else if (input.includes("acid")) {
-        output = "Acids have a pH below 7 and turn blue litmus red.";
-    } else {
-        output = "NSA: I understand your question. A more advanced AI version is coming soon…";
-    }
-
-    document.getElementById("aiOutput").innerHTML = output;
+function signup() {
+    let e = email.value, p = password.value;
+    auth.createUserWithEmailAndPassword(e,p).then(showDash).catch(err=>alert(err.message));
 }
 
-
-// MATH SOLVER
-function solveMath() {
-    try {
-        let expr = document.getElementById("mathInput").value;
-        let ans = eval(expr);
-        document.getElementById("mathOutput").innerHTML = "Answer: " + ans;
-    } catch {
-        document.getElementById("mathOutput").innerHTML = "Invalid math expression.";
-    }
+function logout() {
+    auth.signOut();
+    dashboard.style.display="none";
+    authPage.style.display="block";
 }
 
+auth.onAuthStateChanged(user=>{
+    if(user) showDash();
+});
 
-// ATTENDANCE SYSTEM
-function recordAttendance() {
-    let name = document.getElementById("studentName").value;
-    let status = document.getElementById("status").value;
-    let time = new Date().toLocaleTimeString();
-
-    if (!name.trim()) {
-        alert("Enter student name!");
-        return;
-    }
-
-    let log = `${name} — ${status} at ${time}`;
-    let entry = document.createElement("p");
-    entry.textContent = log;
-    document.getElementById("attendanceList").appendChild(entry);
-
-    // Update parent side too
-    document.getElementById("parentAttendanceView").innerHTML = log;
+function showDash(){
+    userEmail.textContent = auth.currentUser.email;
+    authPage.style.display="none";
+    dashboard.style.display="block";
+    showSection("aiPanel");
 }
 
-
-// GPS SYSTEM DEMO
-function getGPS() {
-    if (!navigator.geolocation) {
-        document.getElementById("gpsOutput").innerHTML = "Device does not support GPS.";
-        return;
-    }
-
-    navigator.geolocation.getCurrentPosition(pos => {
-        let data = `
-            Latitude: ${pos.coords.latitude}<br>
-            Longitude: ${pos.coords.longitude}<br>
-        `;
-
-        document.getElementById("gpsOutput").innerHTML = data;
-
-        document.getElementById("parentLocation").innerHTML = "Student last location:<br>" + data;
+/* -----------------------------
+   SECTION SWITCHER
+--------------------------------*/
+function showSection(id){
+    ["aiPanel","attendancePanel","locationPanel","timetable","reports"]
+    .forEach(sec=>{
+        document.getElementById(sec).style.display="none";
     });
+    document.getElementById(id).style.display="block";
+}
+
+/* -----------------------------
+   AI BRAIN (NSA)
+--------------------------------*/
+function askNSA(){
+    let q = aiInput.value.toLowerCase();
+    let r = "";
+
+    if(q.includes("cell")||q.includes("organism")){
+        r = "In biology, a cell is the basic structural & functional unit of life.";
+    }
+    else if(q.includes("atom")||q.includes("chemistry")){
+        r = "An atom consists of protons, neutrons and electrons.";
+    }
+    else if(q.includes("solve")){
+        r = "Send the full equation and I’ll solve it.";
+    }
+    else if(q.includes("sun")||q.includes("photosynthesis")){
+        r = "Photosynthesis converts light energy into chemical energy in plants.";
+    }
+    else{
+        r = "NSA: I need a clearer question 👀";
+    }
+
+    aiResponse.textContent = r;
+}
+
+/* -----------------------------
+   ATTENDANCE
+--------------------------------*/
+function markAttendance(){
+    let name = studentName.value.trim();
+    if(!name) return;
+
+    let time = new Date().toLocaleString();
+
+    db.ref("attendance/"+name).push({
+        time:time,
+        status:"PRESENT"
+    });
+
+    attendanceLog.innerHTML += `<div>${name} — Present @ ${time}</div>`;
+}
+
+/* -----------------------------
+   LOCATION SIMULATION
+--------------------------------*/
+function simulateLocation(){
+    const places = ["Home","School","Road","Church","Lesson Centre"];
+    let pick = places[Math.floor(Math.random()*places.length)];
+
+    let t = new Date().toLocaleTimeString();
+
+    locationLog.innerHTML += `<div>Location: <b>${pick}</b> at ${t}</div>`;
 }
 
 </script>
-
 </body>
 </html>
