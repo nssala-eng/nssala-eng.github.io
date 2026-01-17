@@ -2,205 +2,258 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>NSSALA – Smart Learning Prototype</title>
+<title>NSSALA – Smart Learning Assistant</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
     body{
         margin:0;
-        font-family: "Segoe UI", Arial, sans-serif;
-        background:#0c0f1a;
-        color:#fff;
+        font-family:'Inter', sans-serif;
+        background:#f4f6fa;
+        color:#1a1a1a;
         overflow-x:hidden;
     }
 
-    .menuBtn{
-        font-size:28px;
-        cursor:pointer;
-        position:fixed;
-        left:10px;
-        top:10px;
-        z-index:2000;
-    }
-
-    /* SIDEBAR */
-    .sidebar{
-        position:fixed;
+    /* NAV */
+    nav{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:20px 40px;
+        position:sticky;
         top:0;
-        left:0;
-        width:230px;
-        height:100vh;
-        background:rgba(17,24,39,0.92);
-        backdrop-filter:blur(8px);
-        padding-top:40px;
-        transition:0.3s;
-        transform:translateX(-260px);
-        box-shadow:4px 0 20px rgba(0,0,0,0.3);
+        background:white;
+        box-shadow:0 2px 10px rgba(0,0,0,0.07);
         z-index:1000;
     }
-    .sidebar.active{
-        transform:translateX(0);
+    nav h1{
+        font-size:28px;
+        font-weight:700;
+        color:#1e3a8a;
     }
-    .sidebar a{
-        display:block;
-        padding:15px 25px;
-        font-size:17px;
-        color:white;
+    nav a{
+        margin-left:25px;
         text-decoration:none;
+        color:#333;
+        font-size:16px;
         transition:0.2s;
-        cursor:pointer;
     }
-    .sidebar a:hover{
-        background:#1f2937;
-        padding-left:35px;
+    nav a:hover{
+        color:#1e3a8a;
     }
 
-    header{
-        text-align:center;
-        padding:70px 20px;
-        background:linear-gradient(135deg,#1e293b,#0f172a);
-    }
-
+    /* HERO */
     .hero{
-        padding:80px 20px;
+        padding:110px 40px;
         text-align:center;
+        animation:fadeIn 1s ease;
     }
-
+    @keyframes fadeIn{
+        from{opacity:0;transform:translateY(20px);}
+        to{opacity:1;transform:translateY(0);}
+    }
+    .hero h2{
+        font-size:40px;
+        font-weight:800;
+        margin-bottom:10px;
+    }
+    .hero p{
+        font-size:18px;
+        max-width:700px;
+        margin:auto;
+        color:#444;
+    }
     .btn{
-        padding:12px 26px;
-        background:#3b82f6;
+        padding:14px 30px;
         border:none;
-        border-radius:8px;
+        background:#1e3a8a;
         color:white;
         font-size:17px;
+        border-radius:8px;
         cursor:pointer;
-        margin-top:20px;
-        transition:0.3s;
+        margin-top:25px;
+        transition:0.25s;
     }
     .btn:hover{
-        background:#1d4ed8;
-        transform:scale(1.05);
+        background:#163273;
+        transform:scale(1.04);
     }
 
-    .section{
-        padding:60px 20px;
-        text-align:center;
+    /* FEATURES */
+    .features{
+        padding:60px 40px;
     }
-
-    /* CHAT */
-    .chat-box{
-        width:85%;
-        margin:auto;
-        background:rgba(17,24,39,0.7);
-        backdrop-filter:blur(10px);
+    .cards{
+        display:grid;
+        grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+        gap:25px;
+        margin-top:40px;
+    }
+    .card{
+        background:white;
+        padding:25px;
         border-radius:10px;
-        padding:20px;
-        box-shadow:0 0 20px rgba(0,0,0,0.4);
+        box-shadow:0 3px 12px rgba(0,0,0,0.08);
+        transition:0.3s;
+    }
+    .card:hover{
+        transform:translateY(-6px);
+        box-shadow:0 5px 18px rgba(0,0,0,0.12);
     }
 
+    /* AI SECTION (Dark Mode) */
+    .ai-section{
+        padding:70px 40px;
+        background:#0a0f1c;
+        color:white;
+    }
+    .chat-box{
+        width:90%;
+        max-width:750px;
+        margin:auto;
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(10px);
+        padding:25px;
+        border-radius:12px;
+        box-shadow:0 0 20px rgba(0,0,0,0.3);
+    }
     #chatHistory{
-        height:330px;
+        height:320px;
         overflow-y:auto;
-        border-radius:8px;
-        background:#0f1625;
+        background:#0d1222;
+        border-radius:10px;
         padding:15px;
-    }
-
-    .msg{
         margin-bottom:15px;
-        padding:10px 12px;
+    }
+    .msg{
+        padding:12px;
+        margin-bottom:15px;
         border-radius:8px;
         max-width:80%;
         line-height:20px;
+        animation:fadeMsg .35s ease;
     }
-
+    @keyframes fadeMsg{
+        from{opacity:0;transform:translateY(10px);}
+        to{opacity:1;transform:translateY(0);}
+    }
     .you{
         background:#1e3a8a;
         margin-left:auto;
     }
-
     .nsa{
         background:#111827;
-        margin-right:auto;
         border-left:4px solid #3b82f6;
+        margin-right:auto;
     }
-
     input{
         width:70%;
-        padding:10px;
-        border-radius:6px;
+        padding:13px;
         border:none;
-        margin-top:10px;
+        border-radius:6px;
+        font-size:16px;
+    }
+    .send-btn{
+        padding:13px 22px;
+        background:#2563eb;
+        border:none;
+        border-radius:6px;
+        color:white;
+        font-size:16px;
+        cursor:pointer;
+        margin-left:10px;
+    }
+
+    /* ABOUT */
+    .about{
+        padding:60px 40px;
+        background:#ffffff;
+        text-align:center;
+    }
+
+    /* COMING SOON */
+    .coming{
+        padding:60px 40px;
+        background:#eef1f6;
+        text-align:center;
     }
 </style>
 </head>
+
 <body>
 
-<span class="menuBtn" onclick="toggleMenu()">☰</span>
-
-<div class="sidebar" id="sideNav">
-    <a onclick="scrollToSection('hero')">🏠 Home</a>
-    <a onclick="scrollToSection('features')">✨ Features</a>
-    <a onclick="scrollToSection('ai')">🤖 NSA AI</a>
-    <a onclick="scrollToSection('about')">ℹ️ About</a>
-    <a onclick="scrollToSection('coming')">🚀 Coming Soon</a>
-</div>
-
-<header id="hero">
+<nav>
     <h1>NSSALA</h1>
-    <p>Your fast and simple learning assistant.</p>
-</header>
+    <div>
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#ai">AI Assistant</a>
+        <a href="#about">About</a>
+        <a href="#coming">Coming Soon</a>
+    </div>
+</nav>
 
-<section class="hero">
-    <h2>Welcome to NSSALA</h2>
+<section id="home" class="hero">
+    <h2>Learn Smarter. Study Easier.</h2>
     <p>
-        This tool breaks down school topics in the same way a good teacher explains it in class.
-        No stress. No confusion. Just straight understanding.
+        NSSALA is a student-friendly learning assistant built to simplify complex subjects.
+        No confusion. No stress. Just clear explanations that help you understand faster.
     </p>
-    <button class="btn" onclick="scrollToSection('ai')">Start Learning</button>
+    <button class="btn" onclick="document.getElementById('ai').scrollIntoView({behavior:'smooth'})">
+        Chat with NSA
+    </button>
 </section>
 
-<section class="section" id="features">
-    <h2>Features</h2>
-    <p>📘 Smart topic explanations</p>
-    <p>📚 Subject-by-subject knowledge</p>
-    <p>🤖 NSA answers like a real teacher</p>
-</section>
+<section id="features" class="features">
+    <h2 style="text-align:center;font-size:32px;">What Makes NSSALA Unique</h2>
 
-<section class="section" id="ai">
-    <h2>Chat With NSA</h2>
-    <div class="chat-box">
-        <div id="chatHistory"></div>
-        <input id="userInput" placeholder="Ask a question…">
-        <button class="btn" onclick="sendMessage()">Send</button>
+    <div class="cards">
+        <div class="card">
+            <h3>📘 Student-Friendly</h3>
+            <p>Explanations are broken down in a way any secondary school student can understand without stress.</p>
+        </div>
+
+        <div class="card">
+            <h3>🤖 Smart AI (NSA)</h3>
+            <p>NSA answers questions across multiple subjects with clarity and accuracy — like a patient tutor.</p>
+        </div>
+
+        <div class="card">
+            <h3>📚 Covers Key Subjects</h3>
+            <p>Biology, physics, chemistry, and maths explained in simple language you can remember easily.</p>
+        </div>
     </div>
 </section>
 
-<section class="section" id="about">
+<section id="ai" class="ai-section">
+    <h2 style="text-align:center;font-size:32px;margin-bottom:30px;">NSA – Your Learning Assistant</h2>
+
+    <div class="chat-box">
+        <div id="chatHistory"></div>
+
+        <input id="userInput" placeholder="Ask a question…">
+        <button class="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+</section>
+
+<section id="about" class="about">
     <h2>About NSSALA</h2>
-    <p>
-        NSSALA was built to help students understand complex topics in a simple way
-        using smart explanations and breakdowns.
+    <p style="max-width:750px;margin:auto;">
+        NSSALA was created with one goal: to make learning easier for Nigerian secondary school students.
+        Instead of struggling with confusing notes or rushing teachers, students get calm, clear explanations
+        anytime they need it.
     </p>
 </section>
 
-<section class="section" id="coming">
+<section id="coming" class="coming">
     <h2>Coming Soon</h2>
-    <p>🔥 Voice tutor mode</p>
-    <p>🔥 Full dashboard</p>
-    <p>🔥 Past questions practice</p>
+    <p>📌 Voice-enabled teaching mode</p>
+    <p>📌 Student progress dashboard</p>
+    <p>📌 Practice questions + solutions</p>
+    <p>📌 Offline learning mode</p>
 </section>
 
 <script>
-function toggleMenu(){
-    document.getElementById("sideNav").classList.toggle("active");
-}
-
-function scrollToSection(id){
-    document.getElementById(id).scrollIntoView({behavior:"smooth"});
-    toggleMenu();
-}
-
 function sendMessage(){
     let input = document.getElementById("userInput");
     let message = input.value.trim();
@@ -210,9 +263,9 @@ function sendMessage(){
     input.value="";
 
     setTimeout(()=>{
-        let reply = NSA_teach(message.toLowerCase());
+        let reply = getNSAResponse(message.toLowerCase());
         addMessage("nsa", reply);
-    }, 600);
+    }, 700);
 }
 
 function addMessage(sender,text){
@@ -224,80 +277,33 @@ function addMessage(sender,text){
     box.scrollTop = box.scrollHeight;
 }
 
-/* SMARTER AI KNOWLEDGE SYSTEM */
-function NSA_teach(q){
+function getNSAResponse(q){
+    // BIOLOGY KNOWLEDGE
+    if(q.includes("photosynthesis")) return "Photosynthesis is the process where green plants use sunlight to make food. It mainly occurs in the leaves.";
+    if(q.includes("digestion")) return "Digestion is the breakdown of food into simpler substances that the body can absorb and use.";
+    if(q.includes("respiration")) return "Respiration is how the body converts glucose and oxygen into energy.";
 
-    /* ==========================
-       BIOLOGY
-    ========================== */
-    if(q.includes("photosynthesis")) return "Photosynthesis is the process green plants use to convert sunlight, water, and carbon dioxide into glucose (food) and oxygen. It occurs in the chloroplast.";
-    if(q.includes("digestion")) return "Digestion is the breakdown of food into simpler substances the body can use. It starts in the mouth and ends in the small intestine.";
-    if(q.includes("respiration")) return "Respiration is the release of energy from food. There is aerobic (with oxygen) and anaerobic (without oxygen).";
+    // PHYSICS KNOWLEDGE
+    if(q.includes("force")) return "Force is a push or pull that can change the motion or shape of an object.";
+    if(q.includes("velocity")) return "Velocity is the speed of something in a specific direction.";
+    if(q.includes("gravity")) return "Gravity is the force that pulls objects toward the center of the Earth.";
 
-    /* ==========================
-       CHEMISTRY
-    ========================== */
-    if(q.includes("atom")) return "An atom is the smallest particle of an element that retains its properties. It has protons, neutrons, and electrons.";
-    if(q.includes("electrolysis")) return "Electrolysis is the chemical decomposition of a substance using electric current. Example: splitting water into hydrogen and oxygen.";
-    if(q.includes("salt")) return "Salts are formed when an acid reacts with a base. Example: HCl + NaOH → NaCl + water.";
+    // CHEMISTRY KNOWLEDGE
+    if(q.includes("atom")) return "An atom is the smallest unit of matter that retains the properties of an element.";
+    if(q.includes("acid")) return "Acids have a pH lower than 7 and they usually taste sour. Examples include lemon juice and vinegar.";
+    if(q.includes("neutralization")) return "Neutralization is the reaction between an acid and a base to form salt and water.";
 
-    /* ==========================
-       PHYSICS
-    ========================== */
-    if(q.includes("force")) return "Force is a push or pull that can change the motion or shape of an object. Measured in Newtons.";
-    if(q.includes("velocity")) return "Velocity is speed in a specific direction. If direction changes, velocity changes.";
-    if(q.includes("pressure")) return "Pressure is force per unit area. Formula: P = F/A.";
+    // MATH KNOWLEDGE
+    if(q.includes("algebra")) return "Algebra uses letters and symbols to represent numbers and relationships.";
+    if(q.includes("simultaneous")) return "Simultaneous equations are two or more equations solved together to find values that satisfy all equations.";
+    if(q.includes("quadratic")) return "A quadratic equation has the form ax² + bx + c = 0.";
 
-    /* ==========================
-       MATHEMATICS
-    ========================== */
-    if(q.includes("simultaneous")) return "Simultaneous equations are two equations solved together to find the same unknowns. Use elimination or substitution.";
-    if(q.includes("quadratic")) return "A quadratic equation is in the form ax² + bx + c = 0. Solve using factorization, completing square, or the formula.";
-    if(q.includes("probability")) return "Probability is the likelihood of an event happening. Formula: number of favourable outcomes / total outcomes.";
+    // GENERAL ASK
+    if(q.includes("hello") || q.includes("hi")){
+        return "Hello! I’m NSA. How can I help you study today?";
+    }
 
-    /* ==========================
-       ENGLISH
-    ========================== */
-    if(q.includes("noun")) return "A noun is the name of a person, place, thing, or idea.";
-    if(q.includes("verb")) return "A verb is an action word or a state of being. Example: run, jump, is.";
-    if(q.includes("summary")) return "A summary is a shorter version of a text that captures only the main ideas.";
-
-    /* ==========================
-       GOVERNMENT
-    ========================== */
-    if(q.includes("democracy")) return "Democracy is a system of government where power belongs to the people through elected representatives.";
-    if(q.includes("constitution")) return "A constitution is a document that contains the rules and principles by which a country is governed.";
-
-    /* ==========================
-       ECONOMICS
-    ========================== */
-    if(q.includes("demand")) return "Demand is the quantity of a good consumers are willing and able to buy at a given time and price.";
-    if(q.includes("inflation")) return "Inflation is the general rise in prices of goods and services over time.";
-
-    /* ==========================
-       BASIC TECHNOLOGY
-    ========================== */
-    if(q.includes("simple machine")) return "Simple machines are devices that make work easier: lever, pulley, wheel and axle, screw, wedge, inclined plane.";
-
-    /* ==========================
-       COMPUTER SCIENCE
-    ========================== */
-    if(q.includes("algorithm")) return "An algorithm is a step-by-step procedure for solving a problem.";
-    if(q.includes("software")) return "Software is a set of instructions that make the computer work. Examples: apps, operating systems.";
-
-    /* ==========================
-       AGRIC SCIENCE
-    ========================== */
-    if(q.includes("soil")) return "Soil is the upper layer of the earth where plants grow. Types include sandy, clay, and loamy soil.";
-    if(q.includes("irrigation")) return "Irrigation is the artificial application of water to crops.";
-
-    /* ==========================
-       GEOGRAPHY
-    ========================== */
-    if(q.includes("weather")) return "Weather is the condition of the atmosphere at a specific time and place.";
-    if(q.includes("climate")) return "Climate is the average weather condition of a place over a long period.";
-
-    return "I'm still learning that topic. Try asking a specific subject like biology, math, physics, chemistry, English, government, economics, or geography.";
+    return "I'm not fully trained on that topic yet, but try rephrasing it or ask something from your school subjects.";
 }
 </script>
 
