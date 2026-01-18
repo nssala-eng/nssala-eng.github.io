@@ -25,7 +25,14 @@
         background:white;
         box-shadow:0 2px 10px rgba(0,0,0,0.07);
         z-index:1000;
+        animation:fadeDown 0.6s ease;
     }
+
+    @keyframes fadeDown{
+        from{opacity:0; transform:translateY(-20px);}
+        to{opacity:1; transform:translateY(0);}
+    }
+
     nav h1{
         font-size:28px;
         font-weight:700;
@@ -46,23 +53,32 @@
     .hero{
         padding:110px 40px;
         text-align:center;
-        animation:fadeIn 1s ease;
+        animation:fadeUp 1s ease;
     }
-    @keyframes fadeIn{
-        from{opacity:0;transform:translateY(20px);}
+    @keyframes fadeUp{
+        from{opacity:0;transform:translateY(40px);}
         to{opacity:1;transform:translateY(0);}
     }
+
     .hero h2{
         font-size:40px;
         font-weight:800;
         margin-bottom:10px;
+        animation:growText 1.2s ease;
     }
+    @keyframes growText{
+        from{letter-spacing:-2px; opacity:0;}
+        to{letter-spacing:0px; opacity:1;}
+    }
+
     .hero p{
         font-size:18px;
         max-width:700px;
         margin:auto;
         color:#444;
+        animation:fadeUp 1.3s ease;
     }
+
     .btn{
         padding:14px 30px;
         border:none;
@@ -76,7 +92,7 @@
     }
     .btn:hover{
         background:#163273;
-        transform:scale(1.04);
+        transform:scale(1.05);
     }
 
     /* FEATURES */
@@ -95,7 +111,13 @@
         border-radius:10px;
         box-shadow:0 3px 12px rgba(0,0,0,0.08);
         transition:0.3s;
+        animation:slideUp 0.7s ease;
     }
+    @keyframes slideUp{
+        from{opacity:0;transform:translateY(25px);}
+        to{opacity:1;transform:translateY(0);}
+    }
+
     .card:hover{
         transform:translateY(-6px);
         box-shadow:0 5px 18px rgba(0,0,0,0.12);
@@ -106,7 +128,13 @@
         padding:70px 40px;
         background:#0a0f1c;
         color:white;
+        animation:fadeIn 1s ease;
     }
+    @keyframes fadeIn{
+        from{opacity:0;}
+        to{opacity:1;}
+    }
+
     .chat-box{
         width:90%;
         max-width:750px;
@@ -116,7 +144,9 @@
         padding:25px;
         border-radius:12px;
         box-shadow:0 0 20px rgba(0,0,0,0.3);
+        animation:fadeUp 1s ease;
     }
+
     #chatHistory{
         height:320px;
         overflow-y:auto;
@@ -125,18 +155,20 @@
         padding:15px;
         margin-bottom:15px;
     }
+
     .msg{
         padding:12px;
         margin-bottom:15px;
         border-radius:8px;
         max-width:80%;
         line-height:20px;
-        animation:fadeMsg .35s ease;
+        animation:msgFade 0.4s ease;
     }
-    @keyframes fadeMsg{
-        from{opacity:0;transform:translateY(10px);}
+    @keyframes msgFade{
+        from{opacity:0;transform:translateY(8px);}
         to{opacity:1;transform:translateY(0);}
     }
+
     .you{
         background:#1e3a8a;
         margin-left:auto;
@@ -146,6 +178,7 @@
         border-left:4px solid #3b82f6;
         margin-right:auto;
     }
+
     input{
         width:70%;
         padding:13px;
@@ -169,6 +202,7 @@
         padding:60px 40px;
         background:#ffffff;
         text-align:center;
+        animation:fadeUp 1s ease;
     }
 
     /* COMING SOON */
@@ -176,6 +210,7 @@
         padding:60px 40px;
         background:#eef1f6;
         text-align:center;
+        animation:fadeUp 1s ease;
     }
 </style>
 </head>
@@ -196,8 +231,9 @@
 <section id="home" class="hero">
     <h2>Learn Smarter. Study Easier.</h2>
     <p>
-        NSSALA is a student-friendly learning assistant built to simplify complex subjects.
-        No confusion. No stress. Just clear explanations that help you understand faster.
+        NSSALA is a clean, focused platform that gives students clear explanations,
+        breaking topics down in a way that actually makes sense. No stress, no confusion —
+        just learning made simple.
     </p>
     <button class="btn" onclick="document.getElementById('ai').scrollIntoView({behavior:'smooth'})">
         Chat with NSA
@@ -205,28 +241,28 @@
 </section>
 
 <section id="features" class="features">
-    <h2 style="text-align:center;font-size:32px;">What Makes NSSALA Unique</h2>
+    <h2 style="text-align:center;font-size:32px;">What Makes NSSALA Stand Out</h2>
 
     <div class="cards">
         <div class="card">
-            <h3>📘 Student-Friendly</h3>
-            <p>Explanations are broken down in a way any secondary school student can understand without stress.</p>
+            <h3>📘 Clear Teaching Style</h3>
+            <p>Topics are explained step-by-step with examples, similar to how a calm teacher breaks it down in class.</p>
         </div>
 
         <div class="card">
-            <h3>🤖 Smart AI (NSA)</h3>
-            <p>NSA answers questions across multiple subjects with clarity and accuracy — like a patient tutor.</p>
+            <h3>🤖 Smart Conversation</h3>
+            <p>NSA understands natural questions, recognizes names, and responds like a real tutor — not a robot.</p>
         </div>
 
         <div class="card">
-            <h3>📚 Covers Key Subjects</h3>
-            <p>Biology, physics, chemistry, and maths explained in simple language you can remember easily.</p>
+            <h3>📚 Covers Multiple Subjects</h3>
+            <p>Maths, Biology, Chemistry, Physics and more — each handled with accuracy and simple breakdowns.</p>
         </div>
     </div>
 </section>
 
 <section id="ai" class="ai-section">
-    <h2 style="text-align:center;font-size:32px;margin-bottom:30px;">NSA – Your Learning Assistant</h2>
+    <h2 style="text-align:center;font-size:32px;margin-bottom:30px;">Talk to NSA</h2>
 
     <div class="chat-box">
         <div id="chatHistory"></div>
@@ -239,18 +275,18 @@
 <section id="about" class="about">
     <h2>About NSSALA</h2>
     <p style="max-width:750px;margin:auto;">
-        NSSALA was created with one goal: to make learning easier for Nigerian secondary school students.
-        Instead of struggling with confusing notes or rushing teachers, students get calm, clear explanations
-        anytime they need it.
+        NSSALA is a school-focused learning tool built to help students study at their own pace. 
+        Instead of rushing through topics or guessing during assignments, the system provides clarity 
+        through simple explanations and a calm teaching style.
     </p>
 </section>
 
 <section id="coming" class="coming">
     <h2>Coming Soon</h2>
-    <p>📌 Voice-enabled teaching mode</p>
-    <p>📌 Student progress dashboard</p>
-    <p>📌 Practice questions + solutions</p>
-    <p>📌 Offline learning mode</p>
+    <p>📌 Interactive subject dashboard</p>
+    <p>📌 Voice chat with NSA</p>
+    <p>📌 Personalised study plan</p>
+    <p>📌 Offline mode</p>
 </section>
 
 <script>
@@ -263,7 +299,7 @@ function sendMessage(){
     input.value="";
 
     setTimeout(()=>{
-        let reply = getNSAResponse(message.toLowerCase());
+        let reply = generateNSAReply(message);
         addMessage("nsa", reply);
     }, 700);
 }
@@ -277,33 +313,78 @@ function addMessage(sender,text){
     box.scrollTop = box.scrollHeight;
 }
 
-function getNSAResponse(q){
-    // BIOLOGY KNOWLEDGE
-    if(q.includes("photosynthesis")) return "Photosynthesis is the process where green plants use sunlight to make food. It mainly occurs in the leaves.";
-    if(q.includes("digestion")) return "Digestion is the breakdown of food into simpler substances that the body can absorb and use.";
-    if(q.includes("respiration")) return "Respiration is how the body converts glucose and oxygen into energy.";
+function generateNSAReply(message){
+    let q = message.toLowerCase();
 
-    // PHYSICS KNOWLEDGE
-    if(q.includes("force")) return "Force is a push or pull that can change the motion or shape of an object.";
-    if(q.includes("velocity")) return "Velocity is the speed of something in a specific direction.";
-    if(q.includes("gravity")) return "Gravity is the force that pulls objects toward the center of the Earth.";
-
-    // CHEMISTRY KNOWLEDGE
-    if(q.includes("atom")) return "An atom is the smallest unit of matter that retains the properties of an element.";
-    if(q.includes("acid")) return "Acids have a pH lower than 7 and they usually taste sour. Examples include lemon juice and vinegar.";
-    if(q.includes("neutralization")) return "Neutralization is the reaction between an acid and a base to form salt and water.";
-
-    // MATH KNOWLEDGE
-    if(q.includes("algebra")) return "Algebra uses letters and symbols to represent numbers and relationships.";
-    if(q.includes("simultaneous")) return "Simultaneous equations are two or more equations solved together to find values that satisfy all equations.";
-    if(q.includes("quadratic")) return "A quadratic equation has the form ax² + bx + c = 0.";
-
-    // GENERAL ASK
-    if(q.includes("hello") || q.includes("hi")){
-        return "Hello! I’m NSA. How can I help you study today?";
+    // Name detection
+    if(q.includes("daniel")){
+        return "I see your name there — Daniel, right? How can I help you learn today?";
     }
 
-    return "I'm not fully trained on that topic yet, but try rephrasing it or ask something from your school subjects.";
+    // Greetings
+    if(q.includes("hi") || q.includes("hello") || q.includes("hey")){
+        return "Hello! I’m NSA. Feel free to ask about any school subject you're struggling with.";
+    }
+
+    // BIOLOGY
+    if(q.includes("diffusion")){
+        return "Diffusion is the movement of particles from an area of high concentration to a lower concentration. It doesn’t require energy and it happens in liquids and gases.";
+    }
+    if(q.includes("osmosis")){
+        return "Osmosis is the movement of water molecules from a dilute solution to a concentrated one through a semi-permeable membrane.";
+    }
+    if(q.includes("cell")){
+        return "A cell is the basic structural and functional unit of life. All living things are made of cells.";
+    }
+
+    // PHYSICS
+    if(q.includes("work")){
+        return "In physics, work is done when a force moves an object through a distance. Formula: Work = Force × Distance.";
+    }
+    if(q.includes("power")){
+        return "Power is the rate at which work is done. Formula: Power = Work ÷ Time.";
+    }
+    if(q.includes("wave")){
+        return "A wave is a disturbance that transfers energy from one place to another without transferring matter.";
+
+    }
+
+    // CHEMISTRY
+    if(q.includes("mixture")){
+        return "A mixture contains two or more substances that are not chemically combined. Examples: salt water, air.";
+    }
+    if(q.includes("compound")){
+        return "A compound is formed when two or more elements chemically combine. Example: water (H₂O).";
+    }
+    if(q.includes("element")){
+        return "An element is a pure substance made of only one type of atom. Examples: oxygen, carbon, iron.";
+
+    }
+
+    // MATHS
+    if(q.includes("fraction")){
+        return "A fraction represents a part of a whole. It has a numerator (top) and denominator (bottom).";
+    }
+    if(q.includes("ratio")){
+        return "A ratio compares quantities of the same kind. Example: if you have 2 apples and 3 oranges, the ratio is 2:3.";
+    }
+    if(q.includes("indices") || q.includes("powers")){
+        return "Indices (or powers) show how many times a number is multiplied by itself. Example: 3² = 3 × 3 = 9.";
+
+    }
+
+    // "What is..." engine
+    if(q.startsWith("what is")){
+        return "Here’s the idea: " + q.replace("what is","").trim() + " refers to a concept you can understand better by giving me a bit more detail on it.";
+    }
+
+    // "Explain" engine
+    if(q.startsWith("explain")){
+        return "Let me explain that in a simple way: " + q.replace("explain","").trim() + " is easier to understand if you break it into smaller parts. Tell me which part confuses you.";
+    }
+
+    // Fallback
+    return "I'm not fully trained on that topic yet, but describe it a bit more and I’ll help you understand it step-by-step.";
 }
 </script>
 
