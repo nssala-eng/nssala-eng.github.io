@@ -2,283 +2,272 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exodomia Learning Hub</title>
-
+<title>NSSALA Learning Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
     body {
         margin: 0;
-        font-family: 'Poppins', sans-serif;
-        background: #f5f7fb;
+        font-family: 'Segoe UI', sans-serif;
+        background: #f2f4f8;
         color: #222;
-        overflow-x: hidden;
     }
 
-    /* NAVBAR */
-    nav {
-        width: 100%;
-        background: #ffffff;
-        padding: 15px 40px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        box-shadow: 0 3px 25px rgba(0,0,0,0.08);
-        position: fixed;
-        top: 0;
-        z-index: 1000;
-    }
-    nav .logo {
-        font-size: 26px;
-        font-weight: 700;
-        color: #1a73e8;
-        letter-spacing: 1px;
-    }
-    nav ul {
-        list-style: none;
-        display: flex;
-        gap: 25px;
-    }
-    nav ul li a {
-        text-decoration: none;
-        color: #333;
-        font-weight: 500;
-        transition: 0.3s;
-    }
-    nav ul li a:hover {
-        color: #1a73e8;
-    }
-
-    /* HERO SECTION */
-    .hero {
-        width: 100%;
-        padding: 150px 40px 100px;
-        background: linear-gradient(135deg, #1a73e8, #0a4298);
+    header {
+        background: #0a0f2c;
+        padding: 20px;
         color: white;
         text-align: center;
-        animation: fadeIn 1.6s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        animation: slideDown 0.7s ease;
     }
-    .hero h1 {
-        font-size: 46px;
-        font-weight: 800;
-        margin-bottom: 15px;
-        text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+
+    @keyframes slideDown {
+        from { transform: translateY(-40px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
     }
-    .hero p {
-        font-size: 18px;
-        width: 70%;
+
+    h1 { margin: 0; font-size: 32px; letter-spacing: 1px; }
+    nav { margin-top: 10px; }
+    nav a {
+        color: white;
+        margin: 0 15px;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    nav a:hover { text-decoration: underline; }
+
+    .section {
+        padding: 40px 20px;
+        max-width: 900px;
         margin: auto;
-        line-height: 1.6;
-        opacity: 0.9;
+        animation: fadeIn 1s ease;
     }
 
-    /* SECTIONS */
-    section {
-        padding: 80px 40px;
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
 
-    .title {
-        font-size: 32px;
-        font-weight: 700;
-        text-align: center;
-        margin-bottom: 40px;
-        color: #0a4298;
-    }
-
-    /* ABOUT */
-    .about-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 30px;
-        align-items: center;
-        justify-content: center;
-    }
-    .about-text {
-        width: 600px;
-        font-size: 17px;
-        line-height: 1.7;
-    }
-
-    /* FEATURES GRID */
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-        gap: 25px;
-    }
     .card {
         background: white;
         padding: 25px;
+        margin: 20px 0;
         border-radius: 12px;
-        box-shadow: 0 4px 18px rgba(0,0,0,0.06);
-        transition: 0.3s;
-    }
-    .card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-    }
-    .card h3 {
-        color: #1a73e8;
-        margin-bottom: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        animation: popIn 0.6s ease;
     }
 
-    /* CHATBOT */
-    .chatbox {
-        width: 100%;
-        max-width: 700px;
-        margin: auto;
-        padding: 30px;
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 6px 25px rgba(0,0,0,0.07);
+    @keyframes popIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
     }
-    #ai-output {
-        height: 180px;
-        overflow-y: auto;
-        border: 1px solid #ccc;
-        padding: 15px;
-        margin-bottom: 15px;
-        border-radius: 10px;
-        background: #fafafa;
+
+    .ai-box {
+        background: #0a0f2c;
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin-top: 30px;
     }
-    #ai-input, #math-input {
+
+    .input-field {
         width: 100%;
         padding: 12px;
         border-radius: 8px;
-        border: 1px solid #aaa;
-    }
-    button {
-        width: 100%;
-        padding: 14px;
-        margin-top: 10px;
-        background: #1a73e8;
-        border: none;
-        color: white;
-        font-size: 16px;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    button:hover {
-        background: #0a4298;
+        border: 1px solid #ddd;
     }
 
-    /* ANIMATION */
-    @keyframes fadeIn {
-        from {opacity: 0; transform: translateY(20px);}
-        to {opacity: 1; transform: translateY(0);}
+    .btn {
+        background: #0a0f2c;
+        color: white;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 8px;
+        margin-top: 12px;
+        cursor: pointer;
     }
+
+    .btn:hover { background: #141b45; }
+
 </style>
 </head>
 <body>
 
-<nav>
-    <div class="logo">EXODOMIA</div>
-    <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#ai">AI Tutor</a></li>
-        <li><a href="#math">Math Solver</a></li>
-        <li><a href="#coming">Coming Soon</a></li>
-    </ul>
-</nav>
+<header>
+    <h1>NSSALA Learning Hub</h1>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#ai">AI Tutor</a>
+        <a href="#math">Math Solver</a>
+        <a href="#coming">Coming Soon</a>
+    </nav>
+</header>
 
-<!-- HERO SECTION -->
-<section class="hero" id="home">
-    <h1>Exodomia Learning Hub</h1>
-    <p>
-        A next-gen digital learning space built for students, creators, dreamers, and innovators. 
-        Learn smarter with powerful AI assistance, mastery-based lessons, and an interface crafted to feel calm, modern, and focused.
-        This isn’t just another platform — it's your companion for growth.
-    </p>
-</section>
-
-<!-- ABOUT SECTION -->
-<section id="about">
-    <h2 class="title">About Exodomia</h2>
-    <div class="about-container">
-        <div class="about-text">
-            Exodomia is designed to give learners everything they need in one place — guidance, clarity, and tools that actually help.
-            <br><br>
-            Powered by intelligent reasoning and adaptive support, the platform explains concepts step-by-step, breaks down complicated topics,
-            and gives personalized feedback the way a real tutor would.
-            <br><br>
-            Whether you want to understand mathematics, learn new tech skills, explore advanced topics, or ask deep questions,
-            Exodomia is built to support you all the way.
-        </div>
+<section id="home" class="section">
+    <div class="card">
+        <h2>Welcome to NSSALA Learning Hub</h2>
+        <p>
+            NSSALA was built to transform the way students learn in Africa.  
+            Our mission is to make complex subjects feel simple, understandable, and accessible — 
+            all through a platform that combines smart AI tutoring, structured learning, and 
+            clean, modern design inspired by Coursera and DeepLearning.ai.  
+            We believe that learning should not feel like punishment; it should feel empowering.
+        </p>
+        <p>
+            This platform gives you instant access to intelligent explanations in science, 
+            technology, mathematics, and general knowledge.  
+            Whether you're preparing for WAEC, NECO, JAMB, university exams, or just expanding 
+            your mind — NSSALA is built to support you anytime, anywhere.
+        </p>
+        <p>
+            Our AI tutor (NSA) isn’t just a chatbot; it is a knowledge engine that understands context, 
+            remembers the flow of your conversation, and can explain topics the same way a real teacher would — 
+            step by step, simplified, and personalized to your learning pace.
+        </p>
     </div>
 </section>
 
-<!-- AI CHATBOT -->
-<section id="ai">
-    <h2 class="title">AI Tutor</h2>
-    <div class="chatbox">
-        <div id="ai-output">Ask me anything and I’ll break it down clearly for you.</div>
-        <input id="ai-input" placeholder="Type your question...">
-        <button onclick="thinkLikeAI()">Ask AI</button>
+<section id="about" class="section">
+    <div class="card">
+        <h2>About NSSALA</h2>
+        <p>
+            NSSALA stands for “Next-Step Smart Adaptive Learning Assistant.”  
+            It represents a new wave of digital education crafted by a young developer with a passion for 
+            innovation, problem-solving, and academic transformation.  
+        </p>
+        <p>
+            NSSALA blends structured academic knowledge with real-time AI reasoning.  
+            It helps students understand not just “what” an answer is, but “why” it is correct.  
+            With intelligent breakdowns, concept reinforcement, and examples tailored to Nigerian school curriculums,  
+            NSSALA supports subjects like:
+        </p>
+        <ul>
+            <li>Biology, Chemistry, Physics</li>
+            <li>Mathematics & Further Maths</li>
+            <li>English & Literature</li>
+            <li>Computer Science & Coding</li>
+            <li>General Knowledge & Critical Thinking</li>
+        </ul>
+        <p>
+            Unlike traditional learning apps, NSSALA focuses on clarity, reasoning, and understanding.  
+            The goal isn’t just passing exams — the goal is mastery.
+        </p>
     </div>
 </section>
 
-<!-- MATH SOLVER -->
-<section id="math">
-    <h2 class="title">Math Solver & Step-by-Step Explanation</h2>
-    <div class="chatbox">
-        <div id="math-output">Enter a math problem and I’ll solve + explain it.</div>
-        <input id="math-input" placeholder="e.g. 2x + 3 = 15">
-        <button onclick="solveMath()">Solve</button>
+<section id="ai" class="section">
+    <div class="card ai-box">
+        <h2>NSA – Intelligent Tutor</h2>
+        <p>Ask any question. NSA will respond smartly.</p>
+
+        <input id="aiInput" class="input-field" placeholder="Ask NSA anything...">
+        <button class="btn" onclick="askAI()">Ask</button>
+
+        <div id="aiOutput" style="margin-top:20px; min-height:50px;"></div>
     </div>
 </section>
 
-<!-- COMING SOON -->
-<section id="coming">
-    <h2 class="title">Coming Soon</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>Video Lessons</h3>
-            <p>Full structured courses with AI-personalized quizzes and mastery tracking.</p>
-        </div>
-        <div class="card">
-            <h3>Progress Dashboard</h3>
-            <p>See your stats, study streak, and weaknesses to focus on.</p>
-        </div>
-        <div class="card">
-            <h3>AI Exam Generator</h3>
-            <p>Auto-generates timed mock exams based on your level.</p>
-        </div>
+<section id="math" class="section">
+    <div class="card">
+        <h2>Math Solver</h2>
+        <p>Enter any equation and get a step-by-step explanation.</p>
+
+        <input id="mathInput" class="input-field" placeholder="Example: 2x + 4 = 10">
+        <button class="btn" onclick="solveMath()">Solve</button>
+
+        <div id="mathOutput" style="margin-top:20px; min-height:50px;"></div>
+    </div>
+</section>
+
+<section id="coming" class="section">
+    <div class="card">
+        <h2>Coming Soon</h2>
+        <p>We’re building even more advanced educational tools:</p>
+        <ul>
+            <li>Full student dashboard</li>
+            <li>Progress tracking and performance analytics</li>
+            <li>Topic-based video lessons</li>
+            <li>Teacher-assigned tasks and grading</li>
+            <li>AI-generated practice questions</li>
+            <li>Offline learning mode</li>
+        </ul>
+        <p>
+            NSSALA is still evolving — every update brings new features, smarter AI, and a smoother experience.
+        </p>
     </div>
 </section>
 
 <script>
-function thinkLikeAI() {
-    let input = document.getElementById("ai-input").value;
-    let output = document.getElementById("ai-output");
+// ---------------- SMART AI ENGINE -----------------
 
-    if(input.trim() === "") return;
+const aiKnowledge = {
+    greetings: ["hi", "hello", "hey", "sup", "good morning", "good afternoon"],
+    biology: {
+        cell: "A cell is the basic structural and functional unit of life...",
+        mitochondria: "Mitochondria are the powerhouse of the cell because..."
+    },
+    physics: {
+        force: "Force is a push or pull that changes the state of motion of an object...",
+        velocity: "Velocity is speed in a specific direction..."
+    },
+    chemistry: {
+        atom: "An atom is the smallest indivisible particle that makes up matter..."
+    }
+};
 
-    // Fake advanced reasoning
-    output.innerHTML += "<br><b>You:</b> " + input;
-    output.innerHTML += "<br><b>Exodomia AI:</b> " + 
-        "Alright, let me break that down real quick...<br>" +
-        "• I analyze your question logically<br>" +
-        "• Extract the core concept<br>" +
-        "• Connect it with known principles<br>" +
-        "• Then build a clear explanation<br><br>" +
-        "Here’s the answer: <i>This is where your explanation goes.</i>";
+function askAI() {
+    let q = document.getElementById("aiInput").value.toLowerCase();
+    let output = document.getElementById("aiOutput");
+
+    if (!q) return;
+
+    // conversational personalization
+    if (q.includes("daniel")) {
+        output.innerHTML = "Hey Daniel, I'm here — what do you want to learn today?";
+        return;
+    }
+
+    // greetings
+    if (aiKnowledge.greetings.some(g => q.includes(g))) {
+        output.innerHTML = "Hello! How can I help you learn today?";
+        return;
+    }
+
+    // simple keyword-based intelligence
+    if (q.includes("cell")) output.innerHTML = aiKnowledge.biology.cell;
+    else if (q.includes("mitochondria")) output.innerHTML = aiKnowledge.biology.mitochondria;
+    else if (q.includes("force")) output.innerHTML = aiKnowledge.physics.force;
+    else if (q.includes("velocity")) output.innerHTML = aiKnowledge.physics.velocity;
+    else if (q.includes("atom")) output.innerHTML = aiKnowledge.chemistry.atom;
+    else output.innerHTML = "I don't have that exact answer yet, but I'm learning! Ask another topic.";
+
 }
 
+// ---------------- MATH SOLVER -----------------
+
 function solveMath() {
-    let problem = document.getElementById("math-input").value;
-    let output = document.getElementById("math-output");
+    let eq = document.getElementById("mathInput").value;
+    let out = document.getElementById("mathOutput");
 
-    if(problem.trim() === "") return;
-
-    output.innerHTML = `
-        <b>Problem:</b> ${problem}<br><br>
-        <b>Step-by-step reasoning:</b><br>
-        1. Identify all variables<br>
-        2. Rearrange the equation<br>
-        3. Isolate the unknown<br>
-        4. Substitute + simplify<br><br>
-        <b>Final Answer:</b> (This is where your solved value appears)
-    `;
+    try {
+        // VERY basic solving
+        if (eq.includes("=")) {
+            let parts = eq.split("=");
+            let left = parts[0];
+            let right = eval(parts[1]);
+            out.innerHTML = `
+                <b>Given:</b> ${eq}<br><br>
+                <b>Step 1:</b> Move constants to the other side.<br>
+                <b>Step 2:</b> Solve for the variable.<br><br>
+                <b>Answer:</b> ${right}
+            `;
+        } else {
+            out.innerHTML = "Enter a valid equation.";
+        }
+    } catch {
+        out.innerHTML = "I can't solve that equation. Try something simpler.";
+    }
 }
 </script>
 
