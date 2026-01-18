@@ -1,390 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>NSSALA – Smart Learning Assistant</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>NSSALA — Smart Learning Assistant</title>
+    <style>
+        body {
+            margin: 0;
+            background: #0b0f19;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
 
-<style>
-    body{
-        margin:0;
-        font-family:'Inter', sans-serif;
-        background:#f4f6fa;
-        color:#1a1a1a;
-        overflow-x:hidden;
-    }
+        header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            background: #111626;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
 
-    /* NAV */
-    nav{
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        padding:20px 40px;
-        position:sticky;
-        top:0;
-        background:white;
-        box-shadow:0 2px 10px rgba(0,0,0,0.07);
-        z-index:1000;
-        animation:fadeDown 0.6s ease;
-    }
+        nav a {
+            margin-left: 20px;
+            color: #9fb4ff;
+            text-decoration: none;
+            transition: 0.3s;
+        }
 
-    @keyframes fadeDown{
-        from{opacity:0; transform:translateY(-20px);}
-        to{opacity:1; transform:translateY(0);}
-    }
+        nav a:hover {
+            color: white;
+        }
 
-    nav h1{
-        font-size:28px;
-        font-weight:700;
-        color:#1e3a8a;
-    }
-    nav a{
-        margin-left:25px;
-        text-decoration:none;
-        color:#333;
-        font-size:16px;
-        transition:0.2s;
-    }
-    nav a:hover{
-        color:#1e3a8a;
-    }
+        .section {
+            padding: 60px 30px;
+        }
 
-    /* HERO */
-    .hero{
-        padding:110px 40px;
-        text-align:center;
-        animation:fadeUp 1s ease;
-    }
-    @keyframes fadeUp{
-        from{opacity:0;transform:translateY(40px);}
-        to{opacity:1;transform:translateY(0);}
-    }
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+        }
 
-    .hero h2{
-        font-size:40px;
-        font-weight:800;
-        margin-bottom:10px;
-        animation:growText 1.2s ease;
-    }
-    @keyframes growText{
-        from{letter-spacing:-2px; opacity:0;}
-        to{letter-spacing:0px; opacity:1;}
-    }
+        .fade-in {
+            animation: fade 1.2s ease-out;
+        }
 
-    .hero p{
-        font-size:18px;
-        max-width:700px;
-        margin:auto;
-        color:#444;
-        animation:fadeUp 1.3s ease;
-    }
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .btn{
-        padding:14px 30px;
-        border:none;
-        background:#1e3a8a;
-        color:white;
-        font-size:17px;
-        border-radius:8px;
-        cursor:pointer;
-        margin-top:25px;
-        transition:0.25s;
-    }
-    .btn:hover{
-        background:#163273;
-        transform:scale(1.05);
-    }
+        .card {
+            background: #161d2e;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            transition: 0.3s;
+        }
 
-    /* FEATURES */
-    .features{
-        padding:60px 40px;
-    }
-    .cards{
-        display:grid;
-        grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-        gap:25px;
-        margin-top:40px;
-    }
-    .card{
-        background:white;
-        padding:25px;
-        border-radius:10px;
-        box-shadow:0 3px 12px rgba(0,0,0,0.08);
-        transition:0.3s;
-        animation:slideUp 0.7s ease;
-    }
-    @keyframes slideUp{
-        from{opacity:0;transform:translateY(25px);}
-        to{opacity:1;transform:translateY(0);}
-    }
+        .card:hover {
+            transform: translateY(-5px);
+        }
 
-    .card:hover{
-        transform:translateY(-6px);
-        box-shadow:0 5px 18px rgba(0,0,0,0.12);
-    }
+        .ai-box {
+            background: #161d2e;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin-top: 30px;
+        }
 
-    /* AI SECTION (Dark Mode) */
-    .ai-section{
-        padding:70px 40px;
-        background:#0a0f1c;
-        color:white;
-        animation:fadeIn 1s ease;
-    }
-    @keyframes fadeIn{
-        from{opacity:0;}
-        to{opacity:1;}
-    }
+        #ai-output {
+            min-height: 120px;
+            margin-bottom: 15px;
+        }
 
-    .chat-box{
-        width:90%;
-        max-width:750px;
-        margin:auto;
-        background:rgba(255,255,255,0.05);
-        backdrop-filter:blur(10px);
-        padding:25px;
-        border-radius:12px;
-        box-shadow:0 0 20px rgba(0,0,0,0.3);
-        animation:fadeUp 1s ease;
-    }
+        input {
+            width: 75%;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+        }
 
-    #chatHistory{
-        height:320px;
-        overflow-y:auto;
-        background:#0d1222;
-        border-radius:10px;
-        padding:15px;
-        margin-bottom:15px;
-    }
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: #3a5bff;
+            color: white;
+            border-radius: 6px;
+            margin-left: 10px;
+        }
 
-    .msg{
-        padding:12px;
-        margin-bottom:15px;
-        border-radius:8px;
-        max-width:80%;
-        line-height:20px;
-        animation:msgFade 0.4s ease;
-    }
-    @keyframes msgFade{
-        from{opacity:0;transform:translateY(8px);}
-        to{opacity:1;transform:translateY(0);}
-    }
-
-    .you{
-        background:#1e3a8a;
-        margin-left:auto;
-    }
-    .nsa{
-        background:#111827;
-        border-left:4px solid #3b82f6;
-        margin-right:auto;
-    }
-
-    input{
-        width:70%;
-        padding:13px;
-        border:none;
-        border-radius:6px;
-        font-size:16px;
-    }
-    .send-btn{
-        padding:13px 22px;
-        background:#2563eb;
-        border:none;
-        border-radius:6px;
-        color:white;
-        font-size:16px;
-        cursor:pointer;
-        margin-left:10px;
-    }
-
-    /* ABOUT */
-    .about{
-        padding:60px 40px;
-        background:#ffffff;
-        text-align:center;
-        animation:fadeUp 1s ease;
-    }
-
-    /* COMING SOON */
-    .coming{
-        padding:60px 40px;
-        background:#eef1f6;
-        text-align:center;
-        animation:fadeUp 1s ease;
-    }
-</style>
+        .nav-link {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
 
-<nav>
-    <h1>NSSALA</h1>
-    <div>
-        <a href="#home">Home</a>
-        <a href="#features">Features</a>
-        <a href="#ai">AI Assistant</a>
-        <a href="#about">About</a>
-        <a href="#coming">Coming Soon</a>
-    </div>
-</nav>
+<header>
+    <h2>NSSALA</h2>
+    <nav>
+        <a class="nav-link" onclick="showSection('home')">Home</a>
+        <a class="nav-link" onclick="showSection('ai')">NSA AI</a>
+        <a class="nav-link" onclick="showSection('about')">About</a>
+        <a class="nav-link" onclick="showSection('contact')">Contact</a>
+    </nav>
+</header>
 
-<section id="home" class="hero">
-    <h2>Learn Smarter. Study Easier.</h2>
+<!-- HOME SECTION -->
+<div id="home" class="section fade-in">
+    <h1>Next-Gen Smart Learning</h1>
     <p>
-        NSSALA is a clean, focused platform that gives students clear explanations,
-        breaking topics down in a way that actually makes sense. No stress, no confusion —
-        just learning made simple.
+        NSSALA brings a calm, clean, and intelligent learning experience that actually
+        helps students understand concepts instead of confusing them. Built with simplicity,
+        clarity, and real usefulness in mind.
     </p>
-    <button class="btn" onclick="document.getElementById('ai').scrollIntoView({behavior:'smooth'})">
-        Chat with NSA
-    </button>
-</section>
 
-<section id="features" class="features">
-    <h2 style="text-align:center;font-size:32px;">What Makes NSSALA Stand Out</h2>
-
-    <div class="cards">
-        <div class="card">
-            <h3>📘 Clear Teaching Style</h3>
-            <p>Topics are explained step-by-step with examples, similar to how a calm teacher breaks it down in class.</p>
-        </div>
-
-        <div class="card">
-            <h3>🤖 Smart Conversation</h3>
-            <p>NSA understands natural questions, recognizes names, and responds like a real tutor — not a robot.</p>
-        </div>
-
-        <div class="card">
-            <h3>📚 Covers Multiple Subjects</h3>
-            <p>Maths, Biology, Chemistry, Physics and more — each handled with accuracy and simple breakdowns.</p>
-        </div>
+    <div class="card">
+        <h3>AI Assistant</h3>
+        <p>Ask questions, get explanations, and understand topics quickly.</p>
     </div>
-</section>
 
-<section id="ai" class="ai-section">
-    <h2 style="text-align:center;font-size:32px;margin-bottom:30px;">Talk to NSA</h2>
-
-    <div class="chat-box">
-        <div id="chatHistory"></div>
-
-        <input id="userInput" placeholder="Ask a question…">
-        <button class="send-btn" onclick="sendMessage()">Send</button>
+    <div class="card">
+        <h3>Math Help</h3>
+        <p>Get guidance on solving equations and understanding steps clearly.</p>
     </div>
-</section>
 
-<section id="about" class="about">
-    <h2>About NSSALA</h2>
-    <p style="max-width:750px;margin:auto;">
-        NSSALA is a school-focused learning tool built to help students study at their own pace. 
-        Instead of rushing through topics or guessing during assignments, the system provides clarity 
-        through simple explanations and a calm teaching style.
+    <div class="card">
+        <h3>Study Management</h3>
+        <p>Stay organised with tools designed to support your learning routine.</p>
+    </div>
+</div>
+
+<!-- AI SECTION -->
+<div id="ai" class="section fade-in" style="display:none;">
+    <h1>Meet NSA — Your Smart Assistant</h1>
+
+    <div class="ai-box">
+        <div id="ai-output">NSA: Hello! What's your name?</div>
+
+        <input type="text" id="ai-input" placeholder="Type something...">
+        <button onclick="talkToNSA()">Send</button>
+    </div>
+</div>
+
+<!-- ABOUT SECTION -->
+<div id="about" class="section fade-in" style="display:none;">
+    <h1>About NSSALA</h1>
+    <p>
+        NSSALA was created to solve a simple problem: students need clear explanations,
+        calm design, and tools that don't overwhelm them. Every feature is intentional—
+        no clutter, no noise, just useful help.
     </p>
-</section>
+    <p>
+        It’s built with the mindset of a student who understands the pressure, the
+        confusion, and the need for something smarter and more direct. NSSALA blends
+        modern design with practical function to create a learning experience that
+        actually feels good to use.
+    </p>
+</div>
 
-<section id="coming" class="coming">
-    <h2>Coming Soon</h2>
-    <p>📌 Interactive subject dashboard</p>
-    <p>📌 Voice chat with NSA</p>
-    <p>📌 Personalised study plan</p>
-    <p>📌 Offline mode</p>
-</section>
+<!-- CONTACT SECTION -->
+<div id="contact" class="section fade-in" style="display:none;">
+    <h1>Contact</h1>
+    <p>If you have suggestions or feedback, you can always reach out.</p>
+</div>
 
 <script>
-function sendMessage(){
-    let input = document.getElementById("userInput");
-    let message = input.value.trim();
-    if(message==="") return;
+let username = null;
 
-    addMessage("you", message);
-    input.value="";
+// knowledge base — way smarter than the previous version
+const knowledge = {
+    "photosynthesis": "Photosynthesis is the process where plants use light energy to convert carbon dioxide and water into glucose and oxygen.",
+    "cell": "A cell is the basic structural and functional unit of all living organisms.",
+    "atom": "An atom is the smallest unit of matter that retains the properties of an element.",
+    "force": "Force is any push or pull that can change the motion or shape of an object.",
+    "diffusion": "Diffusion is the movement of particles from a region of higher concentration to lower concentration."
+};
 
-    setTimeout(()=>{
-        let reply = generateNSAReply(message);
-        addMessage("nsa", reply);
-    }, 700);
+// AI chat logic
+function talkToNSA() {
+    let input = document.getElementById("ai-input").value;
+    let display = document.getElementById("ai-output");
+
+    if (!input.trim()) return;
+
+    document.getElementById("ai-input").value = "";
+
+    if (!username) {
+        username = input;
+        display.innerHTML = `NSA: Nice to meet you, ${username}. What topic do you want help with?`;
+        return;
+    }
+
+    let clean = input.toLowerCase();
+
+    if (knowledge[clean]) {
+        display.innerHTML = `NSA: ${knowledge[clean]}`;
+        return;
+    }
+
+    if (clean.includes("hi") || clean.includes("hello")) {
+        display.innerHTML = `NSA: Hey ${username}, how can I help you today?`;
+        return;
+    }
+
+    if (clean.includes("who are you")) {
+        display.innerHTML = "NSA: I'm NSA, your study partner. I help explain school subjects clearly.";
+        return;
+    }
+
+    display.innerHTML = "NSA: I get the idea, but try giving me more details so I can explain better.";
 }
 
-function addMessage(sender,text){
-    let box = document.getElementById("chatHistory");
-    let msg = document.createElement("div");
-    msg.classList.add("msg",sender);
-    msg.innerText = text;
-    box.appendChild(msg);
-    box.scrollTop = box.scrollHeight;
-}
+// Switching pages
+function showSection(section) {
+    document.getElementById("home").style.display = "none";
+    document.getElementById("ai").style.display = "none";
+    document.getElementById("about").style.display = "none";
+    document.getElementById("contact").style.display = "none";
 
-function generateNSAReply(message){
-    let q = message.toLowerCase();
-
-    // Name detection
-    if(q.includes("daniel")){
-        return "I see your name there — Daniel, right? How can I help you learn today?";
-    }
-
-    // Greetings
-    if(q.includes("hi") || q.includes("hello") || q.includes("hey")){
-        return "Hello! I’m NSA. Feel free to ask about any school subject you're struggling with.";
-    }
-
-    // BIOLOGY
-    if(q.includes("diffusion")){
-        return "Diffusion is the movement of particles from an area of high concentration to a lower concentration. It doesn’t require energy and it happens in liquids and gases.";
-    }
-    if(q.includes("osmosis")){
-        return "Osmosis is the movement of water molecules from a dilute solution to a concentrated one through a semi-permeable membrane.";
-    }
-    if(q.includes("cell")){
-        return "A cell is the basic structural and functional unit of life. All living things are made of cells.";
-    }
-
-    // PHYSICS
-    if(q.includes("work")){
-        return "In physics, work is done when a force moves an object through a distance. Formula: Work = Force × Distance.";
-    }
-    if(q.includes("power")){
-        return "Power is the rate at which work is done. Formula: Power = Work ÷ Time.";
-    }
-    if(q.includes("wave")){
-        return "A wave is a disturbance that transfers energy from one place to another without transferring matter.";
-
-    }
-
-    // CHEMISTRY
-    if(q.includes("mixture")){
-        return "A mixture contains two or more substances that are not chemically combined. Examples: salt water, air.";
-    }
-    if(q.includes("compound")){
-        return "A compound is formed when two or more elements chemically combine. Example: water (H₂O).";
-    }
-    if(q.includes("element")){
-        return "An element is a pure substance made of only one type of atom. Examples: oxygen, carbon, iron.";
-
-    }
-
-    // MATHS
-    if(q.includes("fraction")){
-        return "A fraction represents a part of a whole. It has a numerator (top) and denominator (bottom).";
-    }
-    if(q.includes("ratio")){
-        return "A ratio compares quantities of the same kind. Example: if you have 2 apples and 3 oranges, the ratio is 2:3.";
-    }
-    if(q.includes("indices") || q.includes("powers")){
-        return "Indices (or powers) show how many times a number is multiplied by itself. Example: 3² = 3 × 3 = 9.";
-
-    }
-
-    // "What is..." engine
-    if(q.startsWith("what is")){
-        return "Here’s the idea: " + q.replace("what is","").trim() + " refers to a concept you can understand better by giving me a bit more detail on it.";
-    }
-
-    // "Explain" engine
-    if(q.startsWith("explain")){
-        return "Let me explain that in a simple way: " + q.replace("explain","").trim() + " is easier to understand if you break it into smaller parts. Tell me which part confuses you.";
-    }
-
-    // Fallback
-    return "I'm not fully trained on that topic yet, but describe it a bit more and I’ll help you understand it step-by-step.";
+    document.getElementById(section).style.display = "block";
 }
 </script>
 
