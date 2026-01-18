@@ -1,393 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NSSALA Learning Hub</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSSALA — Smart Learning</title>
 <style>
-/* ------------------------------------
-   GLOBAL UI STYLE — DeepLearning AI vibe
-------------------------------------- */
-
-body {
-    margin: 0;
-    background: #0d1117;
-    font-family: 'Inter', sans-serif;
-    color: #e6e6e6;
-    scroll-behavior: smooth;
+body{
+  margin:0;
+  font-family: 'Poppins', sans-serif;
+  background:#f5f7fa;
+  color:#222;
+  scroll-behavior:smooth;
 }
 
-header {
-    position: fixed;
-    width: 100%;
-    top: 0; left: 0;
-    background: rgba(13,17,23,0.85);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid #1f2937;
-    z-index: 999;
-    padding: 12px 20px;
+/* Navbar */
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 50px;
+  position:fixed;
+  width:100%;
+  background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  z-index:999;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+nav a{
+  margin-left:20px;
+  text-decoration:none;
+  color:#222;
+  font-weight:500;
+  transition:0.2s;
 }
 
-nav .logo {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #4db3ff;
-    letter-spacing: -1px;
+nav a:hover{
+  color:#4a6cff;
 }
 
-nav a {
-    margin: 0 12px;
-    color: #9ca3af;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: 0.3s;
+/* Hero Section */
+#hero{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  height:100vh;
+  padding:40px;
+  text-align:center;
+  background:linear-gradient(135deg,#4a6cff,#8ac8ff);
+  color:white;
+  animation:fadeIn 1.3s ease;
 }
 
-nav a:hover {
-    color: #ffffff;
+#hero h1{
+  font-size:3rem;
+  margin-bottom:20px;
 }
 
-/* ------------------------------------
-   SECTIONS
-------------------------------------- */
-
-.section {
-    padding: 120px 20px;
-    max-width: 1000px;
-    margin: auto;
+#hero p{
+  font-size:1.2rem;
+  max-width:700px;
 }
 
-/* ------------------------------------
-   HERO SECTION
-------------------------------------- */
-
-#home {
-    text-align: center;
-    padding-top: 150px;
+button{
+  padding:12px 25px;
+  margin-top:20px;
+  border:none;
+  background:white;
+  color:#4a6cff;
+  font-weight:600;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.3s;
 }
 
-.hero-title {
-    font-size: 3rem;
-    font-weight: 700;
-    background: linear-gradient(90deg, #4db3ff, #7f5cff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+button:hover{
+  transform:scale(1.05);
 }
 
-.hero-sub {
-    margin-top: 15px;
-    font-size: 1.2rem;
-    color: #d1d5db;
+/* Sections */
+.section{
+  padding:100px 50px;
+  animation:fadeIn 1.2s ease;
 }
 
-.btn {
-    margin-top: 25px;
-    padding: 12px 25px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    border-radius: 8px;
-    background: #4db3ff;
-    color: #0d1117;
-    transition: 0.25s;
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
 }
 
-.btn:hover {
-    background: #7f5cff;
+.card{
+  background:white;
+  padding:25px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  transition:0.3s;
 }
 
-/* ------------------------------------
-   ABOUT SECTION
-------------------------------------- */
-
-#about h2 {
-    font-size: 2.2rem;
-    color: #4db3ff;
+.card:hover{
+  transform:translateY(-5px);
 }
 
-#about p {
-    margin-top: 15px;
-    line-height: 1.7;
-    color: #cfcfcf;
-    font-size: 1.05rem;
+/* AI Tutor */
+#ai-box{
+  background:white;
+  padding:25px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* ------------------------------------
-   COURSES / LEARNING SECTION
-------------------------------------- */
-
-.course-card {
-    background: #161b22;
-    border: 1px solid #1f2937;
-    padding: 20px;
-    border-radius: 12px;
-    margin: 20px 0;
-    transition: 0.3s;
+#chat-display{
+  height:250px;
+  overflow-y:auto;
+  padding:10px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  margin-bottom:10px;
 }
 
-.course-card:hover {
-    transform: translateY(-4px);
-    border-color: #4db3ff;
+input, textarea{
+  width:100%;
+  padding:10px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  margin-top:10px;
 }
 
-/* ------------------------------------
-   AI ASSISTANT
-------------------------------------- */
-
-#ai-box {
-    background: #161b22;
-    border: 1px solid #1f2937;
-    padding: 15px;
-    border-radius: 12px;
-}
-
-.ai-log {
-    height: 200px;
-    overflow-y: auto;
-    padding: 10px;
-    background: #0f1620;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    font-size: 0.95rem;
-}
-
-.ai-input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    margin-top: 10px;
-}
-
-/* ------------------------------------
-   MATH SOLVER
-------------------------------------- */
-
-#math-box {
-    background: #161b22;
-    padding: 15px;
-    border-radius: 12px;
-    border: 1px solid #1f2937;
-}
-
-/* ------------------------------------
-   COMING SOON
-------------------------------------- */
-
-.soon-box {
-    margin: 20px 0;
-    background: #161b22;
-    border: 1px solid #1f2937;
-    padding: 20px;
-    border-radius: 12px;
-}
-
-.soon-title {
-    color: #4db3ff;
-    font-size: 1.3rem;
-    margin-bottom: 10px;
+/* Animations */
+@keyframes fadeIn{
+  0%{opacity:0; transform:translateY(20px);}
+  100%{opacity:1; transform:translateY(0);}
 }
 </style>
 </head>
-
 <body>
 
-<header>
-    <nav>
-        <div class="logo">NSSALA</div>
-        <div>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#learn">Learn</a>
-            <a href="#ai">AI Assistant</a>
-            <a href="#math">Math Solver</a>
-            <a href="#soon">Coming Soon</a>
-        </div>
-    </nav>
-</header>
+<nav>
+  <div style="font-size:1.5rem;font-weight:700;color:#4a6cff;">NSSALA</div>
+  <div>
+     <a href="#hero">Home</a>
+     <a href="#about">About</a>
+     <a href="#ai">AI Tutor</a>
+     <a href="#math">Math Solver</a>
+  </div>
+</nav>
 
-<!-- ------------------------------------
-     HOME SECTION
------------------------------------- -->
-
-<section id="home" class="section">
-    <h1 class="hero-title">The Future of Learning Starts Here</h1>
-    <p class="hero-sub">
-        Intelligent education designed for the next generation —
-        powered by advanced reasoning, deep knowledge, and instant answers.
-    </p>
-    <button class="btn" onclick="location.href='#learn'">Start Learning</button>
+<section id="hero">
+  <h1>Welcome to NSSALA</h1>
+  <p>The Next-Stage Smart Learning Academy. Learn faster, understand deeper, and master any subject with intelligent explanations powered by advanced reasoning.</p>
+  <button onclick="document.querySelector('#ai').scrollIntoView({behavior:'smooth'})">Ask the AI Tutor</button>
 </section>
-
-<!-- ------------------------------------
-     ABOUT SECTION
------------------------------------- -->
 
 <section id="about" class="section">
-    <h2>About NSSALA</h2>
-
-    <p>
-        NSSALA represents a new era of academic intelligence — a fusion of technology,
-        mentorship, and deep educational insight. Designed to support students,
-        teachers, and lifelong learners, it blends the precision of structured knowledge
-        with the flexibility of real-time reasoning.
-    </p>
-
-    <p>
-        Whether you're exploring biology, physics, chemistry, mathematics, or general science,
-        NSSALA adapts dynamically to the learner’s pace, providing explanations that feel natural,
-        relatable, and clear. It isn’t just a tool — it’s a digital academic companion.
-    </p>
-
-    <p>
-        Our interface draws inspiration from modern learning platforms like Coursera and
-        DeepLearning.ai, prioritizing clarity, simplicity, elegance, and focus.
-    </p>
+  <h2>About NSSALA</h2>
+  <p>NSSALA is a modern learning platform created to make difficult subjects feel simple. We combine clean design, advanced learning methods, and an intelligent tutor to guide you step by step.</p>
+  <p>Whether you're studying Maths, Physics, Biology, Chemistry, or Coding — NSSALA gives you clear explanations, real examples, and an easy learning flow. More subjects, video lessons, progress tracking and full course modules are coming soon.</p>
 </section>
-
-<!-- ------------------------------------
-     LEARNING SECTION
------------------------------------- -->
-
-<section id="learn" class="section">
-    <h2 style="color:#4db3ff;">Explore Knowledge</h2>
-
-    <div class="course-card">
-        <h3>Biology</h3>
-        <p>Understand living systems, cell structure, genetics, respiration, evolution, ecology, and more.</p>
-    </div>
-
-    <div class="course-card">
-        <h3>Physics</h3>
-        <p>Master motion, energy, electricity, forces, waves, and real-world applications of physical laws.</p>
-    </div>
-
-    <div class="course-card">
-        <h3>Chemistry</h3>
-        <p>Explore atoms, bonding, periodicity, reactions, acids, bases, and practical lab-level concepts.</p>
-    </div>
-
-    <div class="course-card">
-        <h3>General Science</h3>
-        <p>Cross-discipline understanding for exams, projects, assignments, and real-life science problems.</p>
-    </div>
-</section>
-
-<!-- ------------------------------------
-     AI ASSISTANT SECTION
------------------------------------- -->
 
 <section id="ai" class="section">
-    <h2 style="color:#4db3ff;">AI Assistant</h2>
-
-    <div id="ai-box">
-        <div class="ai-log" id="log"></div>
-        <input class="ai-input" id="userInput" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter') aiReply()">
-    </div>
+  <h2>NSSALA AI Tutor</h2>
+  <div id="ai-box">
+    <div id="chat-display"></div>
+    <input id="chat-input" placeholder="Ask me anything...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
 </section>
-
-<!-- ------------------------------------
-     MATH SOLVER SECTION
------------------------------------- -->
 
 <section id="math" class="section">
-    <h2 style="color:#4db3ff;">Math Solver</h2>
-
-    <div id="math-box">
-        <input class="ai-input" id="mathInput" placeholder="Enter equation e.g. 2x + 3 = 11" />
-        <button class="btn" onclick="solveMath()">Solve</button>
-        <div id="mathOutput" style="margin-top:10px;"></div>
-    </div>
-</section>
-
-<!-- ------------------------------------
-     COMING SOON SECTION
------------------------------------- -->
-
-<section id="soon" class="section">
-    <h2 style="color:#4db3ff;">Coming Soon</h2>
-
-    <div class="soon-box">
-        <div class="soon-title">Student Dashboard</div>
-        <p>Personal progress tracking, learning streaks, saved notes, and recommendations.</p>
-    </div>
-
-    <div class="soon-box">
-        <div class="soon-title">Teacher Suite</div>
-        <p>Class management tools, assignment creation, quiz generation, and performance analytics.</p>
-    </div>
-
-    <div class="soon-box">
-        <div class="soon-title">AI Tutor 2.0</div>
-        <p>Voice chat, real-time corrections, and deeper subject reasoning.</p>
-    </div>
+  <h2>Math Solver</h2>
+  <p>Enter any equation or expression. NSSALA will solve and explain it.</p>
+  <input id="math-input" placeholder="e.g. solve 2x + 3 = 11">
+  <button onclick="solveMath()">Solve</button>
+  <div id="math-output" style="margin-top:20px;font-weight:600;"></div>
 </section>
 
 <script>
-/* ------------------------------------
-   AI ASSISTANT LOGIC
------------------------------------- */
+// -------------------------
+// AI Tutor Logic
+// -------------------------
 
-function aiReply() {
-    let input = document.getElementById("userInput").value;
-    if (!input.trim()) return;
+function sendMessage(){
+  let input = document.getElementById("chat-input").value;
+  if(!input.trim()) return;
 
-    let log = document.getElementById("log");
-    log.innerHTML += `<div><b>You:</b> ${input}</div>`;
+  display("You: " + input);
 
-    let reply = generateAI(input);
+  // Simulated reasoning (improved)
+  let response = aiBrain(input);
 
-    setTimeout(() => {
-        log.innerHTML += `<div style="margin-top:5px;"><b>AI:</b> ${reply}</div>`;
-        log.scrollTop = log.scrollHeight;
-    }, 300);
+  setTimeout(() => {
+    display("NSSALA: " + response);
+  }, 700);
 
-    document.getElementById("userInput").value = "";
+  document.getElementById("chat-input").value = "";
 }
 
-function generateAI(text) {
-    text = text.toLowerCase();
-
-    // greetings
-    if (text.includes("hi") || text.includes("hello")) return "Hey! How can I help you today?";
-    if (text.includes("your name")) return "I'm NSSALA AI — your learning assistant.";
-    if (text.includes("daniel")) return "Wagwan Daniel, hope you're good?";
-
-    // biology
-    if (text.includes("cell")) return "Cells are the basic structural and functional units of life.";
-    if (text.includes("photosynthesis")) return "Photosynthesis is the process plants use to make food using sunlight, CO₂, and water.";
-
-    // physics
-    if (text.includes("force")) return "Force is a push or pull acting on an object that can change its motion. F = m × a.";
-
-    // chemistry
-    if (text.includes("atom")) return "An atom is the smallest unit of matter, made up of protons, neutrons, and electrons.";
-
-    // fallback
-    return "That's interesting! Here's what I know: " + text;
+function display(msg){
+  let box = document.getElementById("chat-display");
+  box.innerHTML += msg + "<br><br>";
+  box.scrollTop = box.scrollHeight;
 }
 
-/* ------------------------------------
-   MATH SOLVER (simple engine)
------------------------------------- */
+function aiBrain(text){
+  text = text.toLowerCase();
 
-function solveMath() {
-    let eq = document.getElementById("mathInput").value;
-    try {
-        let ans = eval(eq.replace("=", "==")) ? "This is an identity" : eval(eq.split("=")[0]);
-        document.getElementById("mathOutput").innerHTML = "<b>Answer: </b>" + ans;
-    } catch {
-        document.getElementById("mathOutput").innerHTML = "Invalid equation format.";
-    }
+  if(text.includes("hi") || text.includes("hello")){
+    return "Yo, what’s good? How can I help you today?";
+  }
+
+  if(text.includes("who are you")){
+    return "I'm the NSSALA Tutor — your personal learning assistant built to explain anything with clarity.";
+  }
+
+  if(text.includes("physics")){
+    return "Physics is all about matter, motion, energy, forces, and how the universe behaves. What topic are you stuck on?";
+  }
+
+  // General intelligent fallback
+  return "Alright, let’s break this down step-by-step. " +
+         "Here’s how I understand your question: " + text +
+         ". Give me more details and I’ll explain it clearly.";
+}
+
+// -------------------------
+// Math Solver Logic
+// -------------------------
+function solveMath(){
+  let expr = document.getElementById("math-input").value;
+  let output = document.getElementById("math-output");
+
+  try{
+    let result = math.evaluate(expr);
+    output.innerHTML = "Result: " + result;
+  }catch(err){
+    output.innerHTML = "I couldn't solve that. Try a simpler form or check for errors.";
+  }
 }
 </script>
+
+<!-- MathJS CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
 
 </body>
 </html>
