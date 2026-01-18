@@ -1,101 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>NSSALA — Smart Learning Assistant</title>
-    <style>
-        body {
-            margin: 0;
-            background: #0b0f19;
-            color: #fff;
-            font-family: Arial, sans-serif;
-        }
+<meta charset="UTF-8">
+<title>NSSALA – Intelligent Study Assistant</title>
 
-        header {
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            background: #111626;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
+<style>
+    body {
+        margin: 0;
+        background: #0c1020;
+        font-family: "Inter", Arial, sans-serif;
+        color: #e8ecff;
+        scroll-behavior: smooth;
+    }
 
-        nav a {
-            margin-left: 20px;
-            color: #9fb4ff;
-            text-decoration: none;
-            transition: 0.3s;
-        }
+    header {
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        background: #11172c;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
 
-        nav a:hover {
-            color: white;
-        }
+    nav a {
+        margin-left: 20px;
+        text-decoration: none;
+        color: #9fb4ff;
+        font-size: 16px;
+        transition: .3s;
+    }
 
-        .section {
-            padding: 60px 30px;
-        }
+    nav a:hover { color: white; }
 
-        .hero {
-            min-height: 70vh;
-            display: flex;
-            align-items: center;
-        }
+    .section {
+        padding: 70px 40px;
+        animation: fadeUp 1s ease;
+    }
 
-        .fade-in {
-            animation: fade 1.2s ease-out;
-        }
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(25px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-        @keyframes fade {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .card {
+        background: #161d31;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 10px;
+        transition: .3s;
+        border: 1px solid #1f2a4d;
+    }
 
-        .card {
-            background: #161d2e;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            transition: 0.3s;
-        }
+    .card:hover {
+        transform: translateY(-5px);
+        border-color: #3957ff;
+    }
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+    .ai-box {
+        background: #161d31;
+        padding: 20px;
+        border-radius: 12px;
+        max-width: 650px;
+    }
 
-        .ai-box {
-            background: #161d2e;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin-top: 30px;
-        }
+    #chat {
+        height: 300px;
+        overflow-y: auto;
+        margin-bottom: 15px;
+        padding-right: 10px;
+        border-right: 2px solid #2b3558;
+    }
 
-        #ai-output {
-            min-height: 120px;
-            margin-bottom: 15px;
-        }
+    .msg {
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 8px;
+        animation: fadeMsg 0.5s ease;
+    }
 
-        input {
-            width: 75%;
-            padding: 10px;
-            border-radius: 6px;
-            border: none;
-        }
+    @keyframes fadeMsg {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-        button {
-            padding: 10px 15px;
-            border: none;
-            background: #3a5bff;
-            color: white;
-            border-radius: 6px;
-            margin-left: 10px;
-        }
+    .user {
+        background: #2a3557;
+        text-align: right;
+    }
 
-        .nav-link {
-            cursor: pointer;
-        }
-    </style>
+    .ai {
+        background: #1c2440;
+        border-left: 3px solid #3957ff;
+    }
+
+    input {
+        width: 70%;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        background: #1b223b;
+        color: white;
+    }
+
+    button {
+        padding: 12px;
+        background: #3957ff;
+        border: none;
+        border-radius: 8px;
+        margin-left: 10px;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover { background: #2f49d9; }
+
+</style>
 </head>
 
 <body>
@@ -103,127 +124,178 @@
 <header>
     <h2>NSSALA</h2>
     <nav>
-        <a class="nav-link" onclick="showSection('home')">Home</a>
-        <a class="nav-link" onclick="showSection('ai')">NSA AI</a>
-        <a class="nav-link" onclick="showSection('about')">About</a>
-        <a class="nav-link" onclick="showSection('contact')">Contact</a>
+        <a onclick="show('home')">Home</a>
+        <a onclick="show('ai')">NSA AI</a>
+        <a onclick="show('about')">About</a>
+        <a onclick="show('coming')">Coming Soon</a>
+        <a onclick="show('contact')">Contact</a>
     </nav>
 </header>
 
-<!-- HOME SECTION -->
-<div id="home" class="section fade-in">
-    <h1>Next-Gen Smart Learning</h1>
+<!-- HOME -->
+<div id="home" class="section">
+    <h1>Welcome to NSSALA</h1>
     <p>
-        NSSALA brings a calm, clean, and intelligent learning experience that actually
-        helps students understand concepts instead of confusing them. Built with simplicity,
-        clarity, and real usefulness in mind.
+        NSSALA is a next-generation study assistant built for students who want clarity, calm explanations,
+        and a learning environment that actually respects the way modern students think. It combines intelligent
+        responses with a smooth interface that keeps your focus on learning, not distractions.
     </p>
 
     <div class="card">
-        <h3>AI Assistant</h3>
-        <p>Ask questions, get explanations, and understand topics quickly.</p>
+        <h3>Designed for Real Learning</h3>
+        <p>
+            Instead of throwing complicated terms around, NSSALA breaks concepts down in a simple but
+            mature way, so you actually understand what you are reading — not just memorizing words.
+        </p>
     </div>
 
     <div class="card">
-        <h3>Math Help</h3>
-        <p>Get guidance on solving equations and understanding steps clearly.</p>
-    </div>
-
-    <div class="card">
-        <h3>Study Management</h3>
-        <p>Stay organised with tools designed to support your learning routine.</p>
+        <h3>Smart Recognition</h3>
+        <p>
+            The system can recognise your name, remember your previous messages in the session,
+            and reply in a natural, conversational flow.
+        </p>
     </div>
 </div>
 
-<!-- AI SECTION -->
-<div id="ai" class="section fade-in" style="display:none;">
-    <h1>Meet NSA — Your Smart Assistant</h1>
+<!-- AI -->
+<div id="ai" class="section" style="display:none;">
+    <h1>NSA – Smart AI Assistant</h1>
 
     <div class="ai-box">
-        <div id="ai-output">NSA: Hello! What's your name?</div>
+        <div id="chat"></div>
 
-        <input type="text" id="ai-input" placeholder="Type something...">
-        <button onclick="talkToNSA()">Send</button>
+        <input id="userInput" placeholder="Type your message..." />
+        <button onclick="send()">Send</button>
     </div>
 </div>
 
-<!-- ABOUT SECTION -->
-<div id="about" class="section fade-in" style="display:none;">
+<!-- ABOUT -->
+<div id="about" class="section" style="display:none;">
     <h1>About NSSALA</h1>
     <p>
-        NSSALA was created to solve a simple problem: students need clear explanations,
-        calm design, and tools that don't overwhelm them. Every feature is intentional—
-        no clutter, no noise, just useful help.
+        This platform was built from the perspective of a student who understands academic pressure —
+        the confusion, the deadlines, the heavy topics, and the need for meaningful guidance.
     </p>
     <p>
-        It’s built with the mindset of a student who understands the pressure, the
-        confusion, and the need for something smarter and more direct. NSSALA blends
-        modern design with practical function to create a learning experience that
-        actually feels good to use.
+        NSSALA focuses on clarity and calm communication. No overwhelming layouts, no distracting interfaces.
+        Every feature is intentional. It’s a simple, professional, student-friendly experience.
     </p>
 </div>
 
-<!-- CONTACT SECTION -->
-<div id="contact" class="section fade-in" style="display:none;">
+<!-- COMING SOON -->
+<div id="coming" class="section" style="display:none;">
+    <h1>Coming Soon</h1>
+
+    <div class="card">
+        <h3>🧠 More Advanced AI Reasoning</h3>
+        <p>
+            A deeper understanding engine that can break down multi-step problems, show working steps,
+            and analyse questions like a real tutor.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📊 Student Dashboard</h3>
+        <p>
+            A personalised portal with saved topics, revision schedules and progress insights.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📘 Science Hub</h3>
+        <p>
+            A dedicated learning centre for Biology, Chemistry and Physics with diagrams and
+            simplified explanations.
+        </p>
+    </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="section" style="display:none;">
     <h1>Contact</h1>
-    <p>If you have suggestions or feedback, you can always reach out.</p>
+    <p>You can submit feedback or suggestions anytime to help improve NSSALA.</p>
 </div>
 
 <script>
-let username = null;
+let username = "";
+let chat = document.getElementById("chat");
 
-// knowledge base — way smarter than the previous version
-const knowledge = {
-    "photosynthesis": "Photosynthesis is the process where plants use light energy to convert carbon dioxide and water into glucose and oxygen.",
-    "cell": "A cell is the basic structural and functional unit of all living organisms.",
+// EXPANDED KNOWLEDGE BASE (AI MODE C)
+const facts = {
+    "osmosis": "Osmosis is the movement of water molecules from a region of lower solute concentration to higher solute concentration through a semi-permeable membrane.",
+    "diffusion": "Diffusion is the natural spreading of particles from a region of high concentration to low concentration.",
+    "cell": "A cell is the basic structural and functional unit of life. All organisms are made of cells.",
     "atom": "An atom is the smallest unit of matter that retains the properties of an element.",
-    "force": "Force is any push or pull that can change the motion or shape of an object.",
-    "diffusion": "Diffusion is the movement of particles from a region of higher concentration to lower concentration."
+    "energy": "Energy is the ability to do work. It exists in forms like kinetic, potential, heat, electrical and chemical.",
+    "photosynthesis": "Photosynthesis is the process where green plants use sunlight to convert carbon dioxide and water into glucose and oxygen.",
+    "electricity": "Electricity is the flow of electric charge, usually through a conductor like copper wire.",
+    "fraction": "A fraction represents a part of a whole and is written as numerator over denominator."
 };
 
-// AI chat logic
-function talkToNSA() {
-    let input = document.getElementById("ai-input").value;
-    let display = document.getElementById("ai-output");
+// MAIN AI LOGIC (SMART)
+function generateResponse(input) {
+    let msg = input.toLowerCase();
 
-    if (!input.trim()) return;
-
-    document.getElementById("ai-input").value = "";
-
-    if (!username) {
-        username = input;
-        display.innerHTML = `NSA: Nice to meet you, ${username}. What topic do you want help with?`;
-        return;
+    // name detection
+    if (msg.includes("my name is") || msg.includes("i am")) {
+        username = input.split(" ").pop();
+        return `Nice to meet you, ${username}. What would you like to learn today?`;
     }
 
-    let clean = input.toLowerCase();
-
-    if (knowledge[clean]) {
-        display.innerHTML = `NSA: ${knowledge[clean]}`;
-        return;
+    if (msg.includes("hi") || msg.includes("hello")) {
+        return username ?
+            `Hello ${username}, how can I help you today?` :
+            "Hello! What's your name?";
     }
 
-    if (clean.includes("hi") || clean.includes("hello")) {
-        display.innerHTML = `NSA: Hey ${username}, how can I help you today?`;
-        return;
+    // knowledge dictionary
+    for (let key in facts) {
+        if (msg.includes(key)) {
+            return facts[key];
+        }
     }
 
-    if (clean.includes("who are you")) {
-        display.innerHTML = "NSA: I'm NSA, your study partner. I help explain school subjects clearly.";
-        return;
+    // question detection
+    if (msg.startsWith("what is") || msg.startsWith("explain") || msg.startsWith("define")) {
+        return "That's an interesting topic. Give me a bit more detail and I'll break it down clearly.";
     }
 
-    display.innerHTML = "NSA: I get the idea, but try giving me more details so I can explain better.";
+    // fallback (AI-ish)
+    return "I understand what you're trying to ask. Try giving me a more specific direction so I can explain it properly.";
 }
 
-// Switching pages
-function showSection(section) {
+// SEND FUNCTION
+function send() {
+    let input = document.getElementById("userInput").value.trim();
+    if (!input) return;
+
+    appendMessage(input, "user");
+
+    let reply = generateResponse(input);
+    setTimeout(() => appendMessage(reply, "ai"), 400);
+
+    document.getElementById("userInput").value = "";
+}
+
+// APPEND TO CHAT
+function appendMessage(text, type) {
+    let div = document.createElement("div");
+    div.className = "msg " + type;
+    div.textContent = text;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+// SHOW SECTION
+function show(id) {
     document.getElementById("home").style.display = "none";
     document.getElementById("ai").style.display = "none";
     document.getElementById("about").style.display = "none";
+    document.getElementById("coming").style.display = "none";
     document.getElementById("contact").style.display = "none";
 
-    document.getElementById(section).style.display = "block";
+    document.getElementById(id).style.display = "block";
 }
 </script>
 
