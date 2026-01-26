@@ -9,9 +9,9 @@
 *{box-sizing:border-box}
 body{
 margin:0;
-font-family:Segoe UI,Roboto,sans-serif;
-background:#f2f6fc;
-color:#0f172a;
+font-family: 'Inter', system-ui, sans-serif;
+background:#0f0f14;
+color:#eaeaf0;
 scroll-behavior:smooth;
 overflow-x:hidden;
 }
@@ -21,127 +21,141 @@ nav{
 position:fixed;
 top:0;
 width:100%;
-background:rgba(255,255,255,.95);
+backdrop-filter: blur(10px);
+background:rgba(15,15,20,0.75);
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:16px 60px;
-backdrop-filter:blur(10px);
-box-shadow:0 4px 20px rgba(0,0,0,.08);
+padding:15px 50px;
 z-index:1000;
-animation:slideDown 1s ease;
 }
-nav .logo{font-size:1.6rem;font-weight:800;color:#1d4ed8}
+nav .logo{
+font-size:1.6rem;
+font-weight:800;
+background:linear-gradient(90deg,#9b5cff,#3cffc5);
+-webkit-background-clip:text;
+color:transparent;
+}
 nav a{
-margin-left:28px;
+margin-left:25px;
 text-decoration:none;
 font-weight:600;
-color:#0f172a;
+color:#eaeaf0;
 transition:.3s;
 }
-nav a:hover{color:#1d4ed8}
+nav a:hover{color:#3cffc5}
 
 /* HERO */
 #hero{
 min-height:100vh;
-background:linear-gradient(120deg,#1d4ed8,#60a5fa,#93c5fd);
-background-size:300% 300%;
-animation:gradientMove 10s ease infinite;
 display:flex;
 align-items:center;
 justify-content:center;
-padding:40px;
-color:white;
 text-align:center;
-}
-.hero-box{
-max-width:950px;
+padding:40px;
+background:radial-gradient(circle at top,#1b1b25,#0f0f14 70%);
 animation:fadeUp 1.2s ease;
 }
+.hero-box{
+max-width:900px;
+}
 .hero-box h1{
-font-size:3.3rem;
-margin-bottom:20px;
+font-size:3.4rem;
+background:linear-gradient(90deg,#9b5cff,#3cffc5);
+-webkit-background-clip:text;
+color:transparent;
 }
 .hero-box p{
 font-size:1.15rem;
 line-height:1.8;
+opacity:.9;
 }
-
-/* BUTTON */
 .btn{
 margin-top:25px;
 padding:14px 30px;
 border:none;
-border-radius:12px;
+border-radius:14px;
 font-weight:700;
-background:white;
-color:#1d4ed8;
+background:linear-gradient(90deg,#9b5cff,#3cffc5);
+color:#0f0f14;
 cursor:pointer;
 transition:.3s;
-box-shadow:0 10px 25px rgba(0,0,0,.2);
+box-shadow:0 0 30px rgba(60,255,197,.25);
 }
 .btn:hover{
-transform:translateY(-4px) scale(1.05);
+transform:scale(1.06);
+box-shadow:0 0 45px rgba(60,255,197,.4);
 }
 
 /* SECTIONS */
-section{
-padding:120px 70px;
-}
+section{padding:120px 60px}
+
+/* TITLES */
 .title{
-font-size:2.4rem;
+font-size:2.3rem;
+background:linear-gradient(90deg,#9b5cff,#3cffc5);
+-webkit-background-clip:text;
+color:transparent;
 margin-bottom:20px;
 }
+
+/* TEXT */
 .text{
 max-width:1000px;
-line-height:1.9;
+line-height:1.85;
 font-size:1.05rem;
-animation:fadeUp 1s ease;
+opacity:.95;
 }
 
 /* GRID */
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:28px;
-margin-top:40px;
+gap:25px;
+margin-top:30px;
 }
 .card{
-background:white;
-padding:28px;
+background:#161622;
+padding:25px;
 border-radius:18px;
-box-shadow:0 15px 30px rgba(0,0,0,.08);
+border:1px solid rgba(255,255,255,.05);
+backdrop-filter: blur(10px);
 transition:.4s;
-animation:fadeUp 1s ease;
+box-shadow:0 0 25px rgba(0,0,0,.4);
 }
 .card:hover{
 transform:translateY(-10px) scale(1.02);
+box-shadow:0 0 45px rgba(155,92,255,.25);
 }
 
 /* AI */
 #ai-box{
-background:white;
+background:#161622;
 border-radius:20px;
-padding:30px;
-box-shadow:0 15px 40px rgba(0,0,0,.1);
+padding:25px;
+border:1px solid rgba(255,255,255,.05);
+box-shadow:0 0 40px rgba(0,0,0,.6);
 max-width:950px;
 animation:fadeUp 1s ease;
 }
 #chat{
 height:320px;
 overflow-y:auto;
-border:1px solid #e5e7eb;
 padding:15px;
 border-radius:12px;
+background:#0f0f14;
 margin-bottom:15px;
 font-size:.95rem;
-background:#f9fbff;
+line-height:1.6;
 }
 input{
 width:100%;
-padding:14px;
+padding:13px;
 border-radius:12px;
-border:1px solid #cbd5e1;
+border:none;
+outline:none;
+background:#0f0f14;
+color:white;
 margin-bottom:10px;
 }
 
@@ -149,29 +163,32 @@ margin-bottom:10px;
 #math-output{
 margin-top:15px;
 font-weight:600;
-animation:fadeUp .8s ease;
+line-height:1.6;
+}
+
+/* COMING */
+.badge{
+display:inline-block;
+padding:8px 14px;
+border-radius:999px;
+background:rgba(60,255,197,.1);
+color:#3cffc5;
+font-weight:600;
+margin-bottom:15px;
 }
 
 /* FOOTER */
 footer{
 text-align:center;
-padding:35px;
-color:#64748b;
+padding:40px;
+color:#a1a1b3;
+font-size:.9rem;
 }
 
 /* ANIMATIONS */
 @keyframes fadeUp{
 0%{opacity:0;transform:translateY(30px)}
 100%{opacity:1;transform:translateY(0)}
-}
-@keyframes slideDown{
-0%{opacity:0;transform:translateY(-40px)}
-100%{opacity:1;transform:translateY(0)}
-}
-@keyframes gradientMove{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
 }
 </style>
 </head>
@@ -189,77 +206,91 @@ color:#64748b;
 </div>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
 <div class="hero-box">
 <h1>NSSALA</h1>
 <p><b>Nigerian Secondary School AI Learning Assistant</b></p>
 <p>
-NSSALA is an intelligent digital learning platform built to support Nigerian secondary school students.
-It combines structured education, smart AI tutoring, and modern learning tools into one powerful system.
+NSSALA is a modern AI-powered learning platform built for Nigerian secondary school students.  
+It is designed to make learning clearer, calmer, smarter, and more engaging — not stressful, not confusing, not overwhelming.
 </p>
 <p>
-Here, students don’t just get answers — they gain understanding.
-Every topic is explained clearly, logically, and step-by-step.
-Learning becomes simple, guided, and confidence-building.
+This is not just a website.  
+It is an intelligent learning system that explains, guides, reasons, and teaches like a real tutor.
+From science to mathematics, from logic to understanding — NSSALA helps students build real knowledge, not just memorize answers.
 </p>
 <button class="btn" onclick="scrollToAI()">Start Learning</button>
 </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
 <h2 class="title">About NSSALA</h2>
 <div class="text">
 <p>
-NSSALA was created to solve a real problem in education: students often memorize without understanding.
-This platform changes that by focusing on reasoning, clarity, and structured learning.
+NSSALA (Nigerian Secondary School AI Learning Assistant) was created to solve a real problem in education: 
+students are overwhelmed with information but lack understanding.
 </p>
+
 <p>
-Instead of rushing through topics, NSSALA teaches step-by-step.
-Concepts are broken down, examples are used, and understanding is prioritized over memorization.
+Learning should not feel rushed, confusing, or disconnected.  
+It should feel structured, guided, calm, and progressive.
 </p>
+
 <p>
-NSSALA is built specifically for Nigerian secondary school education, supporting science subjects, mathematics,
-and core academic foundations.
+NSSALA focuses on deep understanding, not surface learning.  
+Students are guided step-by-step, concepts are broken down clearly, and subjects are connected logically.
 </p>
+
 <p>
-This is not just a learning website — it is a digital learning assistant that guides students academically,
-supports teachers, and strengthens education through intelligence and structure.
+This platform is built to support Nigerian secondary school education with modern technology, 
+intelligent tutoring, and a learning system that adapts to the student — not the other way around.
+</p>
+
+<p>
+NSSALA represents the future of digital education in Nigeria:  
+smart learning, AI assistance, calm study environments, and structured academic growth.
 </p>
 </div>
 
 <div class="grid">
-<div class="card"><b>AI Tutoring</b><br>Smart explanations, structured reasoning, learning guidance</div>
-<div class="card"><b>Science Learning</b><br>Physics, Biology, Chemistry, and core subjects</div>
-<div class="card"><b>Math Intelligence</b><br>Problem solving with logic and explanation</div>
-<div class="card"><b>Modern Education</b><br>Built for digital learning and future education</div>
+<div class="card"><b>AI Learning</b><br>Smart explanations and guided reasoning</div>
+<div class="card"><b>Student Focused</b><br>Built for real student needs</div>
+<div class="card"><b>Calm Education</b><br>No pressure learning environment</div>
+<div class="card"><b>Future Ready</b><br>Modern digital learning system</div>
 </div>
 </section>
 
+<!-- AI -->
 <section id="ai">
 <h2 class="title">NSSALA AI Tutor</h2>
 <div id="ai-box">
 <div id="chat"></div>
-<input id="userInput" placeholder="Ask anything (e.g What is biology, Explain photosynthesis, Solve 2x+3=11)">
-<button class="btn" onclick="send()">Send</button>
+<input id="userInput" placeholder="Ask anything... (e.g What is biology? Explain photosynthesis)">
+<button class="btn" onclick="send()">Ask NSSALA</button>
 </div>
 </section>
 
+<!-- MATH -->
 <section id="math">
 <h2 class="title">Math Solver</h2>
-<p class="text">Solve and understand mathematical problems with logic and explanation.</p>
-<input id="mathInput" placeholder="e.g 2x + 3 = 11 or 5*6+2">
+<p class="text">Solve and understand mathematics with step-by-step logic.</p>
+<input id="mathInput" placeholder="e.g 2x + 4 = 10 or 5*6+2">
 <button class="btn" onclick="solve()">Solve</button>
 <div id="math-output"></div>
 </section>
 
+<!-- COMING -->
 <section id="coming">
-<h2 class="title">Coming Soon</h2>
+<span class="badge">Coming Soon</span>
+<h2 class="title">Future Features</h2>
 <div class="grid">
-<div class="card">Full Course System</div>
 <div class="card">Student Dashboards</div>
 <div class="card">Teacher Portals</div>
-<div class="card">AI Learning Plans</div>
-<div class="card">Smart Attendance</div>
+<div class="card">Attendance System</div>
+<div class="card">AI Study Plans</div>
+<div class="card">Digital Classrooms</div>
 <div class="card">Parent Monitoring</div>
 <div class="card">AI Exams</div>
 <div class="card">Certificates</div>
@@ -275,12 +306,14 @@ NSSALA © Nigerian Secondary School AI Learning Assistant
 <script>
 let memoryName = localStorage.getItem("nssala_name");
 
+// CHAT
 function add(msg){
 let chat=document.getElementById("chat");
 chat.innerHTML+=msg+"<br><br>";
 chat.scrollTop=chat.scrollHeight;
 }
 
+// SEND
 function send(){
 let input=document.getElementById("userInput").value.trim();
 if(!input)return;
@@ -290,6 +323,7 @@ setTimeout(()=>add("<b>NSSALA:</b> "+reply),400);
 document.getElementById("userInput").value="";
 }
 
+// AI BRAIN (STRONG REASONING)
 function brain(text){
 let t=text.toLowerCase();
 
@@ -297,58 +331,58 @@ if(t.includes("my name is")){
 let name=text.split("is")[1].trim();
 memoryName=name;
 localStorage.setItem("nssala_name",name);
-return "Nice to meet you, "+name+". I’ll remember your name and personalize your learning.";
+return "Got you, "+name+". I’ll remember your name.";
 }
 
 if(t.startsWith("hi")||t.startsWith("hello")){
-return memoryName ? "Hello "+memoryName+" 👋 How can I support your learning today?" : "Hello 👋 How can I support your learning today?";
+return memoryName ? "Hey "+memoryName+" 👋 Ready to learn something new today?" : "Hey 👋 Ready to learn something new today?";
 }
 
 if(t.startsWith("what is biology")){
-return "Biology is the branch of science that studies living organisms and life processes. It focuses on how living things grow, function, reproduce, evolve, and interact with their environment. Topics in biology include cells, genetics, ecosystems, human biology, plants, animals, and microorganisms.";
+return "Biology is the scientific study of living organisms and life processes. It focuses on how living things function, grow, reproduce, evolve, and interact with their environment. Biology includes areas such as cells, genetics, evolution, ecosystems, and human biology.";
 }
 
 if(t.startsWith("what is physics")){
-return "Physics is the branch of science that studies matter, energy, motion, forces, and the laws that govern the universe. It explains how objects move, how energy is transferred, and how natural forces work.";
+return "Physics is the branch of science that studies matter, energy, motion, forces, space, and time. It explains how the universe behaves, from tiny particles to massive galaxies.";
 }
 
 if(t.startsWith("what is chemistry")){
-return "Chemistry is the study of substances, their composition, structure, properties, and the chemical reactions that change them. It explains how matter transforms and interacts.";
-}
-
-if(t.startsWith("what is math")||t.startsWith("what is mathematics")){
-return "Mathematics is the study of numbers, patterns, structure, logic, and relationships. It helps us understand quantity, space, change, and problem-solving.";
+return "Chemistry is the science of substances — their structure, properties, reactions, and transformations. It explains how matter changes and interacts at the molecular and atomic level.";
 }
 
 if(t.startsWith("explain")){
-return "Let’s explain it clearly and simply:\n\n"+text.replace("explain","")+"\n\nMeaning → What it is\nProcess → How it works\nPurpose → Why it matters\nExample → How it is used";
-}
-
-if(t.startsWith("list")){
-return "Here is a structured list:\n\n1) Definition\n2) Key features\n3) Importance\n4) Applications\n5) Examples";
+return "Let’s break this down clearly:\n\n"+text.replace("explain","")+
+"\n\nMeaning → What it is\nCause → Why it happens\nProcess → How it works\nEffect → What it leads to\nExample → Real-life connection";
 }
 
 if(t.startsWith("how")){
-return "Step-by-step explanation:\n\n1) Understand the concept\n2) Identify key parts\n3) Apply the rules\n4) Solve logically\n5) Verify the result";
+return "Step-by-step reasoning:\n\n1) Identify the concept\n2) Understand the principle\n3) Apply logic\n4) Solve systematically\n5) Verify the result";
 }
 
-if(t.includes("photosynthesis")){
-return "Photosynthesis is the process by which green plants make their own food using sunlight, carbon dioxide, water, and chlorophyll. It produces glucose (food) and oxygen as a by-product.";
+if(t.startsWith("list")){
+return "Here’s a structured list:\n\n1) Definition\n2) Key properties\n3) Functions\n4) Importance\n5) Examples";
 }
 
-return "I understand your question. Let’s analyze it properly and break it down step-by-step so you gain real understanding, not just an answer. Ask in more detail and I’ll explain clearly.";
+if(t.startsWith("what is")){
+let topic=text.replace("what is","").trim();
+return topic.toUpperCase()+" can be understood as a concept that plays an important role in learning and science. It has a definition, purpose, process, and real-world application. If you'd like, I can explain it in detail.";
 }
 
+return "I understand your question. Let’s analyze it logically and clearly so you actually understand the concept, not just memorize the answer. Ask with more detail and I’ll break it down properly.";
+}
+
+// SCROLL
 function scrollToAI(){
 document.getElementById("ai").scrollIntoView({behavior:"smooth"});
 }
 
+// MATH
 function solve(){
 let exp=document.getElementById("mathInput").value;
 let out=document.getElementById("math-output");
 try{
 let res=math.evaluate(exp);
-out.innerHTML="Answer: "+res+"<br><br>Explanation: The expression was solved using mathematical rules and correct order of operations.";
+out.innerHTML="Answer: "+res+"<br><br>Explanation: The expression was solved using mathematical order of operations and logical evaluation.";
 }catch{
 out.innerHTML="Unable to solve. Check the expression format.";
 }
