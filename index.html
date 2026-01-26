@@ -6,64 +6,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
-  font-family:'Inter',system-ui,sans-serif;
+  font-family:Inter,system-ui,sans-serif;
   background:#0f0f14;
   color:#eaeaf0;
   scroll-behavior:smooth;
   overflow-x:hidden;
 }
 
-/* GLOBAL */
-a{text-decoration:none;color:inherit;}
-button{cursor:pointer;}
-img{max-width:100%;}
-
-/* NAVBAR */
+/* NAV */
 nav{
   position:fixed;top:0;width:100%;
-  backdrop-filter: blur(12px);
-  background:rgba(10,10,20,0.85);
+  backdrop-filter:blur(12px);
+  background:rgba(10,10,20,.85);
   display:flex;justify-content:space-between;align-items:center;
-  padding:14px 50px;
-  z-index:1000;
+  padding:14px 50px;z-index:1000;
 }
 .logo{
-  font-weight:900;
-  font-size:1.6rem;
+  font-weight:900;font-size:1.6rem;
   background:linear-gradient(90deg,#9b5cff,#3cffc5);
-  -webkit-background-clip:text;
-  color:transparent;
+  -webkit-background-clip:text;color:transparent;
 }
-nav ul{
-  display:flex;gap:28px;align-items:center;
-}
-nav ul li a{
-  font-weight:600;
-  opacity:.9;
-  transition:.3s;
-}
-nav ul li a:hover{color:#3cffc5;opacity:1;}
+nav ul{display:flex;gap:28px;align-items:center;}
+nav ul li a{font-weight:600;opacity:.9;transition:.3s;}
+nav ul li a:hover{color:#3cffc5;}
+.menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.menu-toggle span{width:26px;height:3px;background:#fff;}
 
 #langSelect{
   background:#161622;border:none;color:#fff;
   padding:6px 10px;border-radius:8px;
 }
 
-/* MENU */
-.menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;}
-.menu-toggle span{width:26px;height:3px;background:#fff;transition:.3s;}
-nav.active ul{
-  position:absolute;top:65px;right:30px;
-  background:rgba(10,10,20,.95);
-  flex-direction:column;
-  padding:25px;
-  border-radius:14px;
-}
-
-/* SECTIONS BASE */
+/* SECTIONS */
 section{
   min-height:100vh;
   padding:120px 60px;
@@ -75,14 +51,23 @@ section{
   overflow:hidden;
 }
 
-/* SMOOTH TRANSITION OVERLAY */
-section::before{
-  content:"";
+/* BACKGROUND SLIDES */
+.bg-layer{
   position:absolute;
   inset:0;
-  background:rgba(15,15,25,0.65);
-  z-index:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transition:opacity 1.5s ease;
 }
+.bg-layer.active{opacity:1;}
+
+.overlay{
+  position:absolute;inset:0;
+  background:rgba(15,15,25,.65);
+  z-index:1;
+}
+
 .section-content{
   position:relative;
   z-index:2;
@@ -91,23 +76,19 @@ section::before{
 }
 
 /* HERO */
-#hero{
-  background:url("students.jpeg") center/cover no-repeat;
-}
 .hero-box{
   backdrop-filter:blur(10px);
-  background:rgba(15,15,25,0.55);
+  background:rgba(15,15,25,.55);
   padding:50px;
   border-radius:24px;
-  border:1px solid rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,.08);
   animation:float 6s ease-in-out infinite;
 }
 .hero-box h1{
   font-size:3rem;
   text-transform:uppercase;
   background:linear-gradient(90deg,#9b5cff,#3cffc5);
-  -webkit-background-clip:text;
-  color:transparent;
+  -webkit-background-clip:text;color:transparent;
 }
 .hero-box p{margin-top:12px;line-height:1.8;font-size:1.05rem;}
 .btn{
@@ -123,21 +104,6 @@ section::before{
 }
 .btn:hover{transform:scale(1.08);box-shadow:0 0 60px rgba(60,255,197,.6);}
 
-/* ABOUT */
-#about{
-  background:url("classroom1.jpeg") center/cover no-repeat;
-}
-
-/* AI */
-#ai{
-  background:url("classroom2.jpeg") center/cover no-repeat;
-}
-
-/* COMING */
-#coming{
-  background:url("classroom2.jpeg") center/cover no-repeat;
-}
-
 /* HEADERS */
 .title{
   text-transform:uppercase;
@@ -146,11 +112,6 @@ section::before{
   background:linear-gradient(90deg,#9b5cff,#3cffc5);
   -webkit-background-clip:text;
   color:transparent;
-}
-.text{
-  line-height:1.9;
-  opacity:.95;
-  font-size:1.05rem;
 }
 
 /* GRID */
@@ -161,7 +122,7 @@ section::before{
   margin-top:35px;
 }
 .card{
-  background:rgba(15,15,25,0.6);
+  background:rgba(15,15,25,.6);
   backdrop-filter:blur(10px);
   padding:25px;
   border-radius:18px;
@@ -173,9 +134,9 @@ section::before{
   box-shadow:0 0 45px rgba(155,92,255,.35);
 }
 
-/* AI BOX */
+/* AI */
 #ai-box{
-  background:rgba(15,15,25,0.65);
+  background:rgba(15,15,25,.65);
   backdrop-filter:blur(12px);
   border-radius:22px;
   padding:25px;
@@ -189,7 +150,6 @@ section::before{
   padding:15px;
   border-radius:12px;
   text-align:left;
-  font-size:.95rem;
 }
 input{
   width:100%;
@@ -232,11 +192,11 @@ input{
     <li><a href="#coming">Coming Soon</a></li>
     <li>
       <select id="langSelect">
-        <option>English</option>
-        <option>Hausa</option>
-        <option>Igbo</option>
-        <option>Yoruba</option>
-        <option>Urhobo</option>
+        <option value="en">English</option>
+        <option value="ha">Hausa</option>
+        <option value="ig">Igbo</option>
+        <option value="yo">Yoruba</option>
+        <option value="ur">Urhobo</option>
       </select>
     </li>
   </ul>
@@ -247,29 +207,30 @@ input{
 
 <!-- HERO -->
 <section id="hero">
+  <div class="bg-layer active" style="background-image:url('students.jpeg')"></div>
+  <div class="overlay"></div>
   <div class="section-content hero-box">
     <h1>NSSALA</h1>
     <p><b>NIGERIAN SECONDARY SCHOOL AI LEARNING ASSISTANT</b></p>
-    <p>A smart AI-powered learning platform built for Nigerian students — clear explanations, deep understanding, and classroom-level teaching.</p>
-    <p>Learn science. Understand maths. Ask questions. Get real explanations.</p>
+    <p>AI-powered learning built for Nigerian students. Real understanding, not memorization.</p>
     <button class="btn" onclick="scrollToAI()">START LEARNING</button>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
+  <div class="bg-layer active" style="background-image:url('classroom1.jpeg')"></div>
+  <div class="overlay"></div>
   <div class="section-content">
     <h2 class="title">ABOUT NSSALA</h2>
-    <p class="text">
-      NSSALA is a digital classroom assistant designed for Nigerian secondary school students.
-      It teaches, explains, reasons, and guides learning like a real teacher.
-      Students don’t just get answers — they understand concepts, logic, and processes.
+    <p>
+      NSSALA is a digital classroom assistant that teaches, explains, and reasons like a real teacher.
+      It helps students understand concepts deeply, not just memorize answers.
     </p>
-
     <div class="grid">
       <div class="card">AI Teaching System</div>
       <div class="card">Science & Maths Learning</div>
-      <div class="card">Step-by-Step Explanations</div>
+      <div class="card">Step-by-Step Reasoning</div>
       <div class="card">Digital Classroom Model</div>
     </div>
   </div>
@@ -277,6 +238,8 @@ input{
 
 <!-- AI -->
 <section id="ai">
+  <div class="bg-layer active" style="background-image:url('classroom2.jpeg')"></div>
+  <div class="overlay"></div>
   <div class="section-content">
     <h2 class="title">AI TUTOR</h2>
     <div id="ai-box">
@@ -289,6 +252,8 @@ input{
 
 <!-- COMING -->
 <section id="coming">
+  <div class="bg-layer active" style="background-image:url('classroom3.jpeg')"></div>
+  <div class="overlay"></div>
   <div class="section-content">
     <h2 class="title">COMING SOON</h2>
     <div class="grid">
@@ -303,6 +268,7 @@ input{
 </section>
 
 <script>
+/* MENU */
 function toggleMenu(){
   document.querySelector("nav").classList.toggle("active");
 }
@@ -310,17 +276,59 @@ function scrollToAI(){
   document.getElementById("ai").scrollIntoView({behavior:"smooth"});
 }
 
-/* SIMPLE AI */
+/* BACKGROUND TRANSITIONS */
+document.querySelectorAll("section").forEach(section=>{
+  const layers = section.querySelectorAll(".bg-layer");
+  let i=0;
+  setInterval(()=>{
+    layers.forEach(l=>l.classList.remove("active"));
+    i=(i+1)%layers.length;
+    layers[i].classList.add("active");
+  },6000);
+});
+
+/* SMART AI */
+let memoryName = localStorage.getItem("nssala_name");
+
 function send(){
   const input=document.getElementById("userInput");
   const chat=document.getElementById("chat");
   if(!input.value.trim())return;
   chat.innerHTML+=`<b>You:</b> ${input.value}<br><br>`;
-  let msg=input.value.toLowerCase();
-  let reply="That’s a great question. NSSALA explains concepts clearly, step-by-step, with real understanding and examples.";
-  if(msg.includes("biology")) reply="Biology is the study of life. It explains how living organisms function, grow, reproduce, and interact with their environment.";
-  if(msg.includes("physics")) reply="Physics studies matter, energy, motion, and forces — explaining how the universe works.";
-  if(msg.includes("math")) reply="Mathematics is the language of logic, patterns, numbers, and problem-solving.";
+
+  let t=input.value.toLowerCase();
+  let reply="";
+
+  if(t.includes("my name is")){
+    let name=input.value.split("is")[1].trim();
+    memoryName=name;
+    localStorage.setItem("nssala_name",name);
+    reply=`Got it ${name}. I’ll remember your name and personalize your learning.`;
+  }
+  else if(t.startsWith("hi")||t.startsWith("hello")){
+    reply=memoryName 
+      ? `Hi ${memoryName} 👋 Ready to learn something new today?`
+      : `Hi 👋 Ready to learn something new today?`;
+  }
+  else if(t.includes("biology")){
+    reply="Biology is the scientific study of life. It explains how living organisms function, grow, reproduce, adapt, evolve, and interact with their environment. It includes topics like cells, genetics, ecosystems, human anatomy, and evolution.";
+  }
+  else if(t.includes("physics")){
+    reply="Physics studies matter, energy, forces, motion, electricity, waves, and the laws that govern the universe. It explains how things move, interact, and exist.";
+  }
+  else if(t.includes("chemistry")){
+    reply="Chemistry studies substances, their properties, reactions, bonding, and energy changes. It explains how matter transforms at molecular and atomic levels.";
+  }
+  else if(t.startsWith("what is")){
+    reply=`${input.value.replace("What is","").replace("what is","")} is explained by defining the concept, describing how it works, giving examples, and showing its importance in real life. NSSALA teaches by understanding, not memorization.`;
+  }
+  else if(t.startsWith("how")){
+    reply="To understand this: 1) Identify the concept  2) Learn the principles  3) Understand the logic  4) Apply it  5) Practice examples  6) Master it through repetition.";
+  }
+  else{
+    reply="That’s a deep question. NSSALA approaches learning through logic, reasoning, examples, and understanding, not just answers.";
+  }
+
   chat.innerHTML+=`<b>NSSALA:</b> ${reply}<br><br>`;
   chat.scrollTop=chat.scrollHeight;
   input.value="";
