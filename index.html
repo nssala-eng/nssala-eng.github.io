@@ -46,8 +46,9 @@ animation:fadeUp 1.2s ease;
 max-width:900px;backdrop-filter: blur(8px);background: rgba(15,15,20,0.55);padding: 40px;border-radius: 20px;
 border: 1px solid rgba(255,255,255,0.08);
 animation:fadeUp 1s ease;
+text-align:center;
 }
-.hero-box h1{font-size:3rem;background:linear-gradient(90deg,#9b5cff,#3cffc5);-webkit-background-clip:text;color:transparent;}
+.hero-box h1{font-size:3rem;background:linear-gradient(90deg,#9b5cff,#3cffc5);-webkit-background-clip:text;color:transparent;text-transform:uppercase;}
 .hero-box p{font-size:1.1rem;line-height:1.85;opacity:.95;}
 .btn{margin-top:25px;padding:14px 30px;border:none;border-radius:14px;font-weight:700;
 background:linear-gradient(90deg,#9b5cff,#3cffc5);color:#0f0f14;transition:.3s;box-shadow:0 0 30px rgba(60,255,197,.25);}
@@ -55,19 +56,19 @@ background:linear-gradient(90deg,#9b5cff,#3cffc5);color:#0f0f14;transition:.3s;b
 
 /* SECTIONS */
 section{padding:120px 60px;}
-.title{font-size:2.3rem;background:linear-gradient(90deg,#9b5cff,#3cffc5);
--webkit-background-clip:text;color:transparent;margin-bottom:20px;}
-.text{max-width:1000px;line-height:1.85;font-size:1.05rem;opacity:.95;}
+.title{text-align:center;font-size:2.3rem;background:linear-gradient(90deg,#9b5cff,#3cffc5);
+-webkit-background-clip:text;color:transparent;margin-bottom:20px;text-transform:uppercase;}
+.text{max-width:1000px;line-height:1.85;font-size:1.05rem;opacity:.95;margin:0 auto;text-align:center;}
 
 /* GRID */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;margin-top:30px;}
 .card{background:#161622;padding:25px;border-radius:18px;border:1px solid rgba(255,255,255,.05);
 backdrop-filter: blur(10px);transition:.4s;box-shadow:0 0 25px rgba(0,0,0,.4);}
-.card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 0 45px rgba(155,92,255,.25);}
+.card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 0 45px rgba(155,92,255,.25);text-align:center;}
 
 /* AI */
 #ai-box{background:#161622;border-radius:20px;padding:25px;border:1px solid rgba(255,255,255,.05);
-box-shadow:0 0 40px rgba(0,0,0,.6);max-width:950px;animation:fadeUp 1s ease;}
+box-shadow:0 0 40px rgba(0,0,0,.6);max-width:950px;margin:0 auto;animation:fadeUp 1s ease;}
 #chat{height:320px;overflow-y:auto;padding:15px;border-radius:12px;background:#0f0f14;margin-bottom:15px;font-size:.95rem;line-height:1.6;}
 input{width:100%;padding:13px;border-radius:12px;border:none;outline:none;background:#0f0f14;color:white;margin-bottom:10px;}
 #math-output{margin-top:15px;font-weight:600;line-height:1.6;}
@@ -120,7 +121,7 @@ section{padding:80px 20px;}
 <section id="hero">
 <div class="hero-box">
 <h1>NSSALA</h1>
-<p><b>Nigerian Secondary School AI Learning Assistant</b></p>
+<p><b>NIGERIAN SECONDARY SCHOOL AI LEARNING ASSISTANT</b></p>
 <p>NSSALA is a next-level AI-powered learning system for Nigerian students, making science and mathematics clear, deep, and fully understood.</p>
 <p>Ask questions, explore topics, solve math problems, and receive teacher-level explanations.</p>
 <button class="btn" onclick="scrollToAI()">Start Learning</button>
@@ -129,22 +130,22 @@ section{padding:80px 20px;}
 
 <!-- ABOUT -->
 <section id="about">
-<h2 class="title">About NSSALA</h2>
+<h2 class="title">ABOUT NSSALA</h2>
 <div class="text">
 <p>NSSALA provides Nigerian students with structured learning in science, math, and beyond. No memorization, just reasoning and understanding.</p>
 <p>The AI explains concepts step by step, gives examples, and can answer questions in multiple languages: English, Hausa, Igbo, Yoruba, Urhobo.</p>
 </div>
 <div class="grid">
-<div class="card"><b>AI Learning</b><br>Teacher-level explanations for all topics.</div>
-<div class="card"><b>Step-by-Step</b><br>Breaks down complex concepts with clarity.</div>
-<div class="card"><b>Student Focused</b><br>Interactive and structured learning environment.</div>
-<div class="card"><b>Future Ready</b><br>Modern digital assistant for students.</div>
+<div class="card"><b>AI LEARNING</b><br>Teacher-level explanations for all topics.</div>
+<div class="card"><b>STEP-BY-STEP</b><br>Breaks down complex concepts with clarity.</div>
+<div class="card"><b>STUDENT FOCUSED</b><br>Interactive and structured learning environment.</div>
+<div class="card"><b>FUTURE READY</b><br>Modern digital assistant for students.</div>
 </div>
 </section>
 
 <!-- AI -->
 <section id="ai">
-<h2 class="title">NSSALA AI Tutor</h2>
+<h2 class="title">AI TUTOR</h2>
 <div id="ai-box">
 <div id="chat"></div>
 <input id="userInput" placeholder="Ask anything... (e.g What is biology?)">
@@ -154,7 +155,7 @@ section{padding:80px 20px;}
 
 <!-- MATH -->
 <section id="math">
-<h2 class="title">Math Solver</h2>
+<h2 class="title">MATH SOLVER</h2>
 <p class="text">Solve mathematics with step-by-step reasoning.</p>
 <input id="mathInput" placeholder="e.g 2x + 4 = 10 or 5*6+2">
 <button class="btn" onclick="solve()">Solve</button>
@@ -163,7 +164,8 @@ section{padding:80px 20px;}
 
 <!-- COMING SOON OFFLINE -->
 <section id="coming">
-<span class="badge">Coming Soon</span>
+<h2 class="title">COMING SOON</h2>
+<span class="badge">Offline Features</span>
 <div id="comingOffline" class="grid offline">
 <div class="card">Student Dashboards</div>
 <div class="card">Teacher Portals</div>
