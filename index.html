@@ -2,245 +2,329 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>NSSALA — Smart Learning Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NSSALA — Smart Learning</title>
+
 <style>
+*{box-sizing:border-box}
 body{
-  margin:0;
-  font-family: 'Poppins', sans-serif;
-  background:#f5f7fa;
-  color:#222;
-  scroll-behavior:smooth;
+margin:0;
+font-family:Segoe UI,Roboto,sans-serif;
+background:#f4f7fb;
+color:#1e293b;
+scroll-behavior:smooth;
 }
 
-/* Navbar */
+/* NAV */
 nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 50px;
-  position:fixed;
-  width:100%;
-  background:white;
-  box-shadow:0 2px 10px rgba(0,0,0,0.1);
-  z-index:999;
+position:fixed;
+top:0;
+width:100%;
+background:#fff;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 50px;
+box-shadow:0 4px 20px rgba(0,0,0,.08);
+z-index:1000;
 }
-
+nav .logo{font-size:1.6rem;font-weight:800;color:#2563eb}
 nav a{
-  margin-left:20px;
-  text-decoration:none;
-  color:#222;
-  font-weight:500;
-  transition:0.2s;
+margin-left:25px;
+text-decoration:none;
+font-weight:600;
+color:#1e293b;
+transition:.3s;
 }
+nav a:hover{color:#2563eb}
 
-nav a:hover{
-  color:#4a6cff;
-}
+/* SECTIONS */
+section{padding:120px 60px}
 
-/* Hero Section */
+/* HERO */
 #hero{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  height:100vh;
-  padding:40px;
-  text-align:center;
-  background:linear-gradient(135deg,#4a6cff,#8ac8ff);
-  color:white;
-  animation:fadeIn 1.3s ease;
+min-height:100vh;
+background:linear-gradient(135deg,#2563eb,#60a5fa);
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px;
 }
+.hero-box{max-width:900px}
+.hero-box h1{font-size:3.2rem}
+.hero-box p{font-size:1.2rem;line-height:1.7}
 
-#hero h1{
-  font-size:3rem;
-  margin-bottom:20px;
+/* BUTTON */
+.btn{
+margin-top:25px;
+padding:14px 28px;
+border:none;
+border-radius:10px;
+font-weight:700;
+background:white;
+color:#2563eb;
+cursor:pointer;
+transition:.3s;
 }
+.btn:hover{transform:scale(1.05)}
 
-#hero p{
-  font-size:1.2rem;
-  max-width:700px;
+/* CONTENT */
+.title{font-size:2.2rem;margin-bottom:20px}
+.text{max-width:1000px;line-height:1.8;font-size:1.05rem}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+margin-top:30px;
 }
-
-button{
-  padding:12px 25px;
-  margin-top:20px;
-  border:none;
-  background:white;
-  color:#4a6cff;
-  font-weight:600;
-  border-radius:8px;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-button:hover{
-  transform:scale(1.05);
-}
-
-/* Sections */
-.section{
-  padding:100px 50px;
-  animation:fadeIn 1.2s ease;
-}
-
-.card-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
-
 .card{
-  background:white;
-  padding:25px;
-  border-radius:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-  transition:0.3s;
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.3s;
 }
+.card:hover{transform:translateY(-6px)}
 
-.card:hover{
-  transform:translateY(-5px);
-}
-
-/* AI Tutor */
+/* AI */
 #ai-box{
-  background:white;
-  padding:25px;
-  border-radius:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+background:white;
+border-radius:15px;
+padding:25px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+max-width:900px;
+}
+#chat{
+height:300px;
+overflow-y:auto;
+border:1px solid #ddd;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+font-size:.95rem;
+}
+input{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #ccc;
+margin-bottom:10px;
 }
 
-#chat-display{
-  height:250px;
-  overflow-y:auto;
-  padding:10px;
-  border:1px solid #ddd;
-  border-radius:8px;
-  margin-bottom:10px;
+/* MATH */
+#math-output{
+margin-top:15px;
+font-weight:600;
 }
 
-input, textarea{
-  width:100%;
-  padding:10px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  margin-top:10px;
-}
-
-/* Animations */
-@keyframes fadeIn{
-  0%{opacity:0; transform:translateY(20px);}
-  100%{opacity:1; transform:translateY(0);}
+/* FOOTER */
+footer{
+text-align:center;
+padding:30px;
+color:#64748b;
 }
 </style>
 </head>
+
 <body>
 
 <nav>
-  <div style="font-size:1.5rem;font-weight:700;color:#4a6cff;">NSSALA</div>
-  <div>
-     <a href="#hero">Home</a>
-     <a href="#about">About</a>
-     <a href="#ai">AI Tutor</a>
-     <a href="#math">Math Solver</a>
-  </div>
+<div class="logo">NSSALA</div>
+<div>
+<a href="#hero">Home</a>
+<a href="#about">About</a>
+<a href="#ai">AI Tutor</a>
+<a href="#math">Math Solver</a>
+<a href="#coming">Coming Soon</a>
+</div>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
-  <h1>Welcome to NSSALA</h1>
-  <p>The Next-Stage Smart Learning Academy. Learn faster, understand deeper, and master any subject with intelligent explanations powered by advanced reasoning.</p>
-  <button onclick="document.querySelector('#ai').scrollIntoView({behavior:'smooth'})">Ask the AI Tutor</button>
+<div class="hero-box">
+<h1>NSSALA — Next-Stage Smart Learning Academy</h1>
+<p>
+NSSALA is a modern intelligent learning platform built to transform how students learn, understand, and grow academically. 
+We combine structured education, smart digital tools, and intelligent tutoring into one unified learning experience. 
+Here, learning is not rushed, confusing, or overwhelming — it is clear, guided, and structured.
+</p>
+<p>
+From mathematics and science to technology and reasoning, NSSALA is designed to help students build real understanding, 
+not just memorization. Every explanation is simplified, every concept is broken down, and every learner is guided at their own pace.
+</p>
+<button class="btn" onclick="scrollToAI()">Start Learning</button>
+</div>
 </section>
 
-<section id="about" class="section">
-  <h2>About NSSALA</h2>
-  <p>NSSALA is a modern learning platform created to make difficult subjects feel simple. We combine clean design, advanced learning methods, and an intelligent tutor to guide you step by step.</p>
-  <p>Whether you're studying Maths, Physics, Biology, Chemistry, or Coding — NSSALA gives you clear explanations, real examples, and an easy learning flow. More subjects, video lessons, progress tracking and full course modules are coming soon.</p>
+<!-- ABOUT -->
+<section id="about">
+<h2 class="title">About NSSALA</h2>
+<div class="text">
+<p>
+NSSALA was created with one clear vision: to make learning intelligent, structured, accessible, and effective.
+Education should not feel confusing, stressful, or disconnected. It should feel guided, clear, and progressive.
+</p>
+
+<p>
+At NSSALA, learning is treated as a journey. Concepts are introduced gradually, explained clearly, and reinforced through practice.
+Students are not just given answers — they are guided through understanding.
+</p>
+
+<p>
+We focus on building strong foundations in core subjects such as Mathematics, Physics, Chemistry, Biology, and Technology.
+Our intelligent learning system is designed to think like a teacher, explain like a tutor, and guide like a mentor.
+</p>
+
+<p>
+NSSALA is not just a platform — it is a learning ecosystem where students grow intellectually, build confidence, 
+and develop true academic mastery.
+</p>
+</div>
+
+<div class="grid">
+<div class="card"><b>Smart Learning</b><br>Structured explanations and guided understanding</div>
+<div class="card"><b>AI Tutoring</b><br>Personal learning assistant for every student</div>
+<div class="card"><b>Math Intelligence</b><br>Step-by-step problem solving and logic building</div>
+<div class="card"><b>Future Ready</b><br>Built for modern education and digital learning</div>
+</div>
 </section>
 
-<section id="ai" class="section">
-  <h2>NSSALA AI Tutor</h2>
-  <div id="ai-box">
-    <div id="chat-display"></div>
-    <input id="chat-input" placeholder="Ask me anything...">
-    <button onclick="sendMessage()">Send</button>
-  </div>
+<!-- AI -->
+<section id="ai">
+<h2 class="title">NSSALA AI Tutor</h2>
+<div id="ai-box">
+<div id="chat"></div>
+<input id="userInput" placeholder="Ask anything...">
+<button class="btn" onclick="send()">Send</button>
+</div>
 </section>
 
-<section id="math" class="section">
-  <h2>Math Solver</h2>
-  <p>Enter any equation or expression. NSSALA will solve and explain it.</p>
-  <input id="math-input" placeholder="e.g. solve 2x + 3 = 11">
-  <button onclick="solveMath()">Solve</button>
-  <div id="math-output" style="margin-top:20px;font-weight:600;"></div>
+<!-- MATH -->
+<section id="math">
+<h2 class="title">Math Solver</h2>
+<p class="text">Solve expressions, equations, and problems. NSSALA explains the logic, not just the answer.</p>
+<input id="mathInput" placeholder="e.g 2x + 4 = 10 or 5*6+2">
+<button class="btn" onclick="solve()">Solve</button>
+<div id="math-output"></div>
 </section>
+
+<!-- COMING SOON -->
+<section id="coming">
+<h2 class="title">Coming Soon</h2>
+<div class="grid">
+<div class="card">Full Course System</div>
+<div class="card">Student Dashboards</div>
+<div class="card">Teacher Portals</div>
+<div class="card">AI Learning Plans</div>
+<div class="card">Smart Attendance System</div>
+<div class="card">Parent Monitoring</div>
+<div class="card">AI Exams</div>
+<div class="card">Certificates</div>
+</div>
+</section>
+
+<footer>
+NSSALA © Smart Learning Platform
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
 
 <script>
-// -------------------------
-// AI Tutor Logic
-// -------------------------
+// MEMORY
+let memoryName = localStorage.getItem("nssala_name");
 
-function sendMessage(){
-  let input = document.getElementById("chat-input").value;
-  if(!input.trim()) return;
-
-  display("You: " + input);
-
-  // Simulated reasoning (improved)
-  let response = aiBrain(input);
-
-  setTimeout(() => {
-    display("NSSALA: " + response);
-  }, 700);
-
-  document.getElementById("chat-input").value = "";
+// CHAT DISPLAY
+function add(msg){
+let chat=document.getElementById("chat");
+chat.innerHTML+=msg+"<br><br>";
+chat.scrollTop=chat.scrollHeight;
 }
 
-function display(msg){
-  let box = document.getElementById("chat-display");
-  box.innerHTML += msg + "<br><br>";
-  box.scrollTop = box.scrollHeight;
+// AI SEND
+function send(){
+let input=document.getElementById("userInput").value.trim();
+if(!input)return;
+add("<b>You:</b> "+input);
+let reply=brain(input);
+setTimeout(()=>add("<b>NSSALA:</b> "+reply),500);
+document.getElementById("userInput").value="";
 }
 
-function aiBrain(text){
-  text = text.toLowerCase();
+// AI BRAIN
+function brain(text){
+let t=text.toLowerCase();
 
-  if(text.includes("hi") || text.includes("hello")){
-    return "Yo, what’s good? How can I help you today?";
-  }
-
-  if(text.includes("who are you")){
-    return "I'm the NSSALA Tutor — your personal learning assistant built to explain anything with clarity.";
-  }
-
-  if(text.includes("physics")){
-    return "Physics is all about matter, motion, energy, forces, and how the universe behaves. What topic are you stuck on?";
-  }
-
-  // General intelligent fallback
-  return "Alright, let’s break this down step-by-step. " +
-         "Here’s how I understand your question: " + text +
-         ". Give me more details and I’ll explain it clearly.";
+if(t.includes("my name is")){
+let name=text.split("is")[1].trim();
+memoryName=name;
+localStorage.setItem("nssala_name",name);
+return "Nice to meet you, "+name+". I’ll remember your name.";
 }
 
-// -------------------------
-// Math Solver Logic
-// -------------------------
-function solveMath(){
-  let expr = document.getElementById("math-input").value;
-  let output = document.getElementById("math-output");
+if(t.includes("what is your name")){
+return "I'm NSSALA AI — your personal intelligent learning tutor.";
+}
 
-  try{
-    let result = math.evaluate(expr);
-    output.innerHTML = "Result: " + result;
-  }catch(err){
-    output.innerHTML = "I couldn't solve that. Try a simpler form or check for errors.";
-  }
+if(t.startsWith("hi")||t.startsWith("hello")){
+return memoryName? "Hello "+memoryName+" 👋 How can I help you learn today?" : "Hello 👋 How can I help you learn today?";
+}
+
+if(t.startsWith("what is")){
+return "Let’s define it clearly:\n\n"+text.replace("what is","").toUpperCase()+" is a concept that can be explained simply as follows:\nIt represents a fundamental idea in learning, and understanding it requires knowing its definition, purpose, and application.";
+}
+
+if(t.startsWith("explain")){
+return "Here is a clear explanation:\n\n"+text.replace("explain","")+"\n\nWe break it into:\n1) Meaning\n2) Purpose\n3) Application\n4) Example";
+}
+
+if(t.startsWith("list")){
+return "Here is a structured list:\n\n1) Primary concept\n2) Supporting idea\n3) Application area\n4) Practical relevance\n5) Example usage";
+}
+
+if(t.startsWith("how")){
+return "Step-by-step explanation:\n\n1) Understand the problem\n2) Identify key variables\n3) Apply correct principles\n4) Solve logically\n5) Verify the result";
+}
+
+if(t.includes("physics")){
+return "Physics studies matter, energy, motion, forces, and the laws that govern the universe.";
+}
+
+if(t.includes("biology")){
+return "Biology studies living organisms, life processes, cells, genetics, evolution, and ecosystems.";
+}
+
+if(t.includes("chemistry")){
+return "Chemistry studies substances, their properties, reactions, structures, and transformations.";
+}
+
+if(t.includes("math")){
+return "Mathematics is the science of numbers, structure, logic, patterns, and relationships.";
+}
+
+return "I understand your question. Let’s analyze it logically and step-by-step so you can truly understand it, not just memorize the answer. Ask in more detail and I’ll explain it clearly.";
+}
+
+// SCROLL
+function scrollToAI(){
+document.getElementById("ai").scrollIntoView({behavior:"smooth"});
+}
+
+// MATH
+function solve(){
+let exp=document.getElementById("mathInput").value;
+let out=document.getElementById("math-output");
+try{
+let res=math.evaluate(exp);
+out.innerHTML="Answer: "+res+"<br><br>Explanation: The expression was evaluated using mathematical rules and order of operations.";
+}catch{
+out.innerHTML="Unable to solve. Check the expression.";
+}
 }
 </script>
-
-<!-- MathJS CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
 
 </body>
 </html>
