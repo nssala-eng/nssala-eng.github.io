@@ -53,16 +53,19 @@ align-items:center;
 justify-content:center;
 text-align:center;
 padding:40px;
-background:
-linear-gradient(rgba(15,15,20,0.75), rgba(15,15,20,0.85)),
-url("students.jpeg");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
+background: linear-gradient(rgba(15,15,20,0.75), rgba(15,15,20,0.85)), url("students.jpeg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
 animation:fadeUp 1.2s ease;
 }
 .hero-box{
 max-width:900px;
+backdrop-filter: blur(6px);
+background: rgba(15,15,20,0.45);
+padding: 40px;
+border-radius: 20px;
+border: 1px solid rgba(255,255,255,0.05);
 }
 .hero-box h1{
 font-size:3.4rem;
@@ -73,7 +76,7 @@ color:transparent;
 .hero-box p{
 font-size:1.15rem;
 line-height:1.8;
-opacity:.9;
+opacity:.95;
 }
 .btn{
 margin-top:25px;
@@ -235,35 +238,27 @@ From science to mathematics, from logic to understanding — NSSALA helps studen
 <div class="text">
 <p>
 NSSALA (Nigerian Secondary School AI Learning Assistant) was created to solve a real problem in education: 
-students are overwhelmed with information but lack understanding.
+students are overwhelmed with information but lack deep understanding.
 </p>
 
 <p>
-Learning should not feel rushed, confusing, or disconnected.  
-It should feel structured, guided, calm, and progressive.
+Learning should feel structured, guided, calm, and progressive. NSSALA breaks concepts down clearly, connects ideas, and helps students build lasting knowledge.
 </p>
 
 <p>
-NSSALA focuses on deep understanding, not surface learning.  
-Students are guided step-by-step, concepts are broken down clearly, and subjects are connected logically.
+This platform supports Nigerian secondary school education with modern technology, intelligent tutoring, and adaptive learning systems.
 </p>
 
 <p>
-This platform is built to support Nigerian secondary school education with modern technology, 
-intelligent tutoring, and a learning system that adapts to the student — not the other way around.
-</p>
-
-<p>
-NSSALA represents the future of digital education in Nigeria:  
-smart learning, AI assistance, calm study environments, and structured academic growth.
+With NSSALA, students can explore science, mathematics, logic, and reasoning at their own pace while receiving clear, detailed explanations that mimic a real tutor's guidance.
 </p>
 </div>
 
 <div class="grid">
-<div class="card"><b>AI Learning</b><br>Smart explanations and guided reasoning</div>
-<div class="card"><b>Student Focused</b><br>Built for real student needs</div>
-<div class="card"><b>Calm Education</b><br>No pressure learning environment</div>
-<div class="card"><b>Future Ready</b><br>Modern digital learning system</div>
+<div class="card"><b>AI Learning</b><br>Smart, detailed explanations, reasoning, and guidance.</div>
+<div class="card"><b>Student Focused</b><br>Built for real student needs and understanding.</div>
+<div class="card"><b>Calm Education</b><br>No stress learning environment, step-by-step guidance.</div>
+<div class="card"><b>Future Ready</b><br>Modern, digital, adaptive learning system for growth.</div>
 </div>
 </section>
 
@@ -328,7 +323,7 @@ setTimeout(()=>add("<b>NSSALA:</b> "+reply),400);
 document.getElementById("userInput").value="";
 }
 
-// AI BRAIN (STRONG REASONING)
+// AI BRAIN (LONG, EXPLICIT, REASONING)
 function brain(text){
 let t=text.toLowerCase();
 
@@ -336,44 +331,44 @@ if(t.includes("my name is")){
 let name=text.split("is")[1].trim();
 memoryName=name;
 localStorage.setItem("nssala_name",name);
-return "Got you, "+name+". I’ll remember your name.";
+return "Got you, "+name+". I’ll remember your name and use it in explanations.";
 }
 
 if(t.startsWith("hi")||t.startsWith("hello")){
-return memoryName ? "Hey "+memoryName+" 👋 Ready to learn something new today?" : "Hey 👋 Ready to learn something new today?";
+return memoryName ? "Hey "+memoryName+" 👋 Ready to explore some deep learning today?" : "Hey 👋 Ready to explore some deep learning today?";
 }
 
 if(t.startsWith("what is biology")){
-return "Biology is the scientific study of living organisms and life processes. It focuses on how living things function, grow, reproduce, evolve, and interact with their environment. Biology includes areas such as cells, genetics, evolution, ecosystems, and human biology.";
+return "Biology is the scientific study of living organisms and life processes. It covers the structure, function, growth, origin, evolution, and interactions of living things. This includes areas like cells, genetics, DNA, ecosystems, evolution, human biology, and the interdependence of species. Understanding biology helps explain life in both theoretical and practical ways, from medical science to environmental stewardship.";
 }
 
 if(t.startsWith("what is physics")){
-return "Physics is the branch of science that studies matter, energy, motion, forces, space, and time. It explains how the universe behaves, from tiny particles to massive galaxies.";
+return "Physics is the branch of science concerned with matter, energy, motion, and the fundamental laws of the universe. It examines how forces interact, how energy is transferred, and the behaviors of objects from the microscopic to the cosmic scale. Physics principles underpin technologies, engineering, and even space exploration, helping us predict and understand natural phenomena.";
 }
 
 if(t.startsWith("what is chemistry")){
-return "Chemistry is the science of substances — their structure, properties, reactions, and transformations. It explains how matter changes and interacts at the molecular and atomic level.";
+return "Chemistry is the study of matter, its composition, structure, properties, and the changes it undergoes. It explains how substances interact at molecular and atomic levels, including reactions, bonding, energy changes, and real-world applications such as pharmaceuticals, industrial processes, and environmental chemistry.";
 }
 
 if(t.startsWith("explain")){
-return "Let’s break this down clearly:\n\n"+text.replace("explain","")+
-"\n\nMeaning → What it is\nCause → Why it happens\nProcess → How it works\nEffect → What it leads to\nExample → Real-life connection";
+return "Let's break it down step by step:\n\n"+text.replace("explain","")+
+"\n\nDefinition: What it is.\nMechanism: How it works.\nCauses: Why it happens.\nEffects: Results or outcomes.\nApplications: How it applies in real life.\nExample: Illustrative cases or experiments.";
 }
 
 if(t.startsWith("how")){
-return "Step-by-step reasoning:\n\n1) Identify the concept\n2) Understand the principle\n3) Apply logic\n4) Solve systematically\n5) Verify the result";
+return "Step-by-step reasoning for understanding and solving:\n1) Identify the core concept.\n2) Understand the principles.\n3) Apply logic and formulas.\n4) Solve systematically.\n5) Verify results with reasoning.";
 }
 
 if(t.startsWith("list")){
-return "Here’s a structured list:\n\n1) Definition\n2) Key properties\n3) Functions\n4) Importance\n5) Examples";
+return "Structured list approach:\n1) Definition\n2) Key points\n3) Mechanisms or processes\n4) Importance or function\n5) Examples or applications";
 }
 
 if(t.startsWith("what is")){
 let topic=text.replace("what is","").trim();
-return topic.toUpperCase()+" can be understood as a concept that plays an important role in learning and science. It has a definition, purpose, process, and real-world application. If you'd like, I can explain it in detail.";
+return topic.toUpperCase()+" can be understood as a concept or phenomenon. NSSALA can break it down with definitions, explanations, examples, and real-life applications to ensure complete understanding.";
 }
 
-return "I understand your question. Let’s analyze it logically and clearly so you actually understand the concept, not just memorize the answer. Ask with more detail and I’ll break it down properly.";
+return "I understand your question. I will provide a detailed explanation to help you fully grasp the concept. Try asking me to explain more or give examples for deeper understanding.";
 }
 
 // SCROLL
@@ -387,7 +382,7 @@ let exp=document.getElementById("mathInput").value;
 let out=document.getElementById("math-output");
 try{
 let res=math.evaluate(exp);
-out.innerHTML="Answer: "+res+"<br><br>Explanation: The expression was solved using mathematical order of operations and logical evaluation.";
+out.innerHTML="Answer: "+res+"<br><br>Explanation: The expression was solved using the correct mathematical rules, step-by-step logic, and careful evaluation of operations.";
 }catch{
 out.innerHTML="Unable to solve. Check the expression format.";
 }
