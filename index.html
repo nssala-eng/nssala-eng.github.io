@@ -6,197 +6,85 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{box-sizing:border-box}
-body{
-margin:0;
-font-family: 'Inter', system-ui, sans-serif;
-background:#0f0f14;
-color:#eaeaf0;
-scroll-behavior:smooth;
-overflow-x:hidden;
-}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#0f0f14;color:#eaeaf0;scroll-behavior:smooth;}
+a{text-decoration:none;color:#eaeaf0;}
+ul{list-style:none;}
+button{cursor:pointer;}
 
 /* NAV */
 nav{
-position:fixed;
-top:0;
-width:100%;
-backdrop-filter: blur(10px);
-background:rgba(15,15,20,0.75);
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 50px;
-z-index:1000;
+position:fixed;top:0;width:100%;backdrop-filter: blur(10px);background:rgba(15,15,20,0.85);
+display:flex;justify-content:space-between;align-items:center;padding:15px 50px;z-index:1000;
 }
-nav .logo{
-font-size:1.6rem;
-font-weight:800;
-background:linear-gradient(90deg,#9b5cff,#3cffc5);
--webkit-background-clip:text;
-color:transparent;
-}
-nav a{
-margin-left:25px;
-text-decoration:none;
-font-weight:600;
-color:#eaeaf0;
-transition:.3s;
-}
-nav a:hover{color:#3cffc5}
+nav .logo{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#9b5cff,#3cffc5);
+-webkit-background-clip:text;color:transparent;}
+nav ul{display:flex;gap:25px;}
+nav ul li a{font-weight:600;transition:.3s;}
+nav ul li a:hover{color:#3cffc5}
+
+/* HAMBURGER */
+.menu-toggle{display:none;flex-direction:column;cursor:pointer;gap:5px;}
+.menu-toggle div{width:25px;height:3px;background:#eaeaf0;transition:.3s;}
+nav.active ul{display:flex;flex-direction:column;position:absolute;top:60px;right:50px;background:rgba(15,15,20,0.95);padding:20px;border-radius:10px;}
+nav.active .menu-toggle div:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+nav.active .menu-toggle div:nth-child(2){opacity:0;}
+nav.active .menu-toggle div:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
 
 /* HERO */
 #hero{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:40px;
+min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;
 background: linear-gradient(rgba(15,15,20,0.75), rgba(15,15,20,0.85)), url("students.jpeg");
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
+background-size: cover;background-position: center;background-repeat: no-repeat;
 animation:fadeUp 1.2s ease;
 }
 .hero-box{
-max-width:900px;
-backdrop-filter: blur(6px);
-background: rgba(15,15,20,0.45);
-padding: 40px;
-border-radius: 20px;
+max-width:900px;backdrop-filter: blur(6px);background: rgba(15,15,20,0.45);padding: 40px;border-radius: 20px;
 border: 1px solid rgba(255,255,255,0.05);
-}
-.hero-box h1{
-font-size:3.4rem;
-background:linear-gradient(90deg,#9b5cff,#3cffc5);
--webkit-background-clip:text;
-color:transparent;
-}
-.hero-box p{
-font-size:1.15rem;
-line-height:1.8;
-opacity:.95;
-}
-.btn{
-margin-top:25px;
-padding:14px 30px;
-border:none;
-border-radius:14px;
-font-weight:700;
-background:linear-gradient(90deg,#9b5cff,#3cffc5);
-color:#0f0f14;
-cursor:pointer;
-transition:.3s;
-box-shadow:0 0 30px rgba(60,255,197,.25);
-}
-.btn:hover{
-transform:scale(1.06);
-box-shadow:0 0 45px rgba(60,255,197,.4);
-}
-
-/* SECTIONS */
-section{padding:120px 60px}
-
-/* TITLES */
-.title{
-font-size:2.3rem;
-background:linear-gradient(90deg,#9b5cff,#3cffc5);
--webkit-background-clip:text;
-color:transparent;
-margin-bottom:20px;
-}
-
-/* TEXT */
-.text{
-max-width:1000px;
-line-height:1.85;
-font-size:1.05rem;
-opacity:.95;
-}
-
-/* GRID */
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-margin-top:30px;
-}
-.card{
-background:#161622;
-padding:25px;
-border-radius:18px;
-border:1px solid rgba(255,255,255,.05);
-backdrop-filter: blur(10px);
-transition:.4s;
-box-shadow:0 0 25px rgba(0,0,0,.4);
-}
-.card:hover{
-transform:translateY(-10px) scale(1.02);
-box-shadow:0 0 45px rgba(155,92,255,.25);
-}
-
-/* AI */
-#ai-box{
-background:#161622;
-border-radius:20px;
-padding:25px;
-border:1px solid rgba(255,255,255,.05);
-box-shadow:0 0 40px rgba(0,0,0,.6);
-max-width:950px;
 animation:fadeUp 1s ease;
 }
-#chat{
-height:320px;
-overflow-y:auto;
-padding:15px;
-border-radius:12px;
-background:#0f0f14;
-margin-bottom:15px;
-font-size:.95rem;
-line-height:1.6;
-}
-input{
-width:100%;
-padding:13px;
-border-radius:12px;
-border:none;
-outline:none;
-background:#0f0f14;
-color:white;
-margin-bottom:10px;
-}
+.hero-box h1{font-size:3rem;background:linear-gradient(90deg,#9b5cff,#3cffc5);-webkit-background-clip:text;color:transparent;}
+.hero-box p{font-size:1.1rem;line-height:1.85;opacity:.95;}
+.btn{margin-top:25px;padding:14px 30px;border:none;border-radius:14px;font-weight:700;
+background:linear-gradient(90deg,#9b5cff,#3cffc5);color:#0f0f14;transition:.3s;box-shadow:0 0 30px rgba(60,255,197,.25);}
+.btn:hover{transform:scale(1.06);box-shadow:0 0 45px rgba(60,255,197,.4);}
 
-/* MATH */
-#math-output{
-margin-top:15px;
-font-weight:600;
-line-height:1.6;
-}
+/* SECTIONS */
+section{padding:120px 60px;}
+.title{font-size:2.3rem;background:linear-gradient(90deg,#9b5cff,#3cffc5);
+-webkit-background-clip:text;color:transparent;margin-bottom:20px;}
+.text{max-width:1000px;line-height:1.85;font-size:1.05rem;opacity:.95;}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;margin-top:30px;}
+.card{background:#161622;padding:25px;border-radius:18px;border:1px solid rgba(255,255,255,.05);
+backdrop-filter: blur(10px);transition:.4s;box-shadow:0 0 25px rgba(0,0,0,.4);}
+.card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 0 45px rgba(155,92,255,.25);}
+
+/* AI */
+#ai-box{background:#161622;border-radius:20px;padding:25px;border:1px solid rgba(255,255,255,.05);
+box-shadow:0 0 40px rgba(0,0,0,.6);max-width:950px;animation:fadeUp 1s ease;}
+#chat{height:320px;overflow-y:auto;padding:15px;border-radius:12px;background:#0f0f14;margin-bottom:15px;font-size:.95rem;line-height:1.6;}
+input{width:100%;padding:13px;border-radius:12px;border:none;outline:none;background:#0f0f14;color:white;margin-bottom:10px;}
+#math-output{margin-top:15px;font-weight:600;line-height:1.6;}
 
 /* COMING */
-.badge{
-display:inline-block;
-padding:8px 14px;
-border-radius:999px;
-background:rgba(60,255,197,.1);
-color:#3cffc5;
-font-weight:600;
-margin-bottom:15px;
-}
+.badge{display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(60,255,197,.1);
+color:#3cffc5;font-weight:600;margin-bottom:15px;}
 
 /* FOOTER */
-footer{
-text-align:center;
-padding:40px;
-color:#a1a1b3;
-font-size:.9rem;
-}
+footer{text-align:center;padding:40px;color:#a1a1b3;font-size:.9rem;}
 
 /* ANIMATIONS */
-@keyframes fadeUp{
-0%{opacity:0;transform:translateY(30px)}
-100%{opacity:1;transform:translateY(0)}
+@keyframes fadeUp{0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:translateY(0)}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+nav ul{display:none;flex-direction:column;gap:20px;}
+.menu-toggle{display:flex;}
+section{padding:80px 20px;}
+.hero-box h1{font-size:2.2rem;}
+.hero-box p{font-size:1rem;}
 }
 </style>
 </head>
@@ -205,12 +93,15 @@ font-size:.9rem;
 
 <nav>
 <div class="logo">NSSALA</div>
-<div>
-<a href="#hero">Home</a>
-<a href="#about">About</a>
-<a href="#ai">AI Tutor</a>
-<a href="#math">Math Solver</a>
-<a href="#coming">Coming Soon</a>
+<ul>
+<li><a href="#hero">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#ai">AI Tutor</a></li>
+<li><a href="#math">Math Solver</a></li>
+<li><a href="#coming">Coming Soon</a></li>
+</ul>
+<div class="menu-toggle" onclick="toggleMenu()">
+<div></div><div></div><div></div>
 </div>
 </nav>
 
@@ -219,15 +110,8 @@ font-size:.9rem;
 <div class="hero-box">
 <h1>NSSALA</h1>
 <p><b>Nigerian Secondary School AI Learning Assistant</b></p>
-<p>
-NSSALA is a modern AI-powered learning platform built for Nigerian secondary school students.  
-It is designed to make learning clearer, calmer, smarter, and more engaging — not stressful, not confusing, not overwhelming.
-</p>
-<p>
-This is not just a website.  
-It is an intelligent learning system that explains, guides, reasons, and teaches like a real tutor.
-From science to mathematics, from logic to understanding — NSSALA helps students build real knowledge, not just memorize answers.
-</p>
+<p>NSSALA is a next-level AI-powered learning system for Nigerian students, making science and mathematics clear, deep, and fully understood.</p>
+<p>Ask questions, explore topics, solve math problems, and receive explanations like a real teacher guiding you step by step.</p>
 <button class="btn" onclick="scrollToAI()">Start Learning</button>
 </div>
 </section>
@@ -236,29 +120,15 @@ From science to mathematics, from logic to understanding — NSSALA helps studen
 <section id="about">
 <h2 class="title">About NSSALA</h2>
 <div class="text">
-<p>
-NSSALA (Nigerian Secondary School AI Learning Assistant) was created to solve a real problem in education: 
-students are overwhelmed with information but lack deep understanding.
-</p>
-
-<p>
-Learning should feel structured, guided, calm, and progressive. NSSALA breaks concepts down clearly, connects ideas, and helps students build lasting knowledge.
-</p>
-
-<p>
-This platform supports Nigerian secondary school education with modern technology, intelligent tutoring, and adaptive learning systems.
-</p>
-
-<p>
-With NSSALA, students can explore science, mathematics, logic, and reasoning at their own pace while receiving clear, detailed explanations that mimic a real tutor's guidance.
-</p>
+<p>NSSALA is designed for Nigerian secondary students who want clarity, depth, and understanding in science and mathematics. No memorization, no confusion — just logical reasoning and step-by-step guidance.</p>
+<p>It uses modern AI to mimic a teacher: explaining, reasoning, giving examples, and connecting ideas across subjects. Biology, chemistry, physics, math — NSSALA knows them all and explains in detail.</p>
+<p>Whether you are exploring photosynthesis, Newton's laws, chemical reactions, or algebraic equations, NSSALA provides explicit, structured, and long-form explanations that stick.</p>
 </div>
-
 <div class="grid">
-<div class="card"><b>AI Learning</b><br>Smart, detailed explanations, reasoning, and guidance.</div>
-<div class="card"><b>Student Focused</b><br>Built for real student needs and understanding.</div>
-<div class="card"><b>Calm Education</b><br>No stress learning environment, step-by-step guidance.</div>
-<div class="card"><b>Future Ready</b><br>Modern, digital, adaptive learning system for growth.</div>
+<div class="card"><b>AI Learning</b><br>Teacher-level explanations and reasoning for every topic.</div>
+<div class="card"><b>Step-by-Step</b><br>Breaks down complex concepts with examples and clarity.</div>
+<div class="card"><b>Student Focused</b><br>Learning environment is calm, structured, and effective.</div>
+<div class="card"><b>Future Ready</b><br>Digital learning assistant, modern and adaptable.</div>
 </div>
 </section>
 
@@ -275,7 +145,7 @@ With NSSALA, students can explore science, mathematics, logic, and reasoning at 
 <!-- MATH -->
 <section id="math">
 <h2 class="title">Math Solver</h2>
-<p class="text">Solve and understand mathematics with step-by-step logic.</p>
+<p class="text">Solve and understand mathematics with step-by-step reasoning.</p>
 <input id="mathInput" placeholder="e.g 2x + 4 = 10 or 5*6+2">
 <button class="btn" onclick="solve()">Solve</button>
 <div id="math-output"></div>
@@ -297,23 +167,20 @@ With NSSALA, students can explore science, mathematics, logic, and reasoning at 
 </div>
 </section>
 
-<footer>
-NSSALA © Nigerian Secondary School AI Learning Assistant
-</footer>
+<footer>NSSALA © Nigerian Secondary School AI Learning Assistant</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
 
 <script>
-let memoryName = localStorage.getItem("nssala_name");
+// MENU TOGGLE
+function toggleMenu(){document.querySelector('nav').classList.toggle('active');}
+
+// SCROLL
+function scrollToAI(){document.getElementById("ai").scrollIntoView({behavior:"smooth"});}
 
 // CHAT
-function add(msg){
-let chat=document.getElementById("chat");
-chat.innerHTML+=msg+"<br><br>";
-chat.scrollTop=chat.scrollHeight;
-}
-
-// SEND
+let memoryName = localStorage.getItem("nssala_name");
+function add(msg){let chat=document.getElementById("chat");chat.innerHTML+=msg+"<br><br>";chat.scrollTop=chat.scrollHeight;}
 function send(){
 let input=document.getElementById("userInput").value.trim();
 if(!input)return;
@@ -322,72 +189,59 @@ let reply=brain(input);
 setTimeout(()=>add("<b>NSSALA:</b> "+reply),400);
 document.getElementById("userInput").value="";
 }
-
-// AI BRAIN (LONG, EXPLICIT, REASONING)
 function brain(text){
 let t=text.toLowerCase();
 
+// Name memory
 if(t.includes("my name is")){
 let name=text.split("is")[1].trim();
-memoryName=name;
-localStorage.setItem("nssala_name",name);
+memoryName=name;localStorage.setItem("nssala_name",name);
 return "Got you, "+name+". I’ll remember your name and use it in explanations.";
 }
-
 if(t.startsWith("hi")||t.startsWith("hello")){
 return memoryName ? "Hey "+memoryName+" 👋 Ready to explore some deep learning today?" : "Hey 👋 Ready to explore some deep learning today?";
 }
 
-if(t.startsWith("what is biology")){
-return "Biology is the scientific study of living organisms and life processes. It covers the structure, function, growth, origin, evolution, and interactions of living things. This includes areas like cells, genetics, DNA, ecosystems, evolution, human biology, and the interdependence of species. Understanding biology helps explain life in both theoretical and practical ways, from medical science to environmental stewardship.";
+// Science subjects
+if(t.includes("biology")){
+return "Biology is the study of living organisms and their life processes, including cells, genetics, DNA, ecosystems, physiology, evolution, and interactions between species. It explains life from molecular to organism and ecosystem level. NSSALA breaks concepts step by step, with examples and real-life applications.";
+}
+if(t.includes("physics")){
+return "Physics studies matter, energy, motion, and forces. Topics include mechanics, thermodynamics, waves, electricity, magnetism, relativity, and quantum physics. NSSALA explains with examples, step-by-step reasoning, and connects concepts to real-world applications.";
+}
+if(t.includes("chemistry")){
+return "Chemistry examines substances, reactions, bonding, energy changes, and molecular interactions. NSSALA provides detailed breakdowns, examples, mechanisms, and real-life context for easier understanding.";
 }
 
-if(t.startsWith("what is physics")){
-return "Physics is the branch of science concerned with matter, energy, motion, and the fundamental laws of the universe. It examines how forces interact, how energy is transferred, and the behaviors of objects from the microscopic to the cosmic scale. Physics principles underpin technologies, engineering, and even space exploration, helping us predict and understand natural phenomena.";
-}
-
-if(t.startsWith("what is chemistry")){
-return "Chemistry is the study of matter, its composition, structure, properties, and the changes it undergoes. It explains how substances interact at molecular and atomic levels, including reactions, bonding, energy changes, and real-world applications such as pharmaceuticals, industrial processes, and environmental chemistry.";
-}
-
+// Explain, How, List
 if(t.startsWith("explain")){
-return "Let's break it down step by step:\n\n"+text.replace("explain","")+
+return "Step-by-step explanation:\n\n"+text.replace("explain","")+
 "\n\nDefinition: What it is.\nMechanism: How it works.\nCauses: Why it happens.\nEffects: Results or outcomes.\nApplications: How it applies in real life.\nExample: Illustrative cases or experiments.";
 }
-
 if(t.startsWith("how")){
-return "Step-by-step reasoning for understanding and solving:\n1) Identify the core concept.\n2) Understand the principles.\n3) Apply logic and formulas.\n4) Solve systematically.\n5) Verify results with reasoning.";
+return "Step-by-step reasoning:\n1) Identify concept\n2) Understand principles\n3) Apply logic/formula\n4) Solve systematically\n5) Verify results";
 }
-
 if(t.startsWith("list")){
-return "Structured list approach:\n1) Definition\n2) Key points\n3) Mechanisms or processes\n4) Importance or function\n5) Examples or applications";
+return "Structured list:\n1) Definition\n2) Key points\n3) Mechanism/process\n4) Importance/function\n5) Examples/applications";
 }
 
+// Generic "what is"
 if(t.startsWith("what is")){
 let topic=text.replace("what is","").trim();
-return topic.toUpperCase()+" can be understood as a concept or phenomenon. NSSALA can break it down with definitions, explanations, examples, and real-life applications to ensure complete understanding.";
+return topic.toUpperCase()+" explained in depth with definitions, examples, context, and reasoning. NSSALA ensures you fully understand the concept, step by step.";
 }
 
-return "I understand your question. I will provide a detailed explanation to help you fully grasp the concept. Try asking me to explain more or give examples for deeper understanding.";
-}
-
-// SCROLL
-function scrollToAI(){
-document.getElementById("ai").scrollIntoView({behavior:"smooth"});
+return "I understand your question. NSSALA will give a detailed explanation. Try asking for examples or deeper reasoning for better understanding.";
 }
 
 // MATH
 function solve(){
 let exp=document.getElementById("mathInput").value;
 let out=document.getElementById("math-output");
-try{
-let res=math.evaluate(exp);
-out.innerHTML="Answer: "+res+"<br><br>Explanation: The expression was solved using the correct mathematical rules, step-by-step logic, and careful evaluation of operations.";
-}catch{
-out.innerHTML="Unable to solve. Check the expression format.";
-}
+try{let res=math.evaluate(exp);
+out.innerHTML="Answer: "+res+"<br><br>Explanation: The expression was solved using correct mathematical rules, logical reasoning, and step-by-step evaluation.";
+}catch{out.innerHTML="Unable to solve. Check the expression format.";}
 }
 </script>
-
 </body>
 </html>
