@@ -4,251 +4,328 @@
 <meta charset="UTF-8">
 <title>NSSALA — Nigerian Secondary School AI Learning Assistant</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-/* === RESET === */
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Inter',sans-serif;background:#0f0f14;color:#eaeaf0;scroll-behavior:smooth;}
-a{text-decoration:none;color:#eaeaf0;}
-ul{list-style:none;}
-button{cursor:pointer;}
-
-/* === NAV === */
-nav{
-position:fixed;top:0;width:100%;backdrop-filter: blur(10px);background:rgba(15,15,20,0.85);
-display:flex;justify-content:space-between;align-items:center;padding:15px 50px;z-index:1000;
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:#0f0f14;
+  color:#eaeaf0;
+  scroll-behavior:smooth;
+  overflow-x:hidden;
 }
-nav .logo{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#9b5cff,#3cffc5);
--webkit-background-clip:text;color:transparent;}
-nav ul{display:flex;gap:25px;align-items:center;}
-nav ul li a{font-weight:600;transition:.3s;}
-nav ul li a:hover{color:#3cffc5}
 
-/* Language Dropdown */
-#langSelect{padding:6px 10px;border-radius:8px;background:#161622;color:#eaeaf0;border:none;outline:none;margin-left:15px;cursor:pointer;transition:.3s;}
-#langSelect:hover{background:#3cffc5;color:#0f0f14;}
+/* GLOBAL */
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;}
+img{max-width:100%;}
 
-/* Hamburger */
-.menu-toggle{display:none;flex-direction:column;cursor:pointer;gap:5px;}
-.menu-toggle div{width:25px;height:3px;background:#eaeaf0;transition:.3s;}
-nav.active ul{display:flex;flex-direction:column;position:absolute;top:60px;right:50px;background:rgba(15,15,20,0.95);padding:20px;border-radius:10px;}
-nav.active .menu-toggle div:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
-nav.active .menu-toggle div:nth-child(2){opacity:0;}
-nav.active .menu-toggle div:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
+/* NAVBAR */
+nav{
+  position:fixed;top:0;width:100%;
+  backdrop-filter: blur(12px);
+  background:rgba(10,10,20,0.85);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 50px;
+  z-index:1000;
+}
+.logo{
+  font-weight:900;
+  font-size:1.6rem;
+  background:linear-gradient(90deg,#9b5cff,#3cffc5);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+nav ul{
+  display:flex;gap:28px;align-items:center;
+}
+nav ul li a{
+  font-weight:600;
+  opacity:.9;
+  transition:.3s;
+}
+nav ul li a:hover{color:#3cffc5;opacity:1;}
+
+#langSelect{
+  background:#161622;border:none;color:#fff;
+  padding:6px 10px;border-radius:8px;
+}
+
+/* MENU */
+.menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.menu-toggle span{width:26px;height:3px;background:#fff;transition:.3s;}
+nav.active ul{
+  position:absolute;top:65px;right:30px;
+  background:rgba(10,10,20,.95);
+  flex-direction:column;
+  padding:25px;
+  border-radius:14px;
+}
+
+/* SECTIONS BASE */
+section{
+  min-height:100vh;
+  padding:120px 60px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+
+/* SMOOTH TRANSITION OVERLAY */
+section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(15,15,25,0.65);
+  z-index:0;
+}
+.section-content{
+  position:relative;
+  z-index:2;
+  max-width:1000px;
+  animation:fadeUp 1.2s ease;
+}
 
 /* HERO */
 #hero{
-min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;
-background: linear-gradient(rgba(15,15,20,0.65), rgba(15,15,20,0.75)), url("students.jpeg");
-background-size: cover;background-position: center;background-repeat: no-repeat;
-animation:fadeUp 1.2s ease;
+  background:url("students.jpeg") center/cover no-repeat;
 }
 .hero-box{
-max-width:900px;backdrop-filter: blur(8px);background: rgba(15,15,20,0.55);padding: 40px;border-radius: 20px;
-border: 1px solid rgba(255,255,255,0.08);
-animation:fadeUp 1s ease;
-text-align:center;
+  backdrop-filter:blur(10px);
+  background:rgba(15,15,25,0.55);
+  padding:50px;
+  border-radius:24px;
+  border:1px solid rgba(255,255,255,0.08);
+  animation:float 6s ease-in-out infinite;
 }
-.hero-box h1{font-size:3rem;background:linear-gradient(90deg,#9b5cff,#3cffc5);-webkit-background-clip:text;color:transparent;text-transform:uppercase;}
-.hero-box p{font-size:1.1rem;line-height:1.85;opacity:.95;}
-.btn{margin-top:25px;padding:14px 30px;border:none;border-radius:14px;font-weight:700;
-background:linear-gradient(90deg,#9b5cff,#3cffc5);color:#0f0f14;transition:.3s;box-shadow:0 0 30px rgba(60,255,197,.25);}
-.btn:hover{transform:scale(1.06);box-shadow:0 0 45px rgba(60,255,197,.4);}
+.hero-box h1{
+  font-size:3rem;
+  text-transform:uppercase;
+  background:linear-gradient(90deg,#9b5cff,#3cffc5);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.hero-box p{margin-top:12px;line-height:1.8;font-size:1.05rem;}
+.btn{
+  margin-top:25px;
+  padding:14px 32px;
+  border-radius:14px;
+  border:none;
+  font-weight:700;
+  background:linear-gradient(90deg,#9b5cff,#3cffc5);
+  color:#0f0f14;
+  transition:.4s;
+  box-shadow:0 0 35px rgba(60,255,197,.35);
+}
+.btn:hover{transform:scale(1.08);box-shadow:0 0 60px rgba(60,255,197,.6);}
 
-/* SECTIONS */
-section{padding:120px 60px;}
-.title{text-align:center;font-size:2.3rem;background:linear-gradient(90deg,#9b5cff,#3cffc5);
--webkit-background-clip:text;color:transparent;margin-bottom:20px;text-transform:uppercase;}
-.text{max-width:1000px;line-height:1.85;font-size:1.05rem;opacity:.95;margin:0 auto;text-align:center;}
-
-/* GRID */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;margin-top:30px;}
-.card{background:#161622;padding:25px;border-radius:18px;border:1px solid rgba(255,255,255,.05);
-backdrop-filter: blur(10px);transition:.4s;box-shadow:0 0 25px rgba(0,0,0,.4);}
-.card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 0 45px rgba(155,92,255,.25);text-align:center;}
+/* ABOUT */
+#about{
+  background:url("classroom1.jpeg") center/cover no-repeat;
+}
 
 /* AI */
-#ai-box{background:#161622;border-radius:20px;padding:25px;border:1px solid rgba(255,255,255,.05);
-box-shadow:0 0 40px rgba(0,0,0,.6);max-width:950px;margin:0 auto;animation:fadeUp 1s ease;}
-#chat{height:320px;overflow-y:auto;padding:15px;border-radius:12px;background:#0f0f14;margin-bottom:15px;font-size:.95rem;line-height:1.6;}
-input{width:100%;padding:13px;border-radius:12px;border:none;outline:none;background:#0f0f14;color:white;margin-bottom:10px;}
-#math-output{margin-top:15px;font-weight:600;line-height:1.6;}
+#ai{
+  background:url("classroom2.jpeg") center/cover no-repeat;
+}
 
 /* COMING */
-#coming.offline{background:#161622;padding:25px;border-radius:15px;margin-top:20px;}
-.badge{display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(60,255,197,.1);
-color:#3cffc5;font-weight:600;margin-bottom:15px;}
+#coming{
+  background:url("classroom2.jpeg") center/cover no-repeat;
+}
 
-/* FOOTER */
-footer{text-align:center;padding:40px;color:#a1a1b3;font-size:.9rem;}
+/* HEADERS */
+.title{
+  text-transform:uppercase;
+  font-size:2.4rem;
+  margin-bottom:20px;
+  background:linear-gradient(90deg,#9b5cff,#3cffc5);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.text{
+  line-height:1.9;
+  opacity:.95;
+  font-size:1.05rem;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:25px;
+  margin-top:35px;
+}
+.card{
+  background:rgba(15,15,25,0.6);
+  backdrop-filter:blur(10px);
+  padding:25px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.06);
+  transition:.4s;
+}
+.card:hover{
+  transform:translateY(-12px) scale(1.03);
+  box-shadow:0 0 45px rgba(155,92,255,.35);
+}
+
+/* AI BOX */
+#ai-box{
+  background:rgba(15,15,25,0.65);
+  backdrop-filter:blur(12px);
+  border-radius:22px;
+  padding:25px;
+  max-width:900px;
+  margin:auto;
+}
+#chat{
+  height:300px;
+  overflow-y:auto;
+  background:#0f0f14;
+  padding:15px;
+  border-radius:12px;
+  text-align:left;
+  font-size:.95rem;
+}
+input{
+  width:100%;
+  margin-top:10px;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  background:#0f0f14;
+  color:white;
+}
 
 /* ANIMATIONS */
-@keyframes fadeUp{0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
 
 /* RESPONSIVE */
 @media(max-width:900px){
-nav ul{display:none;flex-direction:column;gap:20px;}
-.menu-toggle{display:flex;}
-section{padding:80px 20px;}
-.hero-box h1{font-size:2.2rem;}
-.hero-box p{font-size:1rem;}
+  nav ul{display:none;}
+  .menu-toggle{display:flex;}
+  section{padding:120px 25px;}
+  .hero-box h1{font-size:2.2rem;}
 }
 </style>
 </head>
+
 <body>
 
 <nav>
-<div class="logo">NSSALA</div>
-<ul>
-<li><a href="#hero">Home</a></li>
-<li><a href="#about">About</a></li>
-<li><a href="#ai">AI Tutor</a></li>
-<li><a href="#math">Math Solver</a></li>
-<li><a href="#coming">Coming Soon</a></li>
-<li>
-<select id="langSelect" onchange="setLang()">
-<option value="en">English</option>
-<option value="ha">Hausa</option>
-<option value="ig">Igbo</option>
-<option value="yo">Yoruba</option>
-<option value="ur">Urhobo</option>
-</select>
-</li>
-</ul>
-<div class="menu-toggle" onclick="toggleMenu()"><div></div><div></div><div></div></div>
+  <div class="logo">NSSALA</div>
+  <ul>
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#ai">AI Tutor</a></li>
+    <li><a href="#coming">Coming Soon</a></li>
+    <li>
+      <select id="langSelect">
+        <option>English</option>
+        <option>Hausa</option>
+        <option>Igbo</option>
+        <option>Yoruba</option>
+        <option>Urhobo</option>
+      </select>
+    </li>
+  </ul>
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-<div class="hero-box">
-<h1>NSSALA</h1>
-<p><b>NIGERIAN SECONDARY SCHOOL AI LEARNING ASSISTANT</b></p>
-<p>NSSALA is a next-level AI-powered learning system for Nigerian students, making science and mathematics clear, deep, and fully understood.</p>
-<p>Ask questions, explore topics, solve math problems, and receive teacher-level explanations.</p>
-<button class="btn" onclick="scrollToAI()">Start Learning</button>
-</div>
+  <div class="section-content hero-box">
+    <h1>NSSALA</h1>
+    <p><b>NIGERIAN SECONDARY SCHOOL AI LEARNING ASSISTANT</b></p>
+    <p>A smart AI-powered learning platform built for Nigerian students — clear explanations, deep understanding, and classroom-level teaching.</p>
+    <p>Learn science. Understand maths. Ask questions. Get real explanations.</p>
+    <button class="btn" onclick="scrollToAI()">START LEARNING</button>
+  </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-<h2 class="title">ABOUT NSSALA</h2>
-<div class="text">
-<p>NSSALA provides Nigerian students with structured learning in science, math, and beyond. No memorization, just reasoning and understanding.</p>
-<p>The AI explains concepts step by step, gives examples, and can answer questions in multiple languages: English, Hausa, Igbo, Yoruba, Urhobo.</p>
-</div>
-<div class="grid">
-<div class="card"><b>AI LEARNING</b><br>Teacher-level explanations for all topics.</div>
-<div class="card"><b>STEP-BY-STEP</b><br>Breaks down complex concepts with clarity.</div>
-<div class="card"><b>STUDENT FOCUSED</b><br>Interactive and structured learning environment.</div>
-<div class="card"><b>FUTURE READY</b><br>Modern digital assistant for students.</div>
-</div>
+  <div class="section-content">
+    <h2 class="title">ABOUT NSSALA</h2>
+    <p class="text">
+      NSSALA is a digital classroom assistant designed for Nigerian secondary school students.
+      It teaches, explains, reasons, and guides learning like a real teacher.
+      Students don’t just get answers — they understand concepts, logic, and processes.
+    </p>
+
+    <div class="grid">
+      <div class="card">AI Teaching System</div>
+      <div class="card">Science & Maths Learning</div>
+      <div class="card">Step-by-Step Explanations</div>
+      <div class="card">Digital Classroom Model</div>
+    </div>
+  </div>
 </section>
 
 <!-- AI -->
 <section id="ai">
-<h2 class="title">AI TUTOR</h2>
-<div id="ai-box">
-<div id="chat"></div>
-<input id="userInput" placeholder="Ask anything... (e.g What is biology?)">
-<button class="btn" onclick="send()">Ask NSSALA</button>
-</div>
+  <div class="section-content">
+    <h2 class="title">AI TUTOR</h2>
+    <div id="ai-box">
+      <div id="chat"></div>
+      <input id="userInput" placeholder="Ask anything... e.g What is biology?">
+      <button class="btn" onclick="send()">ASK NSSALA</button>
+    </div>
+  </div>
 </section>
 
-<!-- MATH -->
-<section id="math">
-<h2 class="title">MATH SOLVER</h2>
-<p class="text">Solve mathematics with step-by-step reasoning.</p>
-<input id="mathInput" placeholder="e.g 2x + 4 = 10 or 5*6+2">
-<button class="btn" onclick="solve()">Solve</button>
-<div id="math-output"></div>
-</section>
-
-<!-- COMING SOON OFFLINE -->
+<!-- COMING -->
 <section id="coming">
-<h2 class="title">COMING SOON</h2>
-<span class="badge">Offline Features</span>
-<div id="comingOffline" class="grid offline">
-<div class="card">Student Dashboards</div>
-<div class="card">Teacher Portals</div>
-<div class="card">Attendance System</div>
-<div class="card">AI Study Plans</div>
-<div class="card">Digital Classrooms</div>
-<div class="card">Parent Monitoring</div>
-<div class="card">AI Exams</div>
-<div class="card">Certificates</div>
-</div>
+  <div class="section-content">
+    <h2 class="title">COMING SOON</h2>
+    <div class="grid">
+      <div class="card">Student Dashboards</div>
+      <div class="card">Teacher Portals</div>
+      <div class="card">Attendance System</div>
+      <div class="card">Digital Classrooms</div>
+      <div class="card">AI Exams</div>
+      <div class="card">Certificates</div>
+    </div>
+  </div>
 </section>
 
-<footer>NSSALA © Nigerian Secondary School AI Learning Assistant</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
 <script>
-// MENU
-function toggleMenu(){document.querySelector('nav').classList.toggle('active');}
-function scrollToAI(){document.getElementById("ai").scrollIntoView({behavior:"smooth"});}
+function toggleMenu(){
+  document.querySelector("nav").classList.toggle("active");
+}
+function scrollToAI(){
+  document.getElementById("ai").scrollIntoView({behavior:"smooth"});
+}
 
-// LANGUAGE
-let lang="en";
-function setLang(){lang=document.getElementById("langSelect").value;}
-
-// AI
-let memoryName=localStorage.getItem("nssala_name");
-function add(msg){let chat=document.getElementById("chat");chat.innerHTML+=msg+"<br><br>";chat.scrollTop=chat.scrollHeight;}
+/* SIMPLE AI */
 function send(){
-let input=document.getElementById("userInput").value.trim();
-if(!input)return;
-add("<b>You:</b> "+input);
-let reply=brain(input);
-setTimeout(()=>add("<b>NSSALA:</b> "+reply),400);
-document.getElementById("userInput").value="";
-}
-function brain(text){
-let t=text.toLowerCase();
-if(t.includes("my name is")){
-let name=text.split("is")[1].trim();
-memoryName=name;localStorage.setItem("nssala_name",name);
-return translate("Got you, "+name+". I’ll remember your name.");
-}
-if(t.startsWith("hi")||t.startsWith("hello")){
-return memoryName ? translate("Hey "+memoryName+" 👋 Ready to explore some deep learning today?")
-: translate("Hey 👋 Ready to explore some deep learning today?");
-}
-// Subjects
-if(t.includes("biology")) return translate("Biology studies life: cells, genetics, physiology, ecosystems, and evolution.");
-if(t.includes("physics")) return translate("Physics explores matter, energy, forces, motion, thermodynamics, waves, electricity, and magnetism.");
-if(t.includes("chemistry")) return translate("Chemistry examines substances, reactions, bonding, energy changes, and molecules.");
-// Explain, How, List
-if(t.startsWith("explain")) return translate("Step-by-step explanation: "+text.replace("explain",""));
-if(t.startsWith("how")) return translate("Step-by-step reasoning: 1) Identify concept 2) Understand principles 3) Apply logic 4) Solve 5) Verify");
-if(t.startsWith("list")) return translate("Structured list: 1) Definition 2) Key points 3) Process 4) Importance 5) Examples");
-if(t.startsWith("what is")) return translate(text.replace("what is","").toUpperCase()+" explained in depth with definitions, examples, context, and reasoning.");
-return translate("I understand your question. NSSALA will give a detailed explanation.");
-}
-
-// Translation
-function translate(str){
-switch(lang){
-case "en":return str;
-case "ha":return "HA: "+str;
-case "ig":return "IG: "+str;
-case "yo":return "YO: "+str;
-case "ur":return "UR: "+str;
-default:return str;
-}
-
-// MATH
-}
-function solve(){
-let exp=document.getElementById("mathInput").value;
-let out=document.getElementById("math-output");
-try{let res=math.evaluate(exp);
-out.innerHTML="Answer: "+res+"<br><br>Explanation: The expression was solved step-by-step logically and mathematically.";
-}catch{out.innerHTML="Unable to solve. Check the expression format.";}
-}
-
-// Offline Coming Soon Cache
-if('serviceWorker' in navigator){
-navigator.serviceWorker.register('sw.js').then(()=>console.log("SW registered for offline coming soon"));
+  const input=document.getElementById("userInput");
+  const chat=document.getElementById("chat");
+  if(!input.value.trim())return;
+  chat.innerHTML+=`<b>You:</b> ${input.value}<br><br>`;
+  let msg=input.value.toLowerCase();
+  let reply="That’s a great question. NSSALA explains concepts clearly, step-by-step, with real understanding and examples.";
+  if(msg.includes("biology")) reply="Biology is the study of life. It explains how living organisms function, grow, reproduce, and interact with their environment.";
+  if(msg.includes("physics")) reply="Physics studies matter, energy, motion, and forces — explaining how the universe works.";
+  if(msg.includes("math")) reply="Mathematics is the language of logic, patterns, numbers, and problem-solving.";
+  chat.innerHTML+=`<b>NSSALA:</b> ${reply}<br><br>`;
+  chat.scrollTop=chat.scrollHeight;
+  input.value="";
 }
 </script>
+
 </body>
 </html>
