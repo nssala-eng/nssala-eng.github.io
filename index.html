@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 /* === RESET === */
-*{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Inter',sans-serif;background:#0f0f14;color:#eaeaf0;scroll-behavior:smooth;}
 a{text-decoration:none;color:#eaeaf0;}
 ul{list-style:none;}
@@ -38,13 +38,13 @@ nav.active .menu-toggle div:nth-child(3){transform:rotate(-45deg) translate(6px,
 /* HERO */
 #hero{
 min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;
-background: linear-gradient(rgba(15,15,20,0.75), rgba(15,15,20,0.85)), url("students.jpeg");
+background: linear-gradient(rgba(15,15,20,0.65), rgba(15,15,20,0.75)), url("students.jpeg");
 background-size: cover;background-position: center;background-repeat: no-repeat;
 animation:fadeUp 1.2s ease;
 }
 .hero-box{
-max-width:900px;backdrop-filter: blur(6px);background: rgba(15,15,20,0.55);padding: 40px;border-radius: 20px;
-border: 1px solid rgba(255,255,255,0.05);
+max-width:900px;backdrop-filter: blur(8px);background: rgba(15,15,20,0.55);padding: 40px;border-radius: 20px;
+border: 1px solid rgba(255,255,255,0.08);
 animation:fadeUp 1s ease;
 }
 .hero-box h1{font-size:3rem;background:linear-gradient(90deg,#9b5cff,#3cffc5);-webkit-background-clip:text;color:transparent;}
@@ -122,7 +122,7 @@ section{padding:80px 20px;}
 <h1>NSSALA</h1>
 <p><b>Nigerian Secondary School AI Learning Assistant</b></p>
 <p>NSSALA is a next-level AI-powered learning system for Nigerian students, making science and mathematics clear, deep, and fully understood.</p>
-<p>Ask questions, explore topics, solve math problems, and receive explanations like a real teacher guiding you step by step.</p>
+<p>Ask questions, explore topics, solve math problems, and receive teacher-level explanations.</p>
 <button class="btn" onclick="scrollToAI()">Start Learning</button>
 </div>
 </section>
@@ -131,15 +131,14 @@ section{padding:80px 20px;}
 <section id="about">
 <h2 class="title">About NSSALA</h2>
 <div class="text">
-<p>NSSALA is designed for Nigerian secondary students who want clarity, depth, and understanding in science and mathematics. No memorization, no confusion — just logical reasoning and step-by-step guidance.</p>
-<p>It uses modern AI to mimic a teacher: explaining, reasoning, giving examples, and connecting ideas across subjects. Biology, chemistry, physics, math — NSSALA knows them all and explains in detail.</p>
-<p>Whether you are exploring photosynthesis, Newton's laws, chemical reactions, or algebraic equations, NSSALA provides explicit, structured, and long-form explanations that stick.</p>
+<p>NSSALA provides Nigerian students with structured learning in science, math, and beyond. No memorization, just reasoning and understanding.</p>
+<p>The AI explains concepts step by step, gives examples, and can answer questions in multiple languages: English, Hausa, Igbo, Yoruba, Urhobo.</p>
 </div>
 <div class="grid">
-<div class="card"><b>AI Learning</b><br>Teacher-level explanations and reasoning for every topic.</div>
-<div class="card"><b>Step-by-Step</b><br>Breaks down complex concepts with examples and clarity.</div>
-<div class="card"><b>Student Focused</b><br>Learning environment is calm, structured, and effective.</div>
-<div class="card"><b>Future Ready</b><br>Digital learning assistant, modern and adaptable.</div>
+<div class="card"><b>AI Learning</b><br>Teacher-level explanations for all topics.</div>
+<div class="card"><b>Step-by-Step</b><br>Breaks down complex concepts with clarity.</div>
+<div class="card"><b>Student Focused</b><br>Interactive and structured learning environment.</div>
+<div class="card"><b>Future Ready</b><br>Modern digital assistant for students.</div>
 </div>
 </section>
 
@@ -148,7 +147,7 @@ section{padding:80px 20px;}
 <h2 class="title">NSSALA AI Tutor</h2>
 <div id="ai-box">
 <div id="chat"></div>
-<input id="userInput" placeholder="Ask anything... (e.g What is biology? Explain photosynthesis)">
+<input id="userInput" placeholder="Ask anything... (e.g What is biology?)">
 <button class="btn" onclick="send()">Ask NSSALA</button>
 </div>
 </section>
@@ -156,7 +155,7 @@ section{padding:80px 20px;}
 <!-- MATH -->
 <section id="math">
 <h2 class="title">Math Solver</h2>
-<p class="text">Solve and understand mathematics with step-by-step reasoning.</p>
+<p class="text">Solve mathematics with step-by-step reasoning.</p>
 <input id="mathInput" placeholder="e.g 2x + 4 = 10 or 5*6+2">
 <button class="btn" onclick="solve()">Solve</button>
 <div id="math-output"></div>
@@ -202,45 +201,40 @@ document.getElementById("userInput").value="";
 }
 function brain(text){
 let t=text.toLowerCase();
-// Name memory
 if(t.includes("my name is")){
 let name=text.split("is")[1].trim();
 memoryName=name;localStorage.setItem("nssala_name",name);
-return (lang==="en")?"Got you, "+name+". I’ll remember your name.": translate("Got you, "+name+". I’ll remember your name.");
+return translate("Got you, "+name+". I’ll remember your name.");
 }
 if(t.startsWith("hi")||t.startsWith("hello")){
-return memoryName ? ((lang==="en")?"Hey "+memoryName+" 👋 Ready to explore some deep learning today?":translate("Hey "+memoryName+" 👋 Ready to explore some deep learning today?"))
-: ((lang==="en")?"Hey 👋 Ready to explore some deep learning today?":translate("Hey 👋 Ready to explore some deep learning today?"));
+return memoryName ? translate("Hey "+memoryName+" 👋 Ready to explore some deep learning today?")
+: translate("Hey 👋 Ready to explore some deep learning today?");
 }
-
-// Science subjects
-if(t.includes("biology")) return translate("Biology is the study of living organisms and their life processes, including cells, genetics, DNA, ecosystems, physiology, evolution, and interactions between species. It explains life from molecular to ecosystem level.");
-if(t.includes("physics")) return translate("Physics studies matter, energy, motion, and forces. Topics include mechanics, thermodynamics, waves, electricity, magnetism, relativity, and quantum physics.");
-if(t.includes("chemistry")) return translate("Chemistry examines substances, reactions, bonding, energy changes, and molecular interactions.");
-
+// Subjects
+if(t.includes("biology")) return translate("Biology studies life: cells, genetics, physiology, ecosystems, and evolution.");
+if(t.includes("physics")) return translate("Physics explores matter, energy, forces, motion, thermodynamics, waves, electricity, and magnetism.");
+if(t.includes("chemistry")) return translate("Chemistry examines substances, reactions, bonding, energy changes, and molecules.");
 // Explain, How, List
 if(t.startsWith("explain")) return translate("Step-by-step explanation: "+text.replace("explain",""));
 if(t.startsWith("how")) return translate("Step-by-step reasoning: 1) Identify concept 2) Understand principles 3) Apply logic 4) Solve 5) Verify");
 if(t.startsWith("list")) return translate("Structured list: 1) Definition 2) Key points 3) Process 4) Importance 5) Examples");
-
-// Generic what is
 if(t.startsWith("what is")) return translate(text.replace("what is","").toUpperCase()+" explained in depth with definitions, examples, context, and reasoning.");
-
-// Default
 return translate("I understand your question. NSSALA will give a detailed explanation.");
 }
 
-// Translation mock function
+// Translation
 function translate(str){
-if(lang==="en")return str;
-if(lang==="ha")return "HA: "+str;
-if(lang==="ig")return "IG: "+str;
-if(lang==="yo")return "YO: "+str;
-if(lang==="ur")return "UR: "+str;
-return str;
+switch(lang){
+case "en":return str;
+case "ha":return "HA: "+str;
+case "ig":return "IG: "+str;
+case "yo":return "YO: "+str;
+case "ur":return "UR: "+str;
+default:return str;
 }
 
 // MATH
+}
 function solve(){
 let exp=document.getElementById("mathInput").value;
 let out=document.getElementById("math-output");
