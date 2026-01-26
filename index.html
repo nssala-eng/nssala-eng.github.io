@@ -8,7 +8,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
-  font-family:Inter,system-ui,sans-serif;
+  font-family:system-ui,Segoe UI,Inter,sans-serif;
   background:#0f0f14;
   color:#eaeaf0;
   scroll-behavior:smooth;
@@ -28,7 +28,7 @@ nav{
   background:linear-gradient(90deg,#9b5cff,#3cffc5);
   -webkit-background-clip:text;color:transparent;
 }
-nav ul{display:flex;gap:28px;align-items:center;}
+nav ul{display:flex;gap:26px;align-items:center;}
 nav ul li a{font-weight:600;opacity:.9;transition:.3s;}
 nav ul li a:hover{color:#3cffc5;}
 .menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;}
@@ -39,7 +39,7 @@ nav ul li a:hover{color:#3cffc5;}
   padding:6px 10px;border-radius:8px;
 }
 
-/* SECTIONS */
+/* SECTION BASE */
 section{
   min-height:100vh;
   padding:120px 60px;
@@ -51,19 +51,25 @@ section{
   overflow:hidden;
 }
 
-/* BACKGROUND SLIDES */
-.bg-layer{
+/* BACKGROUND SLIDESHOW */
+.bg-wrap{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+.bg-slide{
   position:absolute;
   inset:0;
   background-size:cover;
   background-position:center;
   opacity:0;
-  transition:opacity 1.5s ease;
+  transition:opacity 2s ease;
 }
-.bg-layer.active{opacity:1;}
+.bg-slide.active{opacity:1;}
 
 .overlay{
-  position:absolute;inset:0;
+  position:absolute;
+  inset:0;
   background:rgba(15,15,25,.65);
   z-index:1;
 }
@@ -75,7 +81,7 @@ section{
   animation:fadeUp 1.2s ease;
 }
 
-/* HERO */
+/* HERO BOX */
 .hero-box{
   backdrop-filter:blur(10px);
   background:rgba(15,15,25,.55);
@@ -104,7 +110,7 @@ section{
 }
 .btn:hover{transform:scale(1.08);box-shadow:0 0 60px rgba(60,255,197,.6);}
 
-/* HEADERS */
+/* TITLES */
 .title{
   text-transform:uppercase;
   font-size:2.4rem;
@@ -207,25 +213,31 @@ input{
 
 <!-- HERO -->
 <section id="hero">
-  <div class="bg-layer active" style="background-image:url('students.jpeg')"></div>
+  <div class="bg-wrap">
+    <div class="bg-slide active" style="background-image:url('students.jpeg')"></div>
+    <div class="bg-slide" style="background-image:url('classroom1.jpeg')"></div>
+  </div>
   <div class="overlay"></div>
   <div class="section-content hero-box">
     <h1>NSSALA</h1>
     <p><b>NIGERIAN SECONDARY SCHOOL AI LEARNING ASSISTANT</b></p>
-    <p>AI-powered learning built for Nigerian students. Real understanding, not memorization.</p>
+    <p>AI-powered learning for Nigerian students. Real understanding, real teaching, real education.</p>
     <button class="btn" onclick="scrollToAI()">START LEARNING</button>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="bg-layer active" style="background-image:url('classroom1.jpeg')"></div>
+  <div class="bg-wrap">
+    <div class="bg-slide active" style="background-image:url('classroom1.jpeg')"></div>
+    <div class="bg-slide" style="background-image:url('classroom2.jpeg')"></div>
+  </div>
   <div class="overlay"></div>
   <div class="section-content">
     <h2 class="title">ABOUT NSSALA</h2>
     <p>
-      NSSALA is a digital classroom assistant that teaches, explains, and reasons like a real teacher.
-      It helps students understand concepts deeply, not just memorize answers.
+      NSSALA is a digital classroom assistant designed to teach, explain, and reason like a real teacher.
+      Students don’t just get answers — they understand concepts, logic, and processes.
     </p>
     <div class="grid">
       <div class="card">AI Teaching System</div>
@@ -238,7 +250,10 @@ input{
 
 <!-- AI -->
 <section id="ai">
-  <div class="bg-layer active" style="background-image:url('classroom2.jpeg')"></div>
+  <div class="bg-wrap">
+    <div class="bg-slide active" style="background-image:url('classroom2.jpeg')"></div>
+    <div class="bg-slide" style="background-image:url('classroom3.jpeg')"></div>
+  </div>
   <div class="overlay"></div>
   <div class="section-content">
     <h2 class="title">AI TUTOR</h2>
@@ -252,7 +267,10 @@ input{
 
 <!-- COMING -->
 <section id="coming">
-  <div class="bg-layer active" style="background-image:url('classroom3.jpeg')"></div>
+  <div class="bg-wrap">
+    <div class="bg-slide active" style="background-image:url('classroom3.jpeg')"></div>
+    <div class="bg-slide" style="background-image:url('students.jpeg')"></div>
+  </div>
   <div class="overlay"></div>
   <div class="section-content">
     <h2 class="title">COMING SOON</h2>
@@ -276,57 +294,91 @@ function scrollToAI(){
   document.getElementById("ai").scrollIntoView({behavior:"smooth"});
 }
 
-/* BACKGROUND TRANSITIONS */
-document.querySelectorAll("section").forEach(section=>{
-  const layers = section.querySelectorAll(".bg-layer");
+/* IMAGE TRANSITIONS */
+document.querySelectorAll(".bg-wrap").forEach(wrap=>{
+  const slides = wrap.querySelectorAll(".bg-slide");
   let i=0;
   setInterval(()=>{
-    layers.forEach(l=>l.classList.remove("active"));
-    i=(i+1)%layers.length;
-    layers[i].classList.add("active");
-  },6000);
+    slides.forEach(s=>s.classList.remove("active"));
+    i=(i+1)%slides.length;
+    slides[i].classList.add("active");
+  },5000);
 });
 
-/* SMART AI */
+/* MULTILINGUAL SMART AI */
+let lang="en";
 let memoryName = localStorage.getItem("nssala_name");
+
+document.getElementById("langSelect").addEventListener("change",e=>{
+  lang=e.target.value;
+});
+
+function t(en,ha,ig,yo,ur){
+  if(lang==="ha") return ha;
+  if(lang==="ig") return ig;
+  if(lang==="yo") return yo;
+  if(lang==="ur") return ur;
+  return en;
+}
 
 function send(){
   const input=document.getElementById("userInput");
   const chat=document.getElementById("chat");
   if(!input.value.trim())return;
-  chat.innerHTML+=`<b>You:</b> ${input.value}<br><br>`;
 
-  let t=input.value.toLowerCase();
+  chat.innerHTML+=`<b>You:</b> ${input.value}<br><br>`;
+  let msg=input.value.toLowerCase();
   let reply="";
 
-  if(t.includes("my name is")){
+  if(msg.includes("my name is")){
     let name=input.value.split("is")[1].trim();
     memoryName=name;
     localStorage.setItem("nssala_name",name);
-    reply=`Got it ${name}. I’ll remember your name and personalize your learning.`;
+    reply=t(
+      `Got it ${name}. I’ll remember your name and personalize your learning.`,
+      `Na gane ${name}. Zan tuna sunanka kuma in taimaka maka da koyo.`,
+      `Aghọtara m ${name}. Aga m echeta aha gị ma nyere gị aka n’ịmụ.`,
+      `Mo ti gba ${name}. Emi o ma ranti oruko re.`,
+      `Mi gho ${name}. Me vwe r’ode n’oma akpọ.`,
+    );
   }
-  else if(t.startsWith("hi")||t.startsWith("hello")){
-    reply=memoryName 
-      ? `Hi ${memoryName} 👋 Ready to learn something new today?`
-      : `Hi 👋 Ready to learn something new today?`;
+
+  else if(msg.startsWith("hi")||msg.startsWith("hello")){
+    reply = memoryName 
+      ? t(
+        `Hi ${memoryName} 👋 Ready to learn today?`,
+        `Sannu ${memoryName} 👋 Kana shirye ka koyo yau?`,
+        `Ndewo ${memoryName} 👋 Ị dị njikere ịmụ taa?`,
+        `Bawo ${memoryName} 👋 Ṣe o setan lati kọ́ ẹ̀kọ́ loni?`,
+        `Mighwo ${memoryName} 👋 Are re vwo kẹrhe?`
+      )
+      : t(
+        "Hi 👋 Ready to learn today?",
+        "Sannu 👋 Kana shirye ka koyo yau?",
+        "Ndewo 👋 Ị dị njikere ịmụ taa?",
+        "Bawo 👋 Ṣe o setan lati kọ́ ẹ̀kọ́ loni?",
+        "Mighwo 👋 Are re vwo kẹrhe?"
+      );
   }
-  else if(t.includes("biology")){
-    reply="Biology is the scientific study of life. It explains how living organisms function, grow, reproduce, adapt, evolve, and interact with their environment. It includes topics like cells, genetics, ecosystems, human anatomy, and evolution.";
+
+  else if(msg.includes("biology")){
+    reply=t(
+      "Biology is the study of life. It explains living organisms, cells, growth, reproduction, evolution, and ecosystems.",
+      "Biology nazarin rayuwa ne. Yana bayyana halittu, kwayoyin halitta, girma, haihuwa, da muhalli.",
+      "Biology bu ọmụmụ banyere ndụ. Ọ na-akọwa sel, uto, mmụba, mmepe na gburugburu ebe obibi.",
+      "Biology ni ẹ̀kọ́ nípa ìyè. Ó ṣàlàyé sẹẹli, ìdagbasoke, ìbímọ, àti ayika.",
+      "Biology ke ẹkọ́ re emẹ r’ẹvwe. E vwe sel, r’ẹvwe, r’ẹkpe, r’ẹmọnọ."
+    );
   }
-  else if(t.includes("physics")){
-    reply="Physics studies matter, energy, forces, motion, electricity, waves, and the laws that govern the universe. It explains how things move, interact, and exist.";
-  }
-  else if(t.includes("chemistry")){
-    reply="Chemistry studies substances, their properties, reactions, bonding, and energy changes. It explains how matter transforms at molecular and atomic levels.";
-  }
-  else if(t.startsWith("what is")){
-    reply=`${input.value.replace("What is","").replace("what is","")} is explained by defining the concept, describing how it works, giving examples, and showing its importance in real life. NSSALA teaches by understanding, not memorization.`;
-  }
-  else if(t.startsWith("how")){
-    reply="To understand this: 1) Identify the concept  2) Learn the principles  3) Understand the logic  4) Apply it  5) Practice examples  6) Master it through repetition.";
-  }
+
   else{
-    reply="That’s a deep question. NSSALA approaches learning through logic, reasoning, examples, and understanding, not just answers.";
+    reply=t(
+      "That’s a deep question. NSSALA teaches using reasoning, logic, examples, and understanding — not memorization.",
+      "Tambaya ce mai zurfi. NSSALA tana koyarwa da tunani, fahimta, da misalai.",
+      "Ajụjụ a dị omimi. NSSALA na-akụzi site na nghọta, ezi uche, na ihe atụ.",
+      "Ìbéèrè yìí jinlẹ̀. NSSALA n kọ́ ẹ̀kọ́ pẹ̀lú ìmòye, àlàyé, àti àpẹẹrẹ.",
+      "Ẹmẹ rhiọ. NSSALA ke ẹkọ́ re ẹhọ, oye, r’ọgbọ́n."
+    );
   }
 
   chat.innerHTML+=`<b>NSSALA:</b> ${reply}<br><br>`;
