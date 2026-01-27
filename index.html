@@ -2,129 +2,266 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>NSSALA — Nigerian Secondary School AI Learning Assistant</title>
+<title>NSSALA | Nigerian Secondary School AI Learning Assistant</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-/* Reset and base */
+/* ---------------- RESET ---------------- */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Inter,system-ui,sans-serif;background:#0f0f14;color:#eaeaf0;scroll-behavior:smooth;}
+html,body{font-family:'Segoe UI',system-ui,sans-serif;background:#0b0e14;color:#eef1f7;scroll-behavior:smooth;}
 
-/* Navigation */
-nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(10,10,20,.85);backdrop-filter:blur(12px);display:flex;justify-content:space-between;align-items:center;padding:14px 50px;}
-.logo{font-weight:900;font-size:1.6rem;background:linear-gradient(90deg,#9b5cff,#3cffc5);-webkit-background-clip:text;color:transparent;}
-nav ul{display:flex;gap:28px;align-items:center;list-style:none;}
-nav ul li a{font-weight:600;opacity:.9;transition:.3s;}
-nav ul li a:hover{color:#3cffc5;}
-.menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;}
-.menu-toggle span{width:26px;height:3px;background:#fff;}
-#langSelect{background:#161622;border:none;color:#fff;padding:6px 10px;border-radius:8px;}
+/* ---------------- NAVBAR ---------------- */
+nav{
+  position:fixed;top:0;left:0;width:100%;
+  background:rgba(10,12,20,.85);
+  backdrop-filter:blur(12px);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 24px;z-index:2000;
+}
+.logo{
+  font-weight:900;font-size:1.5rem;
+  background:linear-gradient(90deg,#6df0c2,#7aa2ff,#c77dff);
+  -webkit-background-clip:text;color:transparent;
+}
+.nav-links{
+  display:flex;gap:28px;align-items:center;
+}
+.nav-links a{
+  text-decoration:none;color:#fff;font-weight:600;opacity:.85;
+  transition:.3s;
+}
+.nav-links a:hover{opacity:1;color:#6df0c2;}
 
-/* Sections */
-section{min-height:100vh;width:100vw;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;}
-.background{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s ease-in-out;}
-.active-bg{opacity:1;}
-.overlay{position:absolute;inset:0;background:rgba(15,15,25,.65);}
-.section-content{position:relative;z-index:2;max-width:1000px;animation:fadeUp 1.2s ease;}
+#langSelect{
+  background:#111523;border:none;color:white;
+  padding:6px 10px;border-radius:8px;
+}
 
-/* Titles */
-.title{text-transform:uppercase;font-size:2.4rem;margin-bottom:20px;background:linear-gradient(90deg,#9b5cff,#3cffc5);-webkit-background-clip:text;color:transparent;text-align:center;}
+/* ----------- HAMBURGER ----------- */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;
+}
+.hamburger span{
+  width:26px;height:3px;background:#fff;border-radius:5px;
+}
 
-/* Hero Box */
-.hero-box{backdrop-filter:blur(10px);background:rgba(15,15,25,.55);padding:50px;border-radius:24px;border:1px solid rgba(255,255,255,.08);}
-.hero-box h1{font-size:3rem;background:linear-gradient(90deg,#9b5cff,#3cffc5);-webkit-background-clip:text;color:transparent;}
-.hero-box p{margin-top:12px;line-height:1.8;font-size:1.05rem;}
-.btn{margin-top:25px;padding:14px 32px;border-radius:14px;border:none;font-weight:700;background:linear-gradient(90deg,#9b5cff,#3cffc5);color:#0f0f14;transition:.4s;box-shadow:0 0 35px rgba(60,255,197,.35);}
-.btn:hover{transform:scale(1.08);box-shadow:0 0 60px rgba(60,255,197,.6);}
+/* ----------- MOBILE MENU ----------- */
+.mobile-menu{
+  position:fixed;top:0;right:-100%;
+  width:75%;height:100vh;
+  background:#0b0e14;
+  transition:.4s;
+  z-index:3000;
+  padding:80px 25px;
+  display:flex;flex-direction:column;gap:25px;
+}
+.mobile-menu a{
+  color:white;text-decoration:none;font-size:1.1rem;font-weight:600;
+}
+.mobile-menu.active{right:0;}
 
-/* Cards */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:25px;margin-top:35px;}
-.card{background:rgba(15,15,25,.6);backdrop-filter:blur(10px);padding:25px;border-radius:18px;border:1px solid rgba(255,255,255,.06);transition:.4s;}
-.card:hover{transform:translateY(-12px) scale(1.03);box-shadow:0 0 45px rgba(155,92,255,.35);}
+/* ---------------- SECTIONS ---------------- */
+section{
+  min-height:100vh;width:100%;
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;overflow:hidden;
+}
 
-/* AI Box */
-#ai-box{background:rgba(15,15,25,.65);backdrop-filter:blur(12px);border-radius:22px;padding:25px;max-width:900px;margin:auto;}
-#chat{height:300px;overflow-y:auto;background:#0f0f14;padding:15px;border-radius:12px;text-align:left;}
-input{width:100%;margin-top:10px;padding:12px;border-radius:10px;border:none;background:#0f0f14;color:white;}
+/* Background system */
+.bg{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+.bg.active{opacity:1;}
 
-/* Animations */
-@keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+.overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom, rgba(10,12,20,.55), rgba(10,12,20,.85));
+}
 
-/* Responsive */
-@media(max-width:900px){nav ul{display:none;}.menu-toggle{display:flex;}section{padding:120px 25px;}.hero-box h1{font-size:2.2rem;}}
+.content{
+  position:relative;z-index:2;
+  max-width:1100px;
+  padding:40px;
+  animation:fadeInUp 1.2s ease;
+}
+
+/* ---------------- TEXT ---------------- */
+h1,h2{
+  text-transform:uppercase;
+  background:linear-gradient(90deg,#6df0c2,#7aa2ff,#c77dff);
+  -webkit-background-clip:text;color:transparent;
+}
+h1{font-size:3rem;}
+h2{font-size:2.3rem;margin-bottom:20px;}
+
+p{
+  line-height:1.9;
+  font-size:1.05rem;
+  opacity:.95;
+}
+
+/* ---------------- BUTTON ---------------- */
+.btn{
+  margin-top:25px;
+  padding:14px 34px;
+  border-radius:14px;
+  border:none;
+  font-weight:700;
+  background:linear-gradient(90deg,#6df0c2,#7aa2ff,#c77dff);
+  color:#0b0e14;
+  cursor:pointer;
+  transition:.4s;
+}
+.btn:hover{transform:scale(1.07);}
+
+/* ---------------- CARDS ---------------- */
+.grid{
+  margin-top:35px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:22px;
+}
+.card{
+  background:rgba(15,18,30,.55);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.08);
+  padding:25px;border-radius:18px;
+  transition:.4s;
+}
+.card:hover{transform:translateY(-10px) scale(1.03);}
+
+/* ---------------- AI ---------------- */
+#ai-box{
+  background:rgba(15,18,30,.65);
+  backdrop-filter:blur(12px);
+  border-radius:22px;
+  padding:25px;
+}
+#chat{
+  height:320px;
+  background:#0b0e14;
+  border-radius:12px;
+  padding:15px;
+  overflow-y:auto;
+  text-align:left;
+}
+#userInput{
+  width:100%;margin-top:10px;
+  padding:12px;border-radius:10px;
+  border:none;background:#0b0e14;color:white;
+}
+
+/* ---------------- ANIMATIONS ---------------- */
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(40px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media(max-width:900px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  h1{font-size:2.2rem;}
+}
 </style>
 </head>
+
 <body>
 
-<!-- Navigation -->
+<!-- NAV -->
 <nav>
   <div class="logo">NSSALA</div>
-  <ul>
-    <li><a href="#hero">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#ai">AI Tutor</a></li>
-    <li><a href="#coming">Coming Soon</a></li>
-    <li>
-      <select id="langSelect" onchange="setLang()">
-        <option value="en">English</option>
-        <option value="ha">Hausa</option>
-        <option value="ig">Igbo</option>
-        <option value="yo">Yoruba</option>
-        <option value="ur">Urhobo</option>
-      </select>
-    </li>
-  </ul>
-  <div class="menu-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+
+  <div class="nav-links">
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#ai">AI Tutor</a>
+    <a href="#coming">Coming Soon</a>
+    <select id="langSelect" onchange="setLang()">
+      <option value="en">English</option>
+      <option value="ha">Hausa</option>
+      <option value="ig">Igbo</option>
+      <option value="yo">Yoruba</option>
+      <option value="ur">Urhobo</option>
+    </select>
+  </div>
+
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
-<!-- Sections -->
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" onclick="toggleMenu()">Home</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#ai" onclick="toggleMenu()">AI Tutor</a>
+  <a href="#coming" onclick="toggleMenu()">Coming Soon</a>
+</div>
+
+<!-- HERO -->
 <section id="hero">
-  <div class="background active-bg" style="background-image:url('students.jpeg')"></div>
+  <div class="bg active" style="background-image:url('students.jpeg')"></div>
   <div class="overlay"></div>
-  <div class="section-content hero-box">
+  <div class="content">
     <h1>NSSALA</h1>
-    <p><b>NIGERIAN SECONDARY SCHOOL AI LEARNING ASSISTANT</b></p>
-    <p>AI-powered learning that explains, reasons, and teaches in your preferred language.</p>
-    <button class="btn" onclick="scrollToAI()">START LEARNING</button>
+    <p><b>Nigerian Secondary School AI Learning Assistant</b></p>
+    <p>
+      NSSALA is an intelligent digital learning system designed for Nigerian students.
+      It teaches science, mathematics, and academic subjects with deep reasoning,
+      step-by-step explanations, multilingual support, and personalized learning.
+    </p>
+    <button class="btn" onclick="document.getElementById('ai').scrollIntoView({behavior:'smooth'})">
+      Start Learning
+    </button>
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
-  <div class="background" style="background-image:url('classroom1.jpeg')"></div>
+  <div class="bg" style="background-image:url('classroom1.jpeg')"></div>
   <div class="overlay"></div>
-  <div class="section-content">
-    <h2 class="title">ABOUT NSSALA</h2>
+  <div class="content">
+    <h2>ABOUT NSSALA</h2>
     <p>
-      NSSALA is a digital classroom assistant. It explains science and math with deep reasoning,
-      personalized guidance, and interactive learning. It remembers your name, adapts answers,
-      and can teach in multiple languages including Hausa, Igbo, Yoruba, and Urhobo.
+      NSSALA is built to solve learning gaps in secondary education using artificial intelligence.
+      It does not just give answers — it teaches concepts, builds understanding, and develops reasoning.
+      Students learn not just *what* is correct, but *why* it is correct.
     </p>
+
     <div class="grid">
-      <div class="card">AI-Powered Teaching</div>
-      <div class="card">Science & Maths Learning</div>
-      <div class="card">Step-by-Step Reasoning</div>
-      <div class="card">Interactive Lessons</div>
+      <div class="card">Deep AI Reasoning</div>
+      <div class="card">Multilingual Teaching</div>
+      <div class="card">Smart Learning Paths</div>
+      <div class="card">Science & Maths Mastery</div>
     </div>
   </div>
 </section>
 
+<!-- AI -->
 <section id="ai">
-  <div class="background" style="background-image:url('classroom2.jpeg')"></div>
+  <div class="bg" style="background-image:url('classroom2.jpeg')"></div>
   <div class="overlay"></div>
-  <div class="section-content">
-    <h2 class="title">AI TUTOR</h2>
+  <div class="content">
+    <h2>AI TUTOR</h2>
     <div id="ai-box">
       <div id="chat"></div>
       <input id="userInput" placeholder="Ask anything... e.g What is biology?">
-      <button class="btn" onclick="send()">ASK NSSALA</button>
+      <button class="btn" onclick="send()">Ask NSSALA</button>
     </div>
   </div>
 </section>
 
+<!-- COMING -->
 <section id="coming">
-  <div class="background" style="background-image:url('classroom3.jpeg')"></div>
+  <div class="bg" style="background-image:url('classroom3.jpeg')"></div>
   <div class="overlay"></div>
-  <div class="section-content">
-    <h2 class="title">COMING SOON</h2>
+  <div class="content">
+    <h2>COMING SOON</h2>
     <div class="grid">
       <div class="card">Student Dashboards</div>
       <div class="card">Teacher Portals</div>
@@ -137,48 +274,83 @@ input{width:100%;margin-top:10px;padding:12px;border-radius:10px;border:none;bac
 </section>
 
 <script>
-// MENU
-function toggleMenu(){document.querySelector("nav").classList.toggle("active");}
-function scrollToAI(){document.getElementById("ai").scrollIntoView({behavior:"smooth"});}
+/* ---------------- MENU ---------------- */
+function toggleMenu(){
+  document.getElementById("mobileMenu").classList.toggle("active");
+}
 
-// SECTION FADE TRANSITION
-const backgrounds=document.querySelectorAll(".background");
-const sections=document.querySelectorAll("section");
-const observer=new IntersectionObserver((entries)=>{
+/* ---------------- BACKGROUND FADE ---------------- */
+const sections = document.querySelectorAll("section");
+const bgs = document.querySelectorAll(".bg");
+
+const observer = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
-      backgrounds.forEach(bg=>bg.classList.remove("active-bg"));
-      entry.target.querySelector(".background").classList.add("active-bg");
+      bgs.forEach(bg=>bg.classList.remove("active"));
+      entry.target.querySelector(".bg").classList.add("active");
     }
   });
 },{threshold:0.5});
+
 sections.forEach(sec=>observer.observe(sec));
 
-// LANGUAGE
+/* ---------------- AI ---------------- */
 let lang="en";
-function setLang(){lang=document.getElementById("langSelect").value;}
-function translate(text){const dict={ha:"(Hausa) "+text,ig:"(Igbo) "+text,yo:"(Yoruba) "+text,ur:"(Urhobo) "+text};return lang==="en"?text:dict[lang]||text;}
-
-// SMART AI
 let memoryName = localStorage.getItem("nssala_name");
+
+function setLang(){
+  lang=document.getElementById("langSelect").value;
+}
+
+function translate(text){
+  const dict={
+    ha:"(Hausa) "+text,
+    ig:"(Igbo) "+text,
+    yo:"(Yoruba) "+text,
+    ur:"(Urhobo) "+text
+  };
+  return lang==="en"?text:(dict[lang]||text);
+}
+
 function send(){
   const input=document.getElementById("userInput");
   const chat=document.getElementById("chat");
   if(!input.value.trim())return;
+
   chat.innerHTML+=`<b>You:</b> ${input.value}<br><br>`;
   let t=input.value.toLowerCase();
   let reply="";
-  if(t.includes("my name is")){let name=input.value.split("is")[1].trim();memoryName=name;localStorage.setItem("nssala_name",name);reply=`Got it ${name}. I’ll remember your name and personalize your learning.`;}
-  else if(t.startsWith("hi")||t.startsWith("hello")){reply=memoryName?`Hi ${memoryName} 👋 Ready to learn today?`:`Hi 👋 Ready to learn today?`;}
-  else if(t.includes("biology")){reply="Biology is the study of life, including cells, genetics, ecosystems, and evolution. It shows how organisms live, survive, and adapt.";}
-  else if(t.includes("physics")){reply="Physics studies matter, energy, forces, motion, waves, and the laws governing the universe.";}
-  else if(t.includes("chemistry")){reply="Chemistry studies substances, reactions, bonding, molecules, and how matter transforms.";}
-  else if(t.startsWith("what is")){reply=`${input.value.replace("What is","").replace("what is","")} can be understood by defining it, explaining how it works, giving examples, and showing its relevance.`;}
-  else if(t.startsWith("how")){reply="Understanding happens through steps: concept → principle → logic → application → practice → mastery.";}
-  else{reply="That’s a thoughtful question. NSSALA explains using logic, examples, reasoning, and understanding.";}
+
+  if(t.includes("my name is")){
+    let name=input.value.split("is")[1].trim();
+    memoryName=name;
+    localStorage.setItem("nssala_name",name);
+    reply=`Got it ${name}. I will remember your name and personalize your learning experience.`;
+  }
+  else if(t.startsWith("hi")||t.startsWith("hello")){
+    reply=memoryName?`Hi ${memoryName} 👋 I'm ready to help you learn today.`:`Hi 👋 I'm NSSALA, your learning assistant.`;
+  }
+  else if(t.includes("biology")){
+    reply="Biology is the scientific study of life. It includes the study of cells, organisms, genetics, ecosystems, evolution, reproduction, and how living things interact with their environment. Biology helps us understand how life functions, survives, adapts, and evolves over time.";
+  }
+  else if(t.includes("math")){
+    reply="Mathematics is the study of numbers, patterns, logic, relationships, and structures. It is the foundation of science, technology, engineering, and problem-solving in daily life.";
+  }
+  else if(t.startsWith("what is")){
+    reply=`${input.value.replace(/what is/i,"")} is best understood by defining it clearly, explaining its purpose, showing how it works, giving real-life examples, and explaining its importance in education and daily life.`;
+  }
+  else if(t.startsWith("how")){
+    reply="Learning happens through structured understanding: concept → explanation → logic → examples → practice → mastery. NSSALA follows this learning method.";
+  }
+  else{
+    reply="That is a good question. NSSALA explains topics using reasoning, logic, structured thinking, examples, and clear explanations to help you truly understand, not just memorize.";
+  }
+
   chat.innerHTML+=`<b>NSSALA:</b> ${translate(reply)}<br><br>`;
   chat.scrollTop=chat.scrollHeight;
+  input.value="";
 }
 </script>
+
 </body>
 </html>
