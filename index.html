@@ -5,7 +5,6 @@
 <title>NSSALA — Nigerian Secondary School AI Learning Assistant</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-/* Reset */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:Inter,system-ui,sans-serif;background:#0f0f14;color:#eaeaf0;overflow-x:hidden;scroll-behavior:smooth;}
 nav{position:fixed;top:0;width:100%;backdrop-filter:blur(12px);background:rgba(10,10,20,.85);display:flex;justify-content:space-between;align-items:center;padding:14px 50px;z-index:1000;}
@@ -17,7 +16,6 @@ nav ul li a:hover{color:#3cffc5;}
 .menu-toggle span{width:26px;height:3px;background:#fff;}
 #langSelect{background:#161622;border:none;color:#fff;padding:6px 10px;border-radius:8px;}
 
-/* Sections */
 section{min-height:100vh;width:100vw;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;transition:opacity 1s ease;}
 .background{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s ease;}
 .active-bg{opacity:1;}
@@ -128,6 +126,7 @@ function scrollToAI(){document.getElementById("ai").scrollIntoView({behavior:"sm
 
 /* SECTION FADE TRANSITION */
 const backgrounds=document.querySelectorAll(".background");
+const sections=document.querySelectorAll("section");
 const observer=new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
@@ -136,7 +135,7 @@ const observer=new IntersectionObserver((entries)=>{
     }
   });
 },{threshold:0.5});
-document.querySelectorAll("section").forEach(sec=>observer.observe(sec));
+sections.forEach(sec=>observer.observe(sec));
 
 /* LANGUAGE */
 let lang="en";
