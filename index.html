@@ -5,26 +5,30 @@
 <title>NSSALA — Nigerian Secondary School AI Learning Assistant</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+/* Reset */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Inter,system-ui,sans-serif;background:#0f0f14;color:#eaeaf0;scroll-behavior:smooth;overflow-x:hidden;}
+body{font-family:Inter,system-ui,sans-serif;background:#0f0f14;color:#eaeaf0;overflow-x:hidden;scroll-behavior:smooth;}
 nav{position:fixed;top:0;width:100%;backdrop-filter:blur(12px);background:rgba(10,10,20,.85);display:flex;justify-content:space-between;align-items:center;padding:14px 50px;z-index:1000;}
 .logo{font-weight:900;font-size:1.6rem;background:linear-gradient(90deg,#9b5cff,#3cffc5);-webkit-background-clip:text;color:transparent;}
-nav ul{display:flex;gap:28px;align-items:center;}
+nav ul{display:flex;gap:28px;align-items:center;list-style:none;}
 nav ul li a{font-weight:600;opacity:.9;transition:.3s;}
 nav ul li a:hover{color:#3cffc5;}
 .menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;}
 .menu-toggle span{width:26px;height:3px;background:#fff;}
 #langSelect{background:#161622;border:none;color:#fff;padding:6px 10px;border-radius:8px;}
-section{min-height:100vh;padding:120px 60px;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;}
-.parallax{position:absolute;inset:-10%;background-size:cover;background-position:center;transform:translateY(0);transition:transform 0.1s linear;z-index:0;}
-.overlay{position:absolute;inset:0;background:rgba(15,15,25,.65);z-index:1;}
+
+/* Sections */
+section{min-height:100vh;width:100vw;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;transition:opacity 1s ease;}
+.background{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s ease;}
+.active-bg{opacity:1;}
+.overlay{position:absolute;inset:0;background:rgba(15,15,25,.65);}
 .section-content{position:relative;z-index:2;max-width:1000px;animation:fadeUp 1.2s ease;}
-.hero-box{backdrop-filter:blur(10px);background:rgba(15,15,25,.55);padding:50px;border-radius:24px;border:1px solid rgba(255,255,255,.08);animation:float 6s ease-in-out infinite;}
-.hero-box h1{text-transform:uppercase;font-size:3rem;background:linear-gradient(90deg,#9b5cff,#3cffc5);-webkit-background-clip:text;color:transparent;}
+.title{text-transform:uppercase;font-size:2.4rem;margin-bottom:20px;background:linear-gradient(90deg,#9b5cff,#3cffc5);-webkit-background-clip:text;color:transparent;}
+.hero-box{backdrop-filter:blur(10px);background:rgba(15,15,25,.55);padding:50px;border-radius:24px;border:1px solid rgba(255,255,255,.08);}
+.hero-box h1{font-size:3rem;background:linear-gradient(90deg,#9b5cff,#3cffc5);-webkit-background-clip:text;color:transparent;}
 .hero-box p{margin-top:12px;line-height:1.8;font-size:1.05rem;}
 .btn{margin-top:25px;padding:14px 32px;border-radius:14px;border:none;font-weight:700;background:linear-gradient(90deg,#9b5cff,#3cffc5);color:#0f0f14;transition:.4s;box-shadow:0 0 35px rgba(60,255,197,.35);}
 .btn:hover{transform:scale(1.08);box-shadow:0 0 60px rgba(60,255,197,.6);}
-.title{text-transform:uppercase;font-size:2.4rem;margin-bottom:20px;background:linear-gradient(90deg,#9b5cff,#3cffc5);-webkit-background-clip:text;color:transparent;}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:25px;margin-top:35px;}
 .card{background:rgba(15,15,25,.6);backdrop-filter:blur(10px);padding:25px;border-radius:18px;border:1px solid rgba(255,255,255,.06);transition:.4s;}
 .card:hover{transform:translateY(-12px) scale(1.03);box-shadow:0 0 45px rgba(155,92,255,.35);}
@@ -32,11 +36,11 @@ section{min-height:100vh;padding:120px 60px;display:flex;align-items:center;just
 #chat{height:300px;overflow-y:auto;background:#0f0f14;padding:15px;border-radius:12px;text-align:left;}
 input{width:100%;margin-top:10px;padding:12px;border-radius:10px;border:none;background:#0f0f14;color:white;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
 @media(max-width:900px){nav ul{display:none;}.menu-toggle{display:flex;}section{padding:120px 25px;}.hero-box h1{font-size:2.2rem;}}
 </style>
 </head>
 <body>
+
 <nav>
   <div class="logo">NSSALA</div>
   <ul>
@@ -57,8 +61,9 @@ input{width:100%;margin-top:10px;padding:12px;border-radius:10px;border:none;bac
   <div class="menu-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
 
+<!-- Sections -->
 <section id="hero">
-  <div class="parallax" style="background-image:url('students.jpeg')"></div>
+  <div class="background active-bg" style="background-image:url('students.jpeg')"></div>
   <div class="overlay"></div>
   <div class="section-content hero-box">
     <h1>NSSALA</h1>
@@ -69,7 +74,7 @@ input{width:100%;margin-top:10px;padding:12px;border-radius:10px;border:none;bac
 </section>
 
 <section id="about">
-  <div class="parallax" style="background-image:url('classroom1.jpeg')"></div>
+  <div class="background" style="background-image:url('classroom1.jpeg')"></div>
   <div class="overlay"></div>
   <div class="section-content">
     <h2 class="title">ABOUT NSSALA</h2>
@@ -88,7 +93,7 @@ input{width:100%;margin-top:10px;padding:12px;border-radius:10px;border:none;bac
 </section>
 
 <section id="ai">
-  <div class="parallax" style="background-image:url('classroom2.jpeg')"></div>
+  <div class="background" style="background-image:url('classroom2.jpeg')"></div>
   <div class="overlay"></div>
   <div class="section-content">
     <h2 class="title">AI TUTOR</h2>
@@ -101,7 +106,7 @@ input{width:100%;margin-top:10px;padding:12px;border-radius:10px;border:none;bac
 </section>
 
 <section id="coming">
-  <div class="parallax" style="background-image:url('classroom3.jpeg')"></div>
+  <div class="background" style="background-image:url('classroom3.jpeg')"></div>
   <div class="overlay"></div>
   <div class="section-content">
     <h2 class="title">COMING SOON</h2>
@@ -120,7 +125,18 @@ input{width:100%;margin-top:10px;padding:12px;border-radius:10px;border:none;bac
 /* MENU */
 function toggleMenu(){document.querySelector("nav").classList.toggle("active");}
 function scrollToAI(){document.getElementById("ai").scrollIntoView({behavior:"smooth"});}
-window.addEventListener("scroll",()=>{document.querySelectorAll(".parallax").forEach(bg=>{let speed=0.25;bg.style.transform=`translateY(${window.scrollY*speed}px)`;});});
+
+/* SECTION FADE TRANSITION */
+const backgrounds=document.querySelectorAll(".background");
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      backgrounds.forEach(bg=>bg.classList.remove("active-bg"));
+      entry.target.querySelector(".background").classList.add("active-bg");
+    }
+  });
+},{threshold:0.5});
+document.querySelectorAll("section").forEach(sec=>observer.observe(sec));
 
 /* LANGUAGE */
 let lang="en";
@@ -146,9 +162,7 @@ function send(){
   else{reply="That’s a thoughtful question. NSSALA explains using logic, examples, reasoning, and understanding.";}
   chat.innerHTML+=`<b>NSSALA:</b> ${translate(reply)}<br><br>`;
   chat.scrollTop=chat.scrollHeight;
-  input.value="";
 }
 </script>
-
 </body>
 </html>
